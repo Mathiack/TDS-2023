@@ -12,7 +12,7 @@ include "Classes/Refri.php";
 $cliente = new Cliente();
 $nome = $_POST['nome'];
 $cliente->setNome($nome);
-$contato = $_POST['contato']
+$contato = $_POST['contato'];
 $cliente->setContato($contato);
 
 $endereco = new Endereco();
