@@ -48,7 +48,7 @@ class Pessoas_banco {
         }
     }
     
-    function deletarPessoa() {
+    /*function deletarPessoa() {
         $database = new Conexao(); //nova instancia da conexao
         $db = $database->getConnection(); //tenta conectar
 
@@ -61,7 +61,7 @@ class Pessoas_banco {
         } catch(PDOExeption $e) {
             echo "Erro ao deletar pessoa: " . $e->getMessage();
         }
-    }
+    }*/
     function inserirVeiculo() {
         $database = new Conexao(); //nova instancia da conexao
         $db = $database->getConnection(); //tenta conectar
@@ -80,7 +80,7 @@ class Pessoas_banco {
             echo "Erro ao inserir pessoa: " . $e->getMessage();
             return false;
         }
-    function alterarVeiculo() {
+    /*function alterarVeiculo() {
         $database = new Conexao(); //nova instancia da conexao
         $db = $database->getConnection(); //tenta conectar
 
@@ -96,8 +96,8 @@ class Pessoas_banco {
         } catch(PDOExeption $e) {
             echo "Erro ao upar novas mudanças na pessoa: " . $e->getMessage();
         }
+    }*/
     }
-}
 }
     
 ?>
