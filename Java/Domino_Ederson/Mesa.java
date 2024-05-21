@@ -11,4 +11,9 @@ public class Mesa {
     public int getQuantidadeJogadores() { //gettando os Jogadores
         return QuantidadeJogadores; //retornando a Quantidade de Jogadores
     }
+    /*public void seMaiorQueQuatro(){
+        if (this.getQuantidadeJogadores() > 4) {
+            System.out.println("N pode ser maior que 4 man, vai le o ridme<");
+        }
+    }*/
 }
