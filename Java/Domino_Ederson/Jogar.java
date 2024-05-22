@@ -18,10 +18,13 @@ public class Jogar { //classe Main
 
         if (qntJogadores > 4) {
             System.out.println("N pode ser maior que 4 man, vai le o ridme<");
+        } else if (qntJogadores < 2) {
+            System.out.println("Vai jogar sosinho?");
         } else {
             System.out.println("Vai ter " + mesa.getQuantidadeJogadores() + " jogadores nessa play");
         }
-        mesa.criarPecas();
+        monte.criarPecas();
+        mesa.distribuirPeca();
         
     }
 }

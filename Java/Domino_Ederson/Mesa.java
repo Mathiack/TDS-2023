@@ -16,7 +16,16 @@ public class Mesa {
     public int getQuantidadeJogadores() { //gettando os Jogadores
         return QuantidadeJogadores; //retornando a Quantidade de Jogadores
     }
-    public void criarPecas() {
+
+
+    public void distribuirPeca() {
+        for (int i = 0 ; i < 7 ; i++) {
+            for(int ii = 0; ii < this.getQuantidadeJogadores(); ii++) {
+                //System.out.println(monte);
+            }
+        }
+    }
+    /*public void criarPecas() {
         ArrayList<Integer> peca = new ArrayList<>();
         for(int i = 0; i < this.getQuantidadeJogadores(); i++){
             for (int num_Esq = 0; num_Esq < 7; num_Esq++) {
@@ -28,7 +37,7 @@ public class Mesa {
             }
             System.out.println("-----");
         }
-    }
+    }*/
     
 
     /*public void seMaiorQueQuatro(){
