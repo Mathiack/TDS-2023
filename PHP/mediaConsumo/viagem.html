@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>media consumo</title>
+</head>
+<style>
+    @charset "UTF-8";
+    * {
+        background-color: gray;
+    }
+    input {
+        background-color: white;
+    }
+    div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+<body>
+    <div>
+        <h1>
+            Media de consumo:
+        </h1>
+        <form action="viagem.php" method="post">
+        <label for="marca"> Marca de vosso calhambeque </label>
+        <br>
+        <input type="text" name = "marca" id = "marca" required>
+        <br>
+
+        <label for="modelo"> Modelo de teu possante </label>
+        <br>
+        <input type="text" name = "modelo" id = "modelo" required>
+        <br>
+
+        <label for="kmInicial"> Km inicial </label>
+        <br>
+        <input type="text" name = "kmInicial" id = "kmInicial" required>
+        <br>
+
+        <label for="kmFinal"> Km final </label>
+        <br>
+        <input type="text" name = "kmFinal" id = "kmFinal" required>
+        <br>
+        
+        <label for="gasolinaLitro"> Quanta gasolina tu usou (em unidade internacional de Litros (L)) </label>
+        <br>
+        <input type="text" name = "gasolinaLitro" id = "gasolinaLitro" required>
+        <br>
+
+        <label for="precoGasolina"> Qual o preço da Gasolina? </label>
+        <br>
+        <input type="text" name="precoGasolina" id="precoGasolina" required>
+        <br>
+
+        <label for="gasolinaTipo"> Que gasolina tu usaste: </label>
+        <br>
+        <input type="text" name = "gasolinaTipo" id = "gasolinaTipo" required>
+        <br>
+
+        <label for="completoOTanque"> Completou o tanque? </label>
+        <br>
+        <input type="checkbox" name="completoOTanque" id="completoOTanque" required>
+        <br>
+
+        <input type="submit" value="Enviar">
+        </form>
+        <br>
+    </div>
+</body>
+</html>
+
+<!--Criar um formulário para leitura da marca, modelo e motorização de um veículo, solicitar
+a km inicial de uma viagem e a km final da viagem, solicitar quantos litros de
+combustível foram consumidos e o tipo de combustível utilizado.
+
+Criar uma classe que receba os valores, que faça o cálculo da média e posteriormente
+mostre todos dados na tela
