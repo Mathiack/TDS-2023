@@ -4,7 +4,9 @@ import java.util.Random;
 
 public class Monte {
     ArrayList<Peca> pecas;
-    // Monte() { }
+    Monte() {
+        this.criarPecas();
+    }
     public void criarPecas() {
         pecas = new ArrayList<Peca>();
         for (int num_Esq = 0; num_Esq < 7; num_Esq++) {

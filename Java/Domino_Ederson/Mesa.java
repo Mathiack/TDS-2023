@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class Mesa {
     ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
+    int jogadorAtual = 0;
     Monte monte = new Monte(); //iniciando o Monte
 
     /*private Jogador jogador;
@@ -18,16 +19,25 @@ public class Mesa {
         return QuantidadeJogadores; //retornando a Quantidade de Jogadores
     }
 
+    public void adicionarJogador(Jogador jogador) {
+        this.jogadores.add(jogador);
+    } 
+    public Jogador pegarJogador() {
+        return this.jogadores.get(jogadorAtual);
+    }
+    public void proximo() {
+        this.jogadorAtual = (this.jogadorAtual + 1) % this.jogadores.size();
+    }
+
+    public void setMonte( Monte monte) {
+        this.monte = monte;
+    }
 
     public void distribuirPeca() {
         for (int i = 0 ; i < 7 ; i++) {
             for(int ii = 0; ii < this.getQuantidadeJogadores(); ii++) {
-                //System.out.println(monte);
+                jogadores.get(ii).adicionarPeca(monte.pescarPeca());
             }
         }
-    }
-
-    public void adicionarJogador(Jogador jogador) {
-        this.jogadores.add(jogador);
     }
 }

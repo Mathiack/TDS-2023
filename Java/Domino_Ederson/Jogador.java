@@ -8,8 +8,17 @@ public class Jogador { //class Jogador
     Jogador (String nome) {
         this.nome = nome;
     }
+    public String toString() {
+        return this.nome;
+    }
+
+    public void mostrarMao() {
+        for (Peca peca : mao) {
+            System.out.println(peca);
+        }
+    } 
 
     public void adicionarPeca(Peca peca) {
-        this.peca = peca;
+        this.mao.add(peca);
     }
 }

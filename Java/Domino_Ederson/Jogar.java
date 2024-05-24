@@ -11,12 +11,7 @@ public class Jogar {
 
         System.out.println("Quantos jogador tu vai ter?");
         int qntJogadores = scan.nextInt();
-
-        for (int i = 0 ; i < qntJogadores ; i++) {
-            System.out.println("Qual o nome do jogador " + (i+1) + "?");
-            //mesa.adicionarJogador(scan.nextLine());
-        }
-
+        scan.nextLine();
         mesa.setQuantidadeJogadores(qntJogadores);
 
         if (qntJogadores > 4) {
@@ -27,16 +22,19 @@ public class Jogar {
             System.out.println("Vai ter " + mesa.getQuantidadeJogadores() + " jogadores nessa play");
         }
 
-
         for (int i = 0 ; i < qntJogadores ; i++) {
-            Jogador jogador = new Jogador(null);
-            System.out.println("\nJogador " + (i+1) + " recebe \n" + monte.pecas + "\n");
-            //pecasTotal -= pecasPorJog;
+            System.out.println("Qual o nome do jogador " + (i+1) + "?");
+            mesa.adicionarJogador(new Jogador(scan.nextLine()));
         }
 
-        //System.out.println("Restam " + pecasTotal + " peças no monte.");
+        //System.out.println("Restam " +  pecasTotal + " peças no monte.");
 
         monte.criarPecas();
-        /*mesa.distribuirPeca();*/
+        mesa.distribuirPeca();
+
+        for (int i = 0 ; i < qntJogadores ; i++) {
+            System.out.println(mesa.pegarJogador());
+            mesa.proximo();
+        }
     }
 }
