@@ -1,20 +1,23 @@
-package Java.Domino_Ederson; //packge por que sim
-import java.util.Scanner; //importando Scanner
+package Java.Domino_Ederson;
+import java.util.Scanner;
 
-public class Jogar { //classe Main
-    public static void main (String [] args) { //aqui mostra que é a Main
-        Scanner scan = new Scanner(System.in); //inicializando o Scanner
-        System.out.println("Opa vamo play, so n rusha pq tem tryhard messe bgl"); //início
+public class Jogar {
+    public static void main (String [] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Opa vamo play, so n rusha pq tem tryhard messe bgl");
 
         Mesa mesa = new Mesa();
-
         Monte monte = new Monte();
-        //monte.criarP  ecas(); ---> teste pra mostrar as peças
-        System.out.println("Quantos jogador tu vai ter?");//settando a quantidade de jogadores
 
-        int qntJogadores = scan.nextInt(); //quantidade de jogadores sendo obtida
+        System.out.println("Quantos jogador tu vai ter?");
+        int qntJogadores = scan.nextInt();
 
-        mesa.setQuantidadeJogadores(qntJogadores); //aqui ta settando
+        for (int i = 0 ; i < qntJogadores ; i++) {
+            System.out.println("Qual o nome do jogador " + (i+1) + "?");
+            //mesa.adicionarJogador(scan.nextLine());
+        }
+
+        mesa.setQuantidadeJogadores(qntJogadores);
 
         if (qntJogadores > 4) {
             System.out.println("N pode ser maior que 4 man, vai le o ridme<");
@@ -23,8 +26,17 @@ public class Jogar { //classe Main
         } else {
             System.out.println("Vai ter " + mesa.getQuantidadeJogadores() + " jogadores nessa play");
         }
+
+
+        for (int i = 0 ; i < qntJogadores ; i++) {
+            Jogador jogador = new Jogador(null);
+            System.out.println("\nJogador " + (i+1) + " recebe \n" + monte.pecas + "\n");
+            //pecasTotal -= pecasPorJog;
+        }
+
+        //System.out.println("Restam " + pecasTotal + " peças no monte.");
+
         monte.criarPecas();
-        mesa.distribuirPeca();
-        
+        /*mesa.distribuirPeca();*/
     }
 }

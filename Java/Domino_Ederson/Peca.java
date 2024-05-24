@@ -9,4 +9,8 @@ public class Peca {
         this.num_Esq = n_E;
         this.num_Dir = n_D;
     }
+
+    public String toString() {
+        return num_Esq + "|" + num_Dir;
+    }
 }

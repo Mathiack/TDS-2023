@@ -17,8 +17,8 @@ public class Monte {
 
     public Peca pescarPeca() {
         Random rand = new Random();
-        int pescou = rand.;
-        //return pecas;
-        
+        int posicao = rand.nextInt(pecas.size());
+        Peca peca = pecas.remove(posicao);
+        return peca;
     }
 }

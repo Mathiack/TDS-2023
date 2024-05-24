@@ -4,6 +4,7 @@ import java.util.ArrayList; //importando ArrayList denovo
 import java.util.Arrays;
 
 public class Mesa {
+    ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     Monte monte = new Monte(); //iniciando o Monte
 
     /*private Jogador jogador;
@@ -25,24 +26,8 @@ public class Mesa {
             }
         }
     }
-    /*public void criarPecas() {
-        ArrayList<Integer> peca = new ArrayList<>();
-        for(int i = 0; i < this.getQuantidadeJogadores(); i++){
-            for (int num_Esq = 0; num_Esq < 7; num_Esq++) {
-                for (int num_Dir = num_Esq; num_Dir < 7; num_Dir++) {
-                    peca.add(num_Esq);
-                    peca.add(num_Dir);
-                    System.out.println("|" + num_Esq + "|" + num_Dir + "|");
-                }
-            }
-            System.out.println("-----");
-        }
-    }*/
-    
 
-    /*public void seMaiorQueQuatro(){
-        if (this.getQuantidadeJogadores() > 4) {
-            System.out.println("N pode ser maior que 4 man, vai le o ridme<");
-        }
-    }*/
+    public void adicionarJogador(Jogador jogador) {
+        this.jogadores.add(jogador);
+    }
 }
