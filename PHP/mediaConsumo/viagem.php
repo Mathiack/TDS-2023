@@ -20,13 +20,6 @@
     $v->setGasolinaTipo($gasolinaTipo);
     /*$completoOTanque = $_POST['completoOTanque'];
     $v->setIsCOmpleto($completoOTanque);*/
-    $cheio = false;
-
-    if(isset($_POST['completoOTanque'])) {
-        $cheio = true;
-    } else {
-        $cheio = false;
-    }
 
     $v->imprimir();
 
