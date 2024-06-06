@@ -22,6 +22,8 @@ public class Revendedora {
         System.out.println("Comissão das Vendas: " + commissaoTotalVendas);
         System.out.println("Salário Final: " + salFinal);
         System.out.println("------------------");
+
+        scan.close();
     }
 }
 
