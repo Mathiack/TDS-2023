@@ -5,10 +5,23 @@ public class Revendedora {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Carros: ");
-        double nCArros = scan.nextDouble();
+        double nCarros = scan.nextDouble();
         System.out.println("Salário Fixo: ");
         double salFixo = scan.nextDouble();
+        System.out.println("Valor Total Vendas: ");
+        double totVenda = scan.nextDouble();
+        System.out.println("Valor Recebido por Carro: ");
+        double valCarro = scan.nextDouble();
 
+        double commissaoPorCarros = nCarros * valCarro;
+        double commissaoTotalVendas = totVenda * 0.05;
+        double salFinal = salFixo + commissaoPorCarros + commissaoTotalVendas;
+
+        System.out.println("------------------");
+        System.out.println("Comissão por Carro: " + commissaoPorCarros);
+        System.out.println("Comissão das Vendas: " + commissaoTotalVendas);
+        System.out.println("Salário Final: " + salFinal);
+        System.out.println("------------------");
     }
 }
 
