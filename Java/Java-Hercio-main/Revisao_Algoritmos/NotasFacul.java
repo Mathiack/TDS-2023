@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class notasFacul {
+public class NotasFacul {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Mete a nota do 1: ");

@@ -3,16 +3,21 @@ import java.util.Scanner;
 public class CLT {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Horas Trabalhadas: ");
+        System.out.println("Horas Trabalhadas na Semana: ");
         double hrCLT = scan.nextDouble();
         System.out.println("Salário por Hora: ");
         double salHora = scan.nextDouble();
 
         double horaExtra = hrCLT - 40;
+        double salPadrao = (hrCLT * salHora) * 4;
+        double salExtra = ((salPadrao * 1.50) + salPadrao) * 4;
 
         if (hrCLT >= 40) {
             System.out.println("Toma hora extra.\n");
-            
+            System.out.println("O salario total é: " + salExtra);
+        } else {
+            System.out.println("Sem hora extra.");
+            System.out.println("O salário é: " + salPadrao);
         }
     }    
 }
