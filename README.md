@@ -1,8 +1,7 @@
 # TDS-2023
-##Projetos
-- Java/Domino_Ederson
+## Projetos
 ### Dominó
-
+Pastas: Java/Domino_Ederson
 - As peças começam viradas (ocultas = true).
 - Todas as 28 peças estão no box.
 - O número de jogadores é definido.
