@@ -1,4 +1,4 @@
-## Dominó 
+## Java - Dominó 
 
 as peças começam viradas (ocultas = true).
 as peças tão no Box (28 peças).
