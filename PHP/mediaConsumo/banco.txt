@@ -1,4 +1,0 @@
-TABELA VEÍCULOS:    -----
-create table veiculo (ID_Veiculo int AUTO_INCREMENT PRIMARY KEY, marca varchar(255), nome varchar(255), kmHodometro double, litrosAbastecidos double, valorAbastecimento double, cheio boolean);
-                    -----
-
