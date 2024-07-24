@@ -1,6 +1,5 @@
 <?php 
     include "viagem.class.php";
-    include "cadastroVeiculo.php";
 
     $v = new Viagem();
 
@@ -12,6 +11,8 @@
     $v->setKmInicial($kmInicial);
     $kmFinal = $_POST['kmFinal'];
     $v->setKmFinal($kmFinal);
+    $kmHodometro = $_POST['kmHodometro'];
+    $v->setKmHodometro($kmHodometro);
     $gasolinaLitro = $_POST['gasolinaLitro'];
     $v->setGasolinaLitro($gasolinaLitro);
     $precoGasolina = $_POST['precoGasolina'];
@@ -20,7 +21,16 @@
     $v->setGasolinaTipo($gasolinaTipo);
     /*$completoOTanque = $_POST['completoOTanque'];
     $v->setIsCOmpleto($completoOTanque);*/
+    $cheio = false;
 
     $v->imprimir();
-
+    if(isset($_POST['completoOTanque'])) {
+        $cheio = true;
+        echo "Encheu o tanque: sim<br>";
+    } else {
+        $cheio = false;
+        echo "Encheu o tanque: não<br>";
+    }
+    $v->mandarVeiculo();
+    $v->mandarAbastecimento();
 ?>

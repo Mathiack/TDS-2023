@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+body {
+    background: linear-gradient(to right, red, blue);
+}
+label {
+    text-align: center;
+    background-color: aliceblue;
+    box-shadow: black;
+}

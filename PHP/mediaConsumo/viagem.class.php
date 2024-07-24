@@ -10,7 +10,7 @@
     <?php
         class Viagem {
 
-            public $marca, $modelo, $kmInicial, $kmFinal, $gasolinaLitro, $gasolinaTipo, $media, $kmHodometro, $precoGasolina;
+            public $marca, $modelo, $kmInicial, $kmFinal, $gasolinaLitro, $gasolinaTipo, $media, $kmPercorridos, $kmHodometro, $precoGasolina;
 
             public function setMarca($marca) {
                 $this->marca = $marca;
@@ -40,6 +40,13 @@
                 return $this->kmFinal;
             }
 
+            public function setKmHodometro($kmHodometro) {
+                $this->kmHodometro = $kmHodometro;
+            }
+            public function getKmHodometro() {
+                return $this->kmHodometro;
+            }
+
             public function setGasolinaLitro($gasolinaLitro) {
                 $this->gasolinaLitro = $gasolinaLitro;
             }
@@ -61,28 +68,74 @@
                 return $this->gasolinaTipo;
             }
 
+
+
             public function imprimir() {
 
-                $kmHodometro = $this->getKmFinal() - $this->getkmInicial();
+                $kmPercorridos = $this->getKmFinal() - $this->getkmInicial();
                 $valorGasolina = $this->getGasolinaLitro() * $this->getPrecoGasolina();
-                $media = ($this->getkmFinal() - $this->getkmInicial()) / $this->getGasolinaLitro();
+                $media = ($kmPercorridos) / $this->getGasolinaLitro();
+
                 echo "<h1>Cadastro: </h1>";
                 echo "Marca: " . $this->getMarca() . "<br>";
                 echo "Modelo: " . $this->getModelo() . "<br>";
                 echo "Km Inicial: " . $this->getkmInicial() . "<br>";
                 echo "Km Final: " . $this->getKmFinal() . "<br>";
+                echo "Km Hodometro: " . $this->getKmHodometro() . "<br>";
+                echo "Kms Percorridos: " . $kmPercorridos . "<br>";
                 echo "Litros: " . $this->getGasolinaLitro() . "<br>";
                 echo "Tipo da Gasosa: " . $this->getGasolinaTipo() . "<br>";
                 echo "Preço da Gasolina: " . $this->getPrecoGasolina() . "<br>";
-                $cheio = false;
-                if(isset($_POST['completoOTanque'])) {
-                    $cheio = true;
-                    echo "Encheu o tanque: sim<br>";
-                } else {
-                    $cheio = false;
-                    echo "Encheu o tanque: não<br>";
-                }
                 echo "Media: " . $media . "<br>";
+            }
+
+            public function mandarVeiculo() {
+                //VEÍCULO
+                $database = new Conexao(); //nova instancia da conexao
+                $db = $database->getConnection(); //tenta conectar
+                
+                $sql = "INSERT INTO veiculo (marca, modelo, kmInicial, kmFinal) VALUES (:marca, :modelo, :kmInicial, :kmFinal)";
+                try {
+                    $stmt = $db->prepare($sql);
+
+                    $stmt->bindParam(':marca', $this->marca);
+                    $stmt->bindParam(':modelo', $this->modelo);
+                    $stmt->bindParam(':kmInicial', $this->kmInicial);
+                    $stmt->bindParam(':kmFinal', $this->kmFinal);
+                    $stmt->execute();
+
+                    $this->ID_Veiculo = $db->lastInsertId();
+                    return true;
+                } catch(PDOExeption $e) { //if(erro==true) {echo $this->mensagem;}
+                    echo "Erro ao inserir automóvel: " . $e->getMessage();
+                    return false;
+                }
+            }
+
+
+            public function mandarAbastecimento() {
+                //ABASTECIMENTO
+                $database = new Conexao(); //nova instancia da conexao
+                $db = $database->getConnection(); //tenta conectar
+
+                $sql = "INSERT INTO abastecimento (ID_Veiculo, gasolinaLitro, gasolinaTipo, kmHodometro, precoGasolina, media, cheio) VALUES (:ID_Veiculo, :gasolinaLitro, :gasolinaTipo, :kmHodometro, :precoGasolina, :media, :cheio)";
+                try {
+                    $stmt = $db->prepare($sql);
+                    
+                    $stmt->bindParam(':ID_Veiculo', $this->ID_Veiculo);
+                    $stmt->bindParam(':gasolinaLitro', $this->gasolinaLitro);
+                    $stmt->bindParam(':gasolinaTipo', $this->gasolinaTipo);
+                    $stmt->bindParam(':kmHodometro', $this->kmPercorridos);
+                    $stmt->bindParam(':precoGasolina', $this->precoGasolina);
+                    $stmt->bindParam(':media', $this->media);
+                    $stmt->bindParam(':cheio', $this->cheio);
+                    $stmt->execute();
+                    var_dump($this->media);
+                    return true;
+                } catch(PDOExeption $e) { //if(erro==true) {echo $this->mensagem;}
+                    echo "Erro ao inserir abastecimento: " . $e->getMessage();
+                    return false;
+                }
             }
         }  
     ?>
