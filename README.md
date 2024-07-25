@@ -2,7 +2,8 @@
 
 ## TDS-00🖥
 ### <a href="https://github.com/Guilherme-Thunder/tds_00" target="_blank">Repositório</a> <br>
-Códigos inicias em C do Curso, usados para aprender Lógica de Programação, funções e operadores de uma linguagem de programação.
+Códigos inicias em C do Curso, usados para aprender Lógica de Programação, funções e operadores de uma linguagem de programação. 
+Iniciando com Git e GitHub fazendo commits e PRs.
 <br><br>
 
 ## TDS-01☕
