@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+* {
+    font-family: monospace;
+}
+
+
+
+div.centralizado {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+div#addLivro, #verLivros {
+    font-size: 20px;
+    background-color: gray;
+    padding: 3px;
+    border-radius: 10px;
+    margin: 10px;
+}
+div#addLivro>a, div#verLivros>a {
+    text-decoration: dashed;
+    color: white;
+}
+div#voltarInicio > a {
+    background-color: gray;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+}
+
+
+
+input#titulo, #autor, #isbn, #editoraB {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+}
+input#inputAdd {
+    margin: 10px;
+    width: 70px;
+    height: 30px;
+}
