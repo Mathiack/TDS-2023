@@ -4,10 +4,6 @@
  */
 package janela;
 
-/**
- *
- * @author Suporte
- */
 public class janela2 extends javax.swing.JFrame {
 
     /**

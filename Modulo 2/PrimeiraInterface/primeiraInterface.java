@@ -7,10 +7,6 @@ package main;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Suporte
- */
 public class PrimeiraInterfasse extends JFrame {
 
     /**

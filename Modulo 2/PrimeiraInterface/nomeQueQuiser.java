@@ -7,10 +7,6 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Suporte
- */
 public class nomeQueQuiser extends javax.swing.JFrame {
 
     /**
