@@ -16,15 +16,14 @@ public class ExemploLabel extends JFrame {
 
     public ExemploLabel() {
         super("Exemplo com Label");
-        setLayout(new BorderLayout());
+       
 
         // Cria o CardLayout e o painel principal
-        cardLayout = new CardLayout();
-        JPanel containerPanel = new JPanel(cardLayout);
+        
 
         // Painel principal (contém a interface original)
-        panelMain = new JPanel(null);
-        panelMain.setPreferredSize(new Dimension(450, 250));
+        panelMain = new JPanel();
+        
 
         rotulo1 = new JLabel("Nome");
         rotulo2 = new JLabel("Idade");
@@ -104,7 +103,7 @@ public class ExemploLabel extends JFrame {
         setSize(400, 350);
         setVisible(true);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
     
     //            JANELA DO CADASTRO            //
@@ -262,12 +261,5 @@ public class ExemploLabel extends JFrame {
         j.add(p);
         j.pack();
         j.setVisible(true);
-    }
-
-
-    public static void main(String[] args) {
-        ExemploLabel j = new ExemploLabel();
-        SwingUtilities.invokeLater(() -> new ExemploLabel());
-        
     }
 }
