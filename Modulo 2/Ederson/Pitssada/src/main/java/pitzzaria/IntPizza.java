@@ -6,17 +6,16 @@ package pitzzaria;
 
 import Pedido.Database;
 import Pedido.Pedido;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.*;
+import javax.swing.*;
 
 /**
  *
  * @author Suporte
  */
 public class IntPizza extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form IntPizza
      */
@@ -60,7 +59,7 @@ public class IntPizza extends javax.swing.JFrame {
         inputHora = new javax.swing.JTextField();
         preco = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -278,11 +277,13 @@ public class IntPizza extends javax.swing.JFrame {
     }//GEN-LAST:event_inputBebidaActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_sairActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        Pedido p = new Pedido();
         print();
+        p.Inserir();
         //System.out.println(Database.getConnection().getCatalog());
     }//GEN-LAST:event_enviarActionPerformed
 
@@ -390,8 +391,7 @@ public class IntPizza extends javax.swing.JFrame {
         
         if (print == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Fasido");
-            Pedido p = new Pedido(nome_Cliente, endereco, bairro, sabor, tamanho);
-            p.Inserir();
+            Pedido p = new Pedido(nome_Cliente, endereco, bairro, nCasa, hora, sabor, tamanho, bebida);
             p.mostrar();
         } else if (print == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Beta");

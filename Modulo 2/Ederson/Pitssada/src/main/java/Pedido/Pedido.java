@@ -10,9 +10,47 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 public class Pedido {
-    private String nome_Cliente, endereco, bairro, sabor, tamanho;
+    private String nome_Cliente, endereco, bairro, numero, hora, sabor, tamanho, bebidas;
+    
+    
+    public Pedido(String nome_Cliente, String endereco, String bairro, int nCasa, JLabel hora1, String numero, String hora, String sabor) {
+        this.nome_Cliente = nome_Cliente;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.numero = numero;
+        this.hora = hora;
+        this.sabor = sabor;
+        this.tamanho = tamanho;
+        this.bebidas = bebidas;
+    }
+    
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getBebidas() {
+        return bebidas;
+    }
+
+    public void setBebidas(String bebidas) {
+        this.bebidas = bebidas;
+    }
 
     public String getNome_Cliente() {
         return nome_Cliente;
@@ -55,16 +93,8 @@ public class Pedido {
     }
     
 
-    public Pedido(String nome_Cliente, String endereco, String bairro, String sabor, String tamanho) {
-        this.nome_Cliente = nome_Cliente;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.sabor = sabor;
-        this.tamanho = tamanho;
-    }
-
     public Pedido() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public void mostrar() {
@@ -80,14 +110,13 @@ public class Pedido {
     public void Inserir() {
         try {
             Connection conn = Database.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO pedido (id_pedido, nome_cliente, endereco, bairro, sabor, tamanho) VALUES (?, ?, ?, ?, ?, ? )");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO pedido (id_pedido, nome_cliente, endereco, bairro, numero, hora, sabor, tamanho, bedidas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
-            Pedido p = new Pedido();
-            stmt.setString(1, p.getNome_Cliente());
-            stmt.setString(2, p.getEndereco());
-            stmt.setString(3, p.getBairro());
-            stmt.setString(4, p.getSabor());
-            stmt.setString(5, p.getTamanho());
+            stmt.setString(1, this.getNome_Cliente());
+            stmt.setString(2, this.getEndereco());
+            stmt.setString(3, this.getBairro());
+            stmt.setString(4, this.getSabor());
+            stmt.setString(5, this.getTamanho());
             
             stmt.executeQuery();
             

@@ -159,6 +159,7 @@ public class ExemploLabel extends JFrame {
         JTextField jTxnum1 = new JTextField();
         jTxnum1.setPreferredSize(new Dimension( 50, 24 ));
         
+        
         JLabel jLbnum2 = new JLabel("Número 2:");
         jLbnum2.setHorizontalAlignment(JLabel.CENTER);
         jLbnum2.setHorizontalTextPosition(JLabel.CENTER);

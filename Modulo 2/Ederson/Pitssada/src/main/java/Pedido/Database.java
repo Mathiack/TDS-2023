@@ -10,7 +10,7 @@ public class Database {
     public static Connection getConnection() {
         try{
             return DriverManager.getConnection(
-                "jdbc:mariadb://localhost:3306/bdjava",
+                "jdbc:mariadb://localhost:3306/pitssada",
                 "root", ""
             );  
         } catch(SQLException ex) {
