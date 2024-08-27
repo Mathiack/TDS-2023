@@ -17,11 +17,6 @@ public class ExemploLabel extends JFrame {
     public ExemploLabel() {
         super("Exemplo com Label");
        
-
-        // Cria o CardLayout e o painel principal
-        
-
-        // Painel principal (contém a interface original)
         panelMain = new JPanel();
         
 
