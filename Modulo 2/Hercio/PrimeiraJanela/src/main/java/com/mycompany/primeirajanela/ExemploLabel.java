@@ -12,14 +12,12 @@ public class ExemploLabel extends JFrame {
 
     // Painéis para exibir
     JPanel panelMain, panelCadastro;
-    CardLayout cardLayout;
 
     public ExemploLabel() {
         super("Exemplo com Label");
        
-        panelMain = new JPanel();
+        Container panelMain = getContentPane();
         
-
         rotulo1 = new JLabel("Nome");
         rotulo2 = new JLabel("Idade");
         rotulo3 = new JLabel("Telefone");
