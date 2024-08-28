@@ -25,16 +25,15 @@ public class hom extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jToolBar1 = new javax.swing.JToolBar();
         btnPedido = new javax.swing.JButton();
-        lblBm = new javax.swing.JLabel();
+        btnPedidosA = new javax.swing.JButton();
+        btnInfo = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        setToolTipText("");
+        setAutoscrolls(true);
+
+        jToolBar1.setRollover(true);
 
         btnPedido.setText("Fazer Pedido");
         btnPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -42,41 +41,41 @@ public class hom extends javax.swing.JPanel {
                 btnPedidoActionPerformed(evt);
             }
         });
+        jToolBar1.add(btnPedido);
 
-        lblBm.setText("Bem-Vindo à Pitssaria");
+        btnPedidosA.setText("Pedidos");
+        btnPedidosA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosAActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnPedidosA);
+
+        btnInfo.setText("Info");
+        btnInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInfoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(lblBm))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(btnPedido)
-                        .addGap(39, 39, 39)
-                        .addComponent(jButton1)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblBm)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(269, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
         JFrame j = new JFrame("Fazer Pedido");
@@ -91,10 +90,19 @@ public class hom extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnPedidoActionPerformed
 
+    private void btnPedidosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPedidosAActionPerformed
+
+    private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInfoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInfo;
     private javax.swing.JButton btnPedido;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel lblBm;
+    private javax.swing.JButton btnPedidosA;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

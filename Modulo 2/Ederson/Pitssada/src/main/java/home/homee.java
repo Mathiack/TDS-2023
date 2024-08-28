@@ -14,11 +14,9 @@ import pitzzaria.IntPizza;
  * @author Aluno
  */
 public class homee extends javax.swing.JFrame {
-
-    /**
-     * Creates new form homee
-     */
+    
     public homee() {
+        super("Início");
         initComponents();
     }
 

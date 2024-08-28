@@ -20,6 +20,7 @@ public class IntPizza extends javax.swing.JFrame {
      * Creates new form IntPizza
      */
     public IntPizza() {
+        super("Pedido");
         initComponents();
     }
 
