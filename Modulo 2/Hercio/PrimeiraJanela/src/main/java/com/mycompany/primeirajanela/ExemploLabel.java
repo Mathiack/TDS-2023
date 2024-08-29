@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class ExemploLabel extends JFrame {
     JLabel rotulo1, rotulo2, rotulo3, rotulo4;
     JTextField texto1, texto2, texto3, texto4;
-    JButton botao, botaoCadastro, botaoSair, botaoCalculadora;
+    JButton botao, botaoCadastro, botaoSair, botaoCalculadora, botaoEstados;
 
     // Painéis para exibir
     JPanel panelMain, panelCadastro;
@@ -17,6 +17,7 @@ public class ExemploLabel extends JFrame {
         super("Exemplo com Label");
        
         Container panelMain = getContentPane();
+        panelMain.setLayout(null);
         
         rotulo1 = new JLabel("Nome");
         rotulo2 = new JLabel("Idade");
@@ -27,6 +28,7 @@ public class ExemploLabel extends JFrame {
         botaoCadastro = new JButton("Cadastro");
         botaoSair = new JButton("Sair");
         botaoCalculadora = new JButton("Calculadora");
+        botaoEstados = new JButton("Estados");
 
         texto1 = new JTextField(50);
         texto2 = new JTextField(3);
@@ -47,6 +49,7 @@ public class ExemploLabel extends JFrame {
         botaoSair.setBounds(35, 210, 100, 20);
         botaoCadastro.setBounds(35, 240, 100, 20);
         botaoCalculadora.setBounds(35, 270, 100, 20);
+        botaoEstados.setBounds(35, 300, 100, 20);
 
         rotulo1.setForeground(Color.red);
         rotulo2.setForeground(Color.blue);
@@ -71,6 +74,7 @@ public class ExemploLabel extends JFrame {
         panelMain.add(botaoCadastro);
         panelMain.add(botaoSair);
         panelMain.add(botaoCalculadora);
+        panelMain.add(botaoEstados);
 
         // Define o comportamento dos botões
         botaoCadastro.addActionListener(new ActionListener() {
@@ -93,14 +97,20 @@ public class ExemploLabel extends JFrame {
                 janCalc();
             }
         });
-        setSize(400, 350);
+        
+        botaoEstados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janEst();
+            }
+        });
+        setSize(400, 430);
         setVisible(true);
         setLocationRelativeTo(null);
         
     }
     
     //            JANELA DO CADASTRO            //
-    
     static void janCad() {
         JFrame j = new JFrame("CADASTRO");
         j.setSize(400, 350);
@@ -117,21 +127,103 @@ public class ExemploLabel extends JFrame {
         JTextField JTnome = new JTextField();
         JTnome.setPreferredSize(new Dimension(50, 24));
         
-        JLabel JLemail = new JLabel("Nome:");
+        JLabel JLemail = new JLabel("E-mail:");
+        JTextField JTemail = new JTextField();
         
-        JLabel JLidade = new JLabel("Nome:");
+        JLabel JLidade = new JLabel("Idade:");
+        JTextField JTidade = new JTextField();
         
-        JLabel JLtelefone = new JLabel("Nome:");
+        JLabel JLtelefone = new JLabel("Telefone:");
+        JTextField JTtelefone = new JTextField();
         
-        JLabel JLcpf = new JLabel("Nome:");
+        JLabel JLcpf = new JLabel("CPF:");
+        JTextField JTcpf = new JTextField();
         
-        JLabel JLdata = new JLabel("Nome:");
+        JLabel JLdata = new JLabel("Data de Nascimento:");
+        JTextField JTdata = new JTextField();
         
-        JLabel JLendereco = new JLabel("Nome:");
+        JLabel JLendereco = new JLabel("Endereço:");
+        JTextField JTendereco = new JTextField();
         
-        JLabel JLcep = new JLabel("Nome:");
+        JLabel JLcep = new JLabel("CEP:");
+        JTextField JTcep = new JTextField();
         
-        JLabel JLsenha = new JLabel("Nome:");
+        JLabel JLsenha = new JLabel("Senha:");
+        JTextField JTsenha = new JTextField();
+        
+        JButton JBenviar = new JButton("Enviar");
+        
+        p.add(JLemail);
+        p.add(JTemail);
+        
+        p.add(JLidade);  
+        p.add(JTidade);
+        
+        p.add(JLtelefone);
+        p.add(JTtelefone);
+        
+        p.add(JLcpf);
+        p.add(JTcpf);
+        
+        p.add(JLdata);
+        p.add(JTdata);
+        
+        p.add(JLendereco);
+        p.add(JTendereco);
+        
+        p.add(JLcep);
+        p.add(JTcep);
+        
+        p.add(JLsenha);
+        p.add(JTsenha);
+        
+        p.add(JBenviar);
+        
+        String nome = JTnome.getText();
+        String idade = JTidade.getText();
+        String telefone = JTtelefone.getText();
+        String data = JTdata.getText();
+        String endereco = JTendereco.getText();
+        String cep = JTcep.getText();
+        String senha = JTsenha.getText();
+        
+        //JBenviar.setHorizontalAlignment(JButton.CENTER);
+        //JBenviar.setHorizontalTextPosition(JButton.CENTER);
+        
+        j.add(p);
+        j.pack();
+        j.setVisible(true);
+        
+        JBenviar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                Integer print = JOptionPane.showConfirmDialog(rootPane, 
+                "-------------------------------\n" +
+                "Nome: " + nome + "\n" +
+                "E-mail"
+                "-------------------------------\n" +
+                "Endereço: " + endereco + "\n" +
+                "-------------------------------\n" +
+                "PEDIDOS\n" +
+                "Sabor: " + sabor + "\n" +
+                "Tamanho: " + tamanho + "\n" +
+                "Bebida: " + bebida + "\n" +
+                "-------------------------------\n" +
+                "PREÇO\n" +
+                "Total: " + preco + "\n" + 
+                "-------------------------------\n"
+                );
+        
+                if (print == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(rootPane, "Fasido");
+                    Pedido p = new Pedido(nome_Cliente, endereco, bairro, nCasa, hora, sabor, tamanho, bebida);
+                    p.mostrar();
+                } else if (print == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(rootPane, "Beta");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Beta");
+                }
+            }
+        });
     }
     
     //            JANELA DA CALCULADORA            //
@@ -255,5 +347,18 @@ public class ExemploLabel extends JFrame {
         j.add(p);
         j.pack();
         j.setVisible(true);
+    }
+    
+    //            JANELA DOS ESTADOS            //
+    //               FAZER DEPOIS               //
+    static void janEst() {
+        JFrame j = new JFrame("ESTADOS");
+        j.setSize(400, 350);
+        j.setLocationRelativeTo(j);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel p = new JPanel();
+        
+        GridLayout layout = new GridLayout(0, 2, 20, 20);
+        p.setLayout(layout);
     }
 }
