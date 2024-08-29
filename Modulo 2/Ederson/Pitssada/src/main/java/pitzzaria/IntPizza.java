@@ -21,6 +21,8 @@ public class IntPizza extends javax.swing.JFrame {
      */
     public IntPizza() {
         super("Pedido");
+        JFrame j = new JFrame();
+        j.setUndecorated(true);
         initComponents();
     }
 
