@@ -24,4 +24,5 @@ Bancos de Dados em SQL, feitos pelo XAMPP.
 👇Confira outros repositórios de cursos no meu perfil !
 <br>
 <a href="https://github.com/Mathiack/RSTI">RSTI</a> - Rio Grande do Sul Tecnologia da Informação
-<br><br>
+<br>
+<a href="https://github.com/Mathiack/Codes">Codes</a> - Meu repositório pessoal, com aulas e projetos
