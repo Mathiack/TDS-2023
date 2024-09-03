@@ -9,6 +9,7 @@ public class ExemploLabel extends JFrame {
     JLabel rotulo1, rotulo2, rotulo3, rotulo4;
     JTextField texto1, texto2, texto3, texto4;
     JButton botao, botaoCadastro, botaoSair, botaoCalculadora, botaoEstados;
+    JButton botaoDialogo;
 
     // Painéis para exibir
     JPanel panelMain, panelCadastro;
@@ -29,6 +30,7 @@ public class ExemploLabel extends JFrame {
         botaoSair = new JButton("Sair");
         botaoCalculadora = new JButton("Calculadora");
         botaoEstados = new JButton("Estados");
+        botaoDialogo = new JButton("Dialogar");
 
         texto1 = new JTextField(50);
         texto2 = new JTextField(3);
@@ -50,6 +52,7 @@ public class ExemploLabel extends JFrame {
         botaoCadastro.setBounds(35, 240, 100, 20);
         botaoCalculadora.setBounds(35, 270, 100, 20);
         botaoEstados.setBounds(35, 300, 100, 20);
+        botaoDialogo.setBounds(35, 330, 100, 20);
 
         rotulo1.setForeground(Color.red);
         rotulo2.setForeground(Color.blue);
@@ -75,6 +78,7 @@ public class ExemploLabel extends JFrame {
         panelMain.add(botaoSair);
         panelMain.add(botaoCalculadora);
         panelMain.add(botaoEstados);
+        panelMain.add(botaoDialogo);
 
         // Define o comportamento dos botões
         botaoCadastro.addActionListener(new ActionListener() {
@@ -104,6 +108,14 @@ public class ExemploLabel extends JFrame {
                 janEst();
             }
         });
+        
+        botaoDialogo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janDia();
+            }
+        });
+        
         setSize(400, 430);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -115,7 +127,7 @@ public class ExemploLabel extends JFrame {
         JFrame j = new JFrame("CADASTRO");
         j.setSize(400, 350);
         j.setLocationRelativeTo(j);
-        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel p = new JPanel();
         
         GridLayout layout = new GridLayout(0, 2, 20, 20);
@@ -180,12 +192,15 @@ public class ExemploLabel extends JFrame {
         p.add(JBenviar);
         
         String nome = JTnome.getText();
+        String email = JTemail.getText();
         String idade = JTidade.getText();
         String telefone = JTtelefone.getText();
         String data = JTdata.getText();
         String endereco = JTendereco.getText();
         String cep = JTcep.getText();
         String senha = JTsenha.getText();
+        
+       
         
         //JBenviar.setHorizontalAlignment(JButton.CENTER);
         //JBenviar.setHorizontalTextPosition(JButton.CENTER);
@@ -196,31 +211,26 @@ public class ExemploLabel extends JFrame {
         
         JBenviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                Integer print = JOptionPane.showConfirmDialog(rootPane, 
-                "-------------------------------\n" +
-                "Nome: " + nome + "\n" +
-                "E-mail"
-                "-------------------------------\n" +
-                "Endereço: " + endereco + "\n" +
-                "-------------------------------\n" +
-                "PEDIDOS\n" +
-                "Sabor: " + sabor + "\n" +
-                "Tamanho: " + tamanho + "\n" +
-                "Bebida: " + bebida + "\n" +
-                "-------------------------------\n" +
-                "PREÇO\n" +
-                "Total: " + preco + "\n" + 
-                "-------------------------------\n"
-                );
-        
+                int print = JOptionPane.showConfirmDialog(j, 
+                    "-------------------------------\n" +
+                    "Nome: " + nome + "\n" +
+                    "Idade: " + idade + "\n" + 
+                    "E-mail: " + email + "\n" +
+                    "Senha: " + senha + "\n" +
+                    "Telefone: " + telefone + "\n" +
+                    "-------------------------------\n" +
+                    "Endereço: " + endereco + "\n" +
+                    "CEP: " + cep + "\n" +
+                    "Data: " + data + "\n" +
+                    "-------------------------------\n"
+                    );
+
                 if (print == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(rootPane, "Fasido");
-                    Pedido p = new Pedido(nome_Cliente, endereco, bairro, nCasa, hora, sabor, tamanho, bebida);
-                    p.mostrar();
+                        JOptionPane.showMessageDialog(j, "Fasido");
                 } else if (print == JOptionPane.NO_OPTION) {
-                    JOptionPane.showMessageDialog(rootPane, "Beta");
+                        JOptionPane.showMessageDialog(j, "Beta");
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Beta");
+                        JOptionPane.showMessageDialog(j, "Beta");
                 }
             }
         });
@@ -231,7 +241,7 @@ public class ExemploLabel extends JFrame {
         JFrame j = new JFrame("CALCULADORA");
         j.setSize(400,350);
         j.setLocationRelativeTo(j);
-        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel p = new JPanel();
         
         GridLayout layout = new GridLayout(0,2,20,20);
@@ -355,10 +365,23 @@ public class ExemploLabel extends JFrame {
         JFrame j = new JFrame("ESTADOS");
         j.setSize(400, 350);
         j.setLocationRelativeTo(j);
-        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel p = new JPanel();
         
         GridLayout layout = new GridLayout(0, 2, 20, 20);
         p.setLayout(layout);
+        j.setVisible(true);
+    }
+    
+    static void janDia() {
+        JFrame j = new JFrame("Dialogo");
+        j.setSize(400, 350);
+        j.setLocationRelativeTo(j);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel p = new JPanel();
+        
+        GridLayout layout = new GridLayout(0, 2, 20, 20);
+        p.setLayout(layout);
+        j.setVisible(true);
     }
 }
