@@ -370,6 +370,7 @@ public class ExemploLabel extends JFrame {
         
         GridLayout layout = new GridLayout(0, 2, 20, 20);
         p.setLayout(layout);
+        
         j.setVisible(true);
     }
     
@@ -382,6 +383,25 @@ public class ExemploLabel extends JFrame {
         
         GridLayout layout = new GridLayout(0, 2, 20, 20);
         p.setLayout(layout);
+        
+        JButton JBdialogo = new JButton("Sair");
+        JBdialogo.setBounds(35, 10, 100, 20);
+        
+        j.add(JBdialogo);
+        
+        JBdialogo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int caixa = JOptionPane.showConfirmDialog(j, "Certeza?");
+                if (caixa == JOptionPane.YES_OPTION) {
+                    j.dispose();
+                } else if (caixa == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(j, "Não quiseste fechar");
+                } else if (caixa == JOptionPane.CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(j, "Você escolheu sair");
+                }
+            }
+        });
+        
         j.setVisible(true);
     }
 }
