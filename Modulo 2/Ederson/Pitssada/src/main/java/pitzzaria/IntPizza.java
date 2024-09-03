@@ -139,7 +139,7 @@ public class IntPizza extends javax.swing.JFrame {
             }
         });
 
-        inputBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "agua", "Refri", "Monari", "Banha", "Cachassa do Lula (Mortal)", "Doce de Leite do 22", "Caldo de Cana ( + pastel )" }));
+        inputBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "monari", "Suco de Laranga", "Cashassa do Lula(mortal)", "Doce de Leite do 22", "nada", "água" }));
         inputBebida.setSelectedItem(null);
         inputBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,9 +169,21 @@ public class IntPizza extends javax.swing.JFrame {
 
         nCasa.setText("Nº");
 
+        inputNumeroCasa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNumeroCasaActionPerformed(evt);
+            }
+        });
+
+        inputPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPrecoActionPerformed(evt);
+            }
+        });
+
         hora.setText("Hora");
 
-        preco.setText("Preço");
+        preco.setText("Preço (R$)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,20 +201,19 @@ public class IntPizza extends javax.swing.JFrame {
                             .addComponent(inputNumeroCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(rua))
-                                    .addComponent(inputRua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(inputHora))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bairro)
-                                    .addComponent(inputBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(4, 4, 4)
+                                    .addComponent(rua))
+                                .addComponent(inputRua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(inputHora))
+                            .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bairro)
+                            .addComponent(inputBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(preco)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,6 +300,14 @@ public class IntPizza extends javax.swing.JFrame {
         p.Inserir();
         //System.out.println(Database.getConnection().getCatalog());
     }//GEN-LAST:event_enviarActionPerformed
+
+    private void inputPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPrecoActionPerformed
+
+    private void inputNumeroCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNumeroCasaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNumeroCasaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,7 +414,6 @@ public class IntPizza extends javax.swing.JFrame {
         if (print == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Fasido");
             Pedido p = new Pedido(nome_Cliente, endereco, bairro, nCasa, hora, sabor, tamanho, bebida);
-            p.mostrar();
         } else if (print == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Beta");
         } else {

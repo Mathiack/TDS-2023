@@ -40,24 +40,22 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="hora" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                      <Component id="rua" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="inputRua" alignment="0" pref="175" max="32767" attributes="0"/>
-                                  <Component id="inputHora" alignment="1" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <Component id="rua" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="bairro" min="-2" max="-2" attributes="0"/>
-                                  <Component id="inputBairro" min="-2" pref="175" max="-2" attributes="0"/>
-                                  <Component id="inputPreco" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                                  <Component id="preco" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="inputRua" alignment="0" pref="175" max="32767" attributes="0"/>
+                              <Component id="inputHora" alignment="1" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="hora" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="bairro" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputBairro" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="inputPreco" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="preco" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -292,16 +290,8 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="inputBebida">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
-            <StringItem index="0" value="agua"/>
-            <StringItem index="1" value="Refri"/>
-            <StringItem index="2" value="Monari"/>
-            <StringItem index="3" value="Banha"/>
-            <StringItem index="4" value="Cachassa do Lula (Mortal)"/>
-            <StringItem index="5" value="Doce de Leite do 22"/>
-            <StringItem index="6" value="Caldo de Cana ( + pastel )"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;monari&quot;, &quot;Suco de Laranga&quot;, &quot;Cashassa do Lula(mortal)&quot;, &quot;Doce de Leite do 22&quot;, &quot;nada&quot;, &quot;&#xe1;gua&quot; })" type="code"/>
         </Property>
         <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="null" type="code"/>
@@ -361,6 +351,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputNumeroCasa">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputNumeroCasaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="inputBairro">
     </Component>
@@ -369,6 +362,9 @@
     <Component class="javax.swing.JTextField" name="inputNome">
     </Component>
     <Component class="javax.swing.JTextField" name="inputPreco">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputPrecoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="hora">
       <Properties>
@@ -379,7 +375,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="preco">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o (R$)"/>
       </Properties>
     </Component>
   </SubComponents>
