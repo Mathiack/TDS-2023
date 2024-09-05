@@ -110,7 +110,7 @@ public class Pedido {
     public void Inserir() {
         try {
             Connection conn = Database.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO pedido (id_pedido, nome_cliente, endereco, bairro, numero, hora, sabor, tamanho, bedidas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO `pedido`(`id_sabor`, `id_tamanho`, `id_bebida`, `nomeCliente`, `rua`, `bairro`, `numero`, `hora`, `precoFinal`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
             stmt.setString(1, this.getNome_Cliente());
             stmt.setString(2, this.getEndereco());
