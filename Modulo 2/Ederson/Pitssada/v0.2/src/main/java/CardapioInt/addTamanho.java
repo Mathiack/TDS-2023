@@ -29,7 +29,7 @@ public class addTamanho extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnAddTamanho = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -37,10 +37,10 @@ public class addTamanho extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Adicionar Tamanho");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddTamanho.setText("Adicionar Tamanho");
+        btnAddTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddTamanhoActionPerformed(evt);
             }
         });
 
@@ -70,7 +70,7 @@ public class addTamanho extends javax.swing.JFrame {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
-                        .addComponent(jButton1))
+                        .addComponent(btnAddTamanho))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -91,7 +91,7 @@ public class addTamanho extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jButton1)
+                .addComponent(btnAddTamanho)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
@@ -102,11 +102,16 @@ public class addTamanho extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTamanhoActionPerformed
         Integer print = JOptionPane.showConfirmDialog(rootPane,
-                ""
+                "Deseja adicionar esse tamanho?"
         );
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (print == JOptionPane.YES_OPTION ) {
+            JOptionPane.showMessageDialog(rootPane, "Tamanho Adicionado");
+        } else if (print == JOptionPane.NO_OPTION || print == JOptionPane.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(rootPane, "Tamanho Não Adicionado");
+        }
+    }//GEN-LAST:event_btnAddTamanhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,7 +149,7 @@ public class addTamanho extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAddTamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
