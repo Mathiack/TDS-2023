@@ -14,6 +14,7 @@ public class IntPizza extends javax.swing.JFrame {
     public IntPizza() {
         super("Pedido");
         JFrame j = new JFrame();
+        j.setLocationRelativeTo(null);
         j.setUndecorated(true);
         initComponents();
     }
@@ -387,7 +388,7 @@ public class IntPizza extends javax.swing.JFrame {
         
         Integer print = JOptionPane.showConfirmDialog(rootPane, 
                 "-------------------------------\n" +
-                "Cliente: " + nomeC + "\n" +
+                 "Cliente: " + nomeC + "\n" +
                 "Rua: " + rua + "\n" +
                 "Bairro: " + bairro + "\n" +
                 "Número Casa: " + nCasa + "\n" +
@@ -405,7 +406,6 @@ public class IntPizza extends javax.swing.JFrame {
         
         if (print == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Fasido");
-            Pedido p = new Pedido(nome_Cliente, endereco, bairro, nCasa, hora, sabor, tamanho, bebida);
         } else if (print == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Beta");
         } else {
