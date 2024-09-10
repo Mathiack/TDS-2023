@@ -38,12 +38,20 @@
             <Property name="text" type="java.lang.String" value="Card&#xe1;pio"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="menuTamanho">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Novo Tamanho"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuTamanhoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuSabor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Novo Sabor"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSaborActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

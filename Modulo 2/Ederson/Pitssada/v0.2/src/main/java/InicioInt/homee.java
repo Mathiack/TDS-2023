@@ -2,9 +2,8 @@ package InicioInt;
 
 import java.awt.*;
 import javax.swing.*;
-import PitzzariaInt.IntPizza;
-import CardapioInt.Cardapio;
-import CardapioInt.addTamanho;
+import PitzzariaInt.*;
+import CardapioInt.*;
 
 public class homee extends javax.swing.JFrame {
     
@@ -31,7 +30,8 @@ public class homee extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         fazP = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuTamanho = new javax.swing.JMenuItem();
+        menuSabor = new javax.swing.JMenuItem();
 
         jMenu2.setText("jMenu2");
 
@@ -77,13 +77,21 @@ public class homee extends javax.swing.JFrame {
 
         jMenu3.setText("Cardápio");
 
-        jMenuItem2.setText("Novo Tamanho");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuTamanho.setText("Novo Tamanho");
+        menuTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuTamanhoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        jMenu3.add(menuTamanho);
+
+        menuSabor.setText("Novo Sabor");
+        menuSabor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSaborActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuSabor);
 
         jMenuBar1.add(jMenu3);
 
@@ -117,11 +125,17 @@ public class homee extends javax.swing.JFrame {
         j.setLocationRelativeTo(null);
     }//GEN-LAST:event_fazPActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTamanhoActionPerformed
         JFrame j = new addTamanho();
         j.setVisible(true);
         j.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuTamanhoActionPerformed
+
+    private void menuSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSaborActionPerformed
+        JFrame j = new addSabor();
+        j.setVisible(true);
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_menuSaborActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,8 +179,9 @@ public class homee extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenuItem menuSabor;
+    private javax.swing.JMenuItem menuTamanho;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,19 +5,21 @@
 package CardapioInt;
 
 import Pedido.Database;
-import Pedido.Pedido;
-import javax.swing.*;
-import java.awt.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
+import javax.swing.*;
 
-public class addTamanho extends javax.swing.JFrame {
+/**
+ *
+ * @author GUILHERMEMATHIACK
+ */
+public class addSabor extends javax.swing.JFrame {
 
     /**
-     * Creates new form addTamanho
+     * Creates new form addSabor
      */
-    public addTamanho() {
+    public addSabor() {
         initComponents();
     }
 
@@ -30,36 +32,36 @@ public class addTamanho extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAddTamanho = new javax.swing.JButton();
+        btnAddSabor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        inputTamanho = new javax.swing.JTextField();
+        inputSabor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        inputPrecoT = new javax.swing.JTextField();
+        inputPrecoS = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAddTamanho.setText("Adicionar Tamanho");
-        btnAddTamanho.addActionListener(new java.awt.event.ActionListener() {
+        btnAddSabor.setText("Adicionar Sabor");
+        btnAddSabor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddTamanhoActionPerformed(evt);
+                btnAddSaborActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Novo Tamanho");
+        jLabel1.setText("Novo Sabor");
 
-        inputTamanho.addActionListener(new java.awt.event.ActionListener() {
+        inputSabor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputTamanhoActionPerformed(evt);
+                inputSaborActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Preço");
 
-        inputPrecoT.addActionListener(new java.awt.event.ActionListener() {
+        inputPrecoS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPrecoTActionPerformed(evt);
+                inputPrecoSActionPerformed(evt);
             }
         });
 
@@ -70,21 +72,20 @@ public class addTamanho extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(btnAddTamanho))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputSabor, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
-                        .addComponent(jLabel2)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputPrecoS, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(btnAddSabor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,45 +93,45 @@ public class addTamanho extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputSabor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnAddTamanho)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addComponent(inputPrecoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnAddSabor)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputPrecoTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPrecoTActionPerformed
-
-    private void btnAddTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTamanhoActionPerformed
+    private void btnAddSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSaborActionPerformed
         Integer print = JOptionPane.showConfirmDialog(rootPane,
-                "Deseja adicionar esse tamanho?"
+            "Deseja adicionar esse sabor?"
         );
         if (print == JOptionPane.YES_OPTION ) {
-            JOptionPane.showMessageDialog(rootPane, "Tamanho Adicionado");
-            inserirTamanho();
-            
-        } else if (print == JOptionPane.NO_OPTION || print == JOptionPane.CANCEL_OPTION) {
-            JOptionPane.showMessageDialog(rootPane, "Tamanho Não Adicionado");
-        }
-    }//GEN-LAST:event_btnAddTamanhoActionPerformed
+            JOptionPane.showMessageDialog(rootPane, "Sabor Adicionado");
+            inserirSabor();
 
-    private void inputTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTamanhoActionPerformed
+        } else if (print == JOptionPane.NO_OPTION || print == JOptionPane.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(rootPane, "Sabor Não Adicionado");
+        }
+    }//GEN-LAST:event_btnAddSaborActionPerformed
+
+    private void inputSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSaborActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputTamanhoActionPerformed
+    }//GEN-LAST:event_inputSaborActionPerformed
+
+    private void inputPrecoSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPrecoSActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -143,48 +144,48 @@ public class addTamanho extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addTamanho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addTamanho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addTamanho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addTamanho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addTamanho().setVisible(true);
+                new addSabor().setVisible(true);
             }
         });
     }
     
-    
-    public void inserirTamanho() {
-        String tamanho = inputTamanho.getText();
+    public void inserirSabor() {
+        String sabor = inputSabor.getText();
         
-        String precoTa = inputPrecoT.getText();
-        double precoT = Double.parseDouble(precoTa);
+        String precoSa = inputPrecoS.getText();
+        double precoS = Double.parseDouble(precoSa);
         
         Connection conn = Database.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO tamanho(tamanho, precoTamanho) VALUES (?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO sabor(sabor, precoSabor) VALUES (?, ?)");
             
-            stmt.setString(1, tamanho);
-            stmt.setDouble(2, precoT);
+            stmt.setString(1, sabor);
+            stmt.setDouble(2, precoS);
             stmt.execute();
             
         } catch (SQLException ex) {
             
-            Logger.getLogger(addTamanho.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(addSabor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddTamanho;
-    private javax.swing.JTextField inputPrecoT;
-    private javax.swing.JTextField inputTamanho;
+    private javax.swing.JButton btnAddSabor;
+    private javax.swing.JTextField inputPrecoS;
+    private javax.swing.JTextField inputSabor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
