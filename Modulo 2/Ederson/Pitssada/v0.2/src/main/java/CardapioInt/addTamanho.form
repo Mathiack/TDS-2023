@@ -31,7 +31,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="204" max="-2" attributes="0"/>
+                      <Component id="inputTamanho" min="-2" pref="204" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
@@ -39,7 +39,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="inputPrecoT" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
@@ -56,11 +56,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="inputTamanho" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+              <Component id="inputPrecoT" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="btnAddTamanho" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="69" max="32767" attributes="0"/>
@@ -85,7 +85,10 @@
         <Property name="text" type="java.lang.String" value="Novo Tamanho"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="inputTamanho">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputTamanhoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -95,9 +98,9 @@
         <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="inputPrecoT">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputPrecoTActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

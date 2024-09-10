@@ -1,7 +1,10 @@
 com\mycompany\primeirajanela\ExemploLabel$1.class
 com\mycompany\primeirajanela\Cadastro.class
+com\mycompany\primeirajanela\ExemploLabel$13.class
+com\mycompany\primeirajanela\ExemploLabel$14.class
 com\mycompany\primeirajanela\dialogo.class
 com\mycompany\primeirajanela\ExemploLabel$7.class
+com\mycompany\primeirajanela\leArquivo.class
 com\mycompany\primeirajanela\PrimeiraJanela.class
 com\mycompany\primeirajanela\ExemploLabel$12.class
 com\mycompany\primeirajanela\Calculos.class
@@ -16,3 +19,4 @@ com\mycompany\primeirajanela\Estados.class
 com\mycompany\primeirajanela\ExemploLabel$2.class
 com\mycompany\primeirajanela\ExemploLabel$6.class
 com\mycompany\primeirajanela\ExemploLabel.class
+com\mycompany\primeirajanela\escreveArquivo.class

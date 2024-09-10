@@ -290,7 +290,7 @@ public class IntPizza extends javax.swing.JFrame {
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         Pedido p = new Pedido();
         print();
-        p.Inserir();
+        p.inserirPedido();
         //System.out.println(Database.getConnection().getCatalog());
     }//GEN-LAST:event_enviarActionPerformed
 

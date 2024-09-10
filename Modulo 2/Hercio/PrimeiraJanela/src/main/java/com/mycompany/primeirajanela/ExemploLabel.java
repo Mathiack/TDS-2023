@@ -9,7 +9,7 @@ public class ExemploLabel extends JFrame {
     JLabel rotulo1, rotulo2, rotulo3, rotulo4;
     JTextField texto1, texto2, texto3, texto4;
     JButton botao, botaoCadastro, botaoSair, botaoCalculadora, botaoEstados;
-    JButton botaoDialogo;
+    JButton botaoDialogo, botaoArquivo;
 
     // Painéis para exibir
     JPanel panelMain, panelCadastro;
@@ -31,6 +31,7 @@ public class ExemploLabel extends JFrame {
         botaoCalculadora = new JButton("Calculadora");
         botaoEstados = new JButton("Estados");
         botaoDialogo = new JButton("Dialogar");
+        botaoArquivo = new JButton("Arquivo");
 
         texto1 = new JTextField(50);
         texto2 = new JTextField(3);
@@ -53,6 +54,7 @@ public class ExemploLabel extends JFrame {
         botaoCalculadora.setBounds(35, 270, 100, 20);
         botaoEstados.setBounds(35, 300, 100, 20);
         botaoDialogo.setBounds(35, 330, 100, 20);
+        botaoArquivo.setBounds(35, 360, 100, 20);
 
         rotulo1.setForeground(Color.red);
         rotulo2.setForeground(Color.blue);
@@ -79,6 +81,7 @@ public class ExemploLabel extends JFrame {
         panelMain.add(botaoCalculadora);
         panelMain.add(botaoEstados);
         panelMain.add(botaoDialogo);
+        panelMain.add(botaoArquivo);
 
         // Define o comportamento dos botões
         botaoCadastro.addActionListener(new ActionListener() {
@@ -113,6 +116,13 @@ public class ExemploLabel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 janDia();
+            }
+        });
+        
+        botaoArquivo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janArq();
             }
         });
         
@@ -374,34 +384,72 @@ public class ExemploLabel extends JFrame {
         j.setVisible(true);
     }
     
+    //               JANELA DO DIALOGO               //
     static void janDia() {
         JFrame j = new JFrame("Dialogo");
         j.setSize(400, 350);
-        j.setLocationRelativeTo(j);
+        j.setLocationRelativeTo(null);
         j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel p = new JPanel();
-        
-        GridLayout layout = new GridLayout(0, 2, 20, 20);
-        p.setLayout(layout);
-        
+        p.setLayout(null);
+
         JButton JBdialogo = new JButton("Sair");
+        JButton JBnome = new JButton("Nome");
+        
         JBdialogo.setBounds(35, 10, 100, 20);
-        
-        j.add(JBdialogo);
-        
+        JBnome.setBounds(35, 50, 100, 20);
+
+        p.add(JBdialogo); // Adiciona os botões ao painel
+        p.add(JBnome);
+
+        j.add(p); // Adiciona o painel ao JFrame
+
         JBdialogo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int caixa = JOptionPane.showConfirmDialog(j, "Certeza?");
                 if (caixa == JOptionPane.YES_OPTION) {
                     j.dispose();
-                } else if (caixa == JOptionPane.NO_OPTION) {
+                } else if (caixa == JOptionPane.NO_OPTION || caixa == JOptionPane.CANCEL_OPTION) {
                     JOptionPane.showMessageDialog(j, "Não quiseste fechar");
-                } else if (caixa == JOptionPane.CANCEL_OPTION) {
-                    JOptionPane.showMessageDialog(j, "Você escolheu sair");
                 }
             }
         });
         
+        JBnome.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                janNome();
+            }
+        });
+        j.setVisible(true);  
+    }
+    
+    //               JANELA DO NOME               //
+    static void janNome() {
+        JFrame j = new JFrame("Nome");
+        j.setSize(400, 350);
+        j.setLocationRelativeTo(null);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel p = new JPanel();
+        p.setLayout(null);
+        
+        JTextField inputNome = new JTextField();
+        JButton JBenvia = new JButton("Enviar");
+        
+        inputNome.setBounds(35, 10, 100, 20);
+        JBenvia.setBounds(35, 50, 100, 20);
+        
+        p.add(inputNome);
+        p.add(JBenvia);
+        
+        j.add(p);
+        
+        
+        
         j.setVisible(true);
+    }
+    
+    static void janArq() {
+        leArquivo a = new leArquivo();
+        a.janArq();
     }
 }

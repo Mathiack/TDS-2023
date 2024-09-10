@@ -4,8 +4,15 @@
  */
 package CardapioInt;
 
+import Pedido.Database;
+import Pedido.Pedido;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,9 +38,9 @@ public class addTamanho extends javax.swing.JFrame {
 
         btnAddTamanho = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        inputTamanho = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        inputPrecoT = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,12 +54,18 @@ public class addTamanho extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Novo Tamanho");
 
+        inputTamanho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTamanhoActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Preço");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        inputPrecoT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                inputPrecoTActionPerformed(evt);
             }
         });
 
@@ -67,13 +80,13 @@ public class addTamanho extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(btnAddTamanho))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(jLabel2)))
@@ -85,11 +98,11 @@ public class addTamanho extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(btnAddTamanho)
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -98,9 +111,9 @@ public class addTamanho extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void inputPrecoTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_inputPrecoTActionPerformed
 
     private void btnAddTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTamanhoActionPerformed
         Integer print = JOptionPane.showConfirmDialog(rootPane,
@@ -108,10 +121,15 @@ public class addTamanho extends javax.swing.JFrame {
         );
         if (print == JOptionPane.YES_OPTION ) {
             JOptionPane.showMessageDialog(rootPane, "Tamanho Adicionado");
+            
         } else if (print == JOptionPane.NO_OPTION || print == JOptionPane.CANCEL_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Tamanho Não Adicionado");
         }
     }//GEN-LAST:event_btnAddTamanhoActionPerformed
+
+    private void inputTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTamanhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputTamanhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,12 +165,27 @@ public class addTamanho extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    public void inserirTamanho() {
+        String tamanho = inputTamanho.getText();
+        
+        String precoTa = inputPrecoT.getText();
+        double precoT = Double.parseDouble(precoTa);
+        try {
+            Connection conn = Database.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO tamanho(tamanho, precoTamanho) VALUES (?, ?)");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Pedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddTamanho;
+    private javax.swing.JTextField inputPrecoT;
+    private javax.swing.JTextField inputTamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
