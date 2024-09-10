@@ -8,16 +8,10 @@ import Pedido.Database;
 import Pedido.Pedido;
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.*;
+import java.util.*;
+import java.util.logging.*;
 
-/**
- *
- * @author GUILHERMEMATHIACK
- */
 public class addTamanho extends javax.swing.JFrame {
 
     /**
@@ -121,6 +115,7 @@ public class addTamanho extends javax.swing.JFrame {
         );
         if (print == JOptionPane.YES_OPTION ) {
             JOptionPane.showMessageDialog(rootPane, "Tamanho Adicionado");
+            inserirTamanho();
             
         } else if (print == JOptionPane.NO_OPTION || print == JOptionPane.CANCEL_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Tamanho Não Adicionado");
@@ -135,7 +130,7 @@ public class addTamanho extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -157,8 +152,7 @@ public class addTamanho extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(addTamanho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new addTamanho().setVisible(true);
@@ -172,9 +166,14 @@ public class addTamanho extends javax.swing.JFrame {
         
         String precoTa = inputPrecoT.getText();
         double precoT = Double.parseDouble(precoTa);
+        
+        Connection conn = Database.getConnection();
         try {
-            Connection conn = Database.getConnection();
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tamanho(tamanho, precoTamanho) VALUES (?, ?)");
+            
+            stmt.setString(1, tamanho);
+            stmt.setDouble(2, precoT);
+            stmt.execute();
             
         } catch (SQLException ex) {
             Logger.getLogger(Pedido.class.getName()).log(Level.SEVERE, null, ex);
