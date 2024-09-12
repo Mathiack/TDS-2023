@@ -23,6 +23,9 @@ public class JCardapio extends javax.swing.JFrame {
     public JCardapio() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        listaSabores();
+        listaTamanhos();
     }
 
     /**
@@ -37,9 +40,9 @@ public class JCardapio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTsabores = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        JTtamanho = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,11 +52,11 @@ public class JCardapio extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Sabores");
 
-        jTable1.setModel(tabelaSabor);
-        jScrollPane1.setViewportView(jTable1);
+        JTsabores.setModel(tabelaSabor);
+        jScrollPane1.setViewportView(JTsabores);
 
-        jTable2.setModel(tabelaTamanho);
-        jScrollPane2.setViewportView(jTable2);
+        JTtamanho.setModel(tabelaTamanho);
+        jScrollPane2.setViewportView(JTtamanho);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,80 +125,80 @@ public class JCardapio extends javax.swing.JFrame {
         });
     }
     
-    public void listaSabores(JTable tabelaSabor) {
+    public void listaSabores() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        
         try {
-        
-        String sql = "SELECT sabor, precoSabor FROM sabor";
-        stmt = conn.prepareStatement(sql);
-        rs = stmt.executeQuery();
-        
-        DefaultTableModel model = (DefaultTableModel) tabelaSabor.getModel();
-        
-        model.setRowCount(0);
-        
-        while (rs.next()) {
-            String sabor = rs.getString("sabor");
-            double precoSabor = rs.getDouble("precoSabor");
+            String sql = "SELECT sabor, precoSabor FROM sabor";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) JTsabores.getModel();
+
+            model.setRowCount(0);
             
-            model.addRow(new Object[]{sabor, precoSabor});
-        }
+            while (rs.next()) {
+                String sabor = rs.getString("sabor");
+                double precoSabor = rs.getDouble("precoSabor");
+
+                model.addRow(new Object[]{sabor, precoSabor});
+            }
         
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
     }
     
-    public void listaTamanhos(JTable tabelaTamanho) {
+    public void listaTamanhos() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-        
-        String sql = "SELECT tamanho, precoTamanho FROM tamanho";
-        stmt = conn.prepareStatement(sql);
-        rs = stmt.executeQuery();
-        
-        DefaultTableModel model = (DefaultTableModel) tabelaTamanho.getModel();
-        
-        model.setRowCount(0);
-        
-        while (rs.next()) {
-            String tamanho = rs.getString("tamanho");
-            double precoTamanho = rs.getDouble("precoTamanho");
-            
-            model.addRow(new Object[]{tamanho, precoTamanho});
-        }
-        
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
+
+            String sql = "SELECT tamanho, precoTamanho FROM tamanho";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) JTtamanho.getModel();
+
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                String tamanho = rs.getString("tamanho");
+                double precoTamanho = rs.getDouble("precoTamanho");
+
+                model.addRow(new Object[]{tamanho, precoTamanho});
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTsabores;
+    private javax.swing.JTable JTtamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
