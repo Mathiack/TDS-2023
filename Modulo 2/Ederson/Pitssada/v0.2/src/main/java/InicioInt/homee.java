@@ -32,6 +32,7 @@ public class homee extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         menuTamanho = new javax.swing.JMenuItem();
         menuSabor = new javax.swing.JMenuItem();
+        verCardapio = new javax.swing.JMenuItem();
 
         jMenu2.setText("jMenu2");
 
@@ -93,6 +94,14 @@ public class homee extends javax.swing.JFrame {
         });
         jMenu3.add(menuSabor);
 
+        verCardapio.setText("Ver Cardápio");
+        verCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verCardapioActionPerformed(evt);
+            }
+        });
+        jMenu3.add(verCardapio);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -136,6 +145,12 @@ public class homee extends javax.swing.JFrame {
         j.setVisible(true);
         j.setLocationRelativeTo(null);
     }//GEN-LAST:event_menuSaborActionPerformed
+
+    private void verCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verCardapioActionPerformed
+        JFrame j = new JCardapio();
+        j.setVisible(true);
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_verCardapioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,5 +198,6 @@ public class homee extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem menuSabor;
     private javax.swing.JMenuItem menuTamanho;
+    private javax.swing.JMenuItem verCardapio;
     // End of variables declaration//GEN-END:variables
 }
