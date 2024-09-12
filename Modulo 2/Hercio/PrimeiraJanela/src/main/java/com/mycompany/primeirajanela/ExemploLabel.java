@@ -449,6 +449,7 @@ public class ExemploLabel extends JFrame {
         j.setVisible(true);
     }
     
+    //               JANELA DO ARQUIVO               //
     static void janArq() {
         JFrame j = new JFrame("CALCULADORA");
         j.setSize(400,350);
