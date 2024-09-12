@@ -6,6 +6,7 @@ package CardapioInt;
 
 import Pedido.Database;
 import java.sql.*;
+import javax.swing.*;
 import javax.swing.table.*;
 
 /**
@@ -14,13 +15,14 @@ import javax.swing.table.*;
  */
 public class JCardapio extends javax.swing.JFrame {
 
-    private DefaultTableModel tabelaSabor = new DefaultTableModel();
-    private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Nome", "Preco"}, 0);
+    private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
+    private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
     /**
      * Creates new form JCardapio
      */
     public JCardapio() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -47,17 +49,7 @@ public class JCardapio extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Sabores");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setModel(tabelaSabor);
         jScrollPane1.setViewportView(jTable1);
 
         jTable2.setModel(tabelaTamanho);
@@ -75,8 +67,8 @@ public class JCardapio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,12 +122,74 @@ public class JCardapio extends javax.swing.JFrame {
         });
     }
     
-    public void listaTamanhos() {
+    public void listaSabores(JTable tabelaSabor) {
         Connection conn = Database.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
         
+        String sql = "SELECT sabor, precoSabor FROM sabor";
+        stmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery();
         
+        DefaultTableModel model = (DefaultTableModel) tabelaSabor.getModel();
+        
+        model.setRowCount(0);
+        
+        while (rs.next()) {
+            String sabor = rs.getString("sabor");
+            double precoSabor = rs.getDouble("precoSabor");
+            
+            model.addRow(new Object[]{sabor, precoSabor});
+        }
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
+    }
+    
+    public void listaTamanhos(JTable tabelaTamanho) {
+        Connection conn = Database.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+        
+        String sql = "SELECT tamanho, precoTamanho FROM tamanho";
+        stmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery();
+        
+        DefaultTableModel model = (DefaultTableModel) tabelaTamanho.getModel();
+        
+        model.setRowCount(0);
+        
+        while (rs.next()) {
+            String tamanho = rs.getString("tamanho");
+            double precoTamanho = rs.getDouble("precoTamanho");
+            
+            model.addRow(new Object[]{tamanho, precoTamanho});
+        }
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
