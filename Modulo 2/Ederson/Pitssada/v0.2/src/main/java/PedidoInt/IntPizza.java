@@ -18,6 +18,8 @@ public class IntPizza extends javax.swing.JFrame {
         j.setLocationRelativeTo(null);
         j.setUndecorated(true);
         initComponents();
+        listaSabores();
+        listaTamanhos();
     }
 
     /**
@@ -117,7 +119,6 @@ public class IntPizza extends javax.swing.JFrame {
 
         nada.getAccessibleContext().setAccessibleName("Pitzzada");
 
-        comboTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mini", "Pequeno", "Médio", "Grande", "Família", "Prédio" }));
         comboTamanho.setSelectedItem(null);
         comboTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +126,6 @@ public class IntPizza extends javax.swing.JFrame {
             }
         });
 
-        comboSabor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Calabreza", "Kejo", "Fejão", "Sopa", "Çorvete", "Milho com", "Java", "Frangão" }));
         comboSabor.setSelectedItem(null);
         comboSabor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +133,7 @@ public class IntPizza extends javax.swing.JFrame {
             }
         });
 
-        comboBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "monari", "Suco de Laranga", "Cashassa do Lula(mortal)", "Doce de Leite do 22", "nada", "água" }));
+        comboBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Água", "Coca-Cola", "Guaraná", " " }));
         comboBebida.setSelectedItem(null);
         comboBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,11 +273,11 @@ public class IntPizza extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTamanhoActionPerformed
-        listaTamanhos();
+        
     }//GEN-LAST:event_comboTamanhoActionPerformed
 
     private void comboSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSaborActionPerformed
-        listaSabores();
+        
     }//GEN-LAST:event_comboSaborActionPerformed
 
     private void comboBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBebidaActionPerformed
@@ -414,80 +414,70 @@ public class IntPizza extends javax.swing.JFrame {
         }
     }
     
-   public void listaSabores() {
-    Connection conn = Database.getConnection();
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    
-    try {
-        String sql = "SELECT sabor FROM sabor";
-        stmt = conn.prepareStatement(sql);
-        rs = stmt.executeQuery();
+    public void listaSabores() {
+        Connection conn = Database.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        // Obtém o modelo do combo box
-        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboSabor.getModel();
-
-        // Limpa os itens atuais do combo box
-        model.removeAllElements();
-        
-        // Adiciona os novos itens ao combo box
-        while (rs.next()) {
-            String sabor = rs.getString("sabor");
-
-            // Se quiser exibir apenas o sabor
-            model.addElement(sabor);
-
-            // Se quiser exibir o sabor e o preço juntos
-            // String displayText = sabor + " - R$" + precoSabor;
-            // model.addElement(displayText);
-        }
-    
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
         try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
+            String sql = "SELECT sabor FROM sabor";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboSabor.getModel();
+
+            model.removeAllElements();
+
+            while (rs.next()) {
+                String sabor = rs.getString("sabor");
+
+                model.addElement(sabor);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
 
-    
     public void listaTamanhos() {
-    Connection conn = Database.getConnection();
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    try {
-        String sql = "SELECT tamanho FROM tamanho";  // Agora, vamos pegar apenas o tamanho
-        stmt = conn.prepareStatement(sql);
-        rs = stmt.executeQuery();
-
-        // Obtém o modelo do combo box
-        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboTamanho.getModel();
-
-        // Remove todos os itens atuais do combo box
-        model.removeAllElements();
-
-        // Adiciona os itens ao combo box
-        while (rs.next()) {
-            String tamanho = rs.getString("tamanho");
-            model.addElement(tamanho); // Adiciona apenas o tamanho
-        }
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
+        Connection conn = Database.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
+            String sql = "SELECT tamanho FROM tamanho";  // Agora, vamos pegar apenas o tamanho
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            // Obtém o modelo do combo box
+            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboTamanho.getModel();
+
+            // Remove todos os itens atuais do combo box
+            model.removeAllElements();
+
+            // Adiciona os itens ao combo box
+            while (rs.next()) {
+                String tamanho = rs.getString("tamanho");
+                model.addElement(tamanho); // Adiciona apenas o tamanho
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
-
 }
