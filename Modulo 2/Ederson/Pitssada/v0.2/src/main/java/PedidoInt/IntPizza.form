@@ -64,20 +64,20 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="inputTamanho" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
+                          <Component id="comboTamanho" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputSabor" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="comboSabor" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="inputBebida" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="comboBebida" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -97,9 +97,9 @@
               </Group>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="inputBebida" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputSabor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputTamanho" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBebida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboSabor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboTamanho" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -240,7 +240,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="inputTamanho">
+    <Component class="javax.swing.JComboBox" name="comboTamanho">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="6">
@@ -257,13 +257,13 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputTamanhoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboTamanhoActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="inputSabor">
+    <Component class="javax.swing.JComboBox" name="comboSabor">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="8">
@@ -282,13 +282,13 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputSaborActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboSaborActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="inputBebida">
+    <Component class="javax.swing.JComboBox" name="comboBebida">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;monari&quot;, &quot;Suco de Laranga&quot;, &quot;Cashassa do Lula(mortal)&quot;, &quot;Doce de Leite do 22&quot;, &quot;nada&quot;, &quot;&#xe1;gua&quot; })" type="code"/>
@@ -298,7 +298,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputBebidaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBebidaActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

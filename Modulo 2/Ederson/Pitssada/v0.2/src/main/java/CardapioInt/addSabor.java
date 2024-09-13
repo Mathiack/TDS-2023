@@ -165,7 +165,6 @@ public class addSabor extends javax.swing.JFrame {
     public void inserirSabor() {
         String sabor = inputSabor.getText();
         
-        
         String precoSa = inputPrecoS.getText();
         double precoS = Double.parseDouble(precoSa);
         

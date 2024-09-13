@@ -1,8 +1,8 @@
 package InicioInt;
 
+import PedidoInt.IntPizza;
 import java.awt.*;
 import javax.swing.*;
-import PitzzariaInt.*;
 import CardapioInt.*;
 
 public class homee extends javax.swing.JFrame {

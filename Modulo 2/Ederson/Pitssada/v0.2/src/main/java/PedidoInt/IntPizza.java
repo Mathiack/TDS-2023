@@ -1,10 +1,11 @@
-package PitzzariaInt;
+package PedidoInt;
 
 import Pedido.Database;
 import Pedido.Pedido;
 import java.sql.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class IntPizza extends javax.swing.JFrame {
     
@@ -35,9 +36,9 @@ public class IntPizza extends javax.swing.JFrame {
         nada2 = new java.awt.Label();
         nada1 = new java.awt.Label();
         sair = new javax.swing.JButton();
-        inputTamanho = new javax.swing.JComboBox<>();
-        inputSabor = new javax.swing.JComboBox<>();
-        inputBebida = new javax.swing.JComboBox<>();
+        comboTamanho = new javax.swing.JComboBox<>();
+        comboSabor = new javax.swing.JComboBox<>();
+        comboBebida = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -116,27 +117,27 @@ public class IntPizza extends javax.swing.JFrame {
 
         nada.getAccessibleContext().setAccessibleName("Pitzzada");
 
-        inputTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mini", "Pequeno", "Médio", "Grande", "Família", "Prédio" }));
-        inputTamanho.setSelectedItem(null);
-        inputTamanho.addActionListener(new java.awt.event.ActionListener() {
+        comboTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mini", "Pequeno", "Médio", "Grande", "Família", "Prédio" }));
+        comboTamanho.setSelectedItem(null);
+        comboTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputTamanhoActionPerformed(evt);
+                comboTamanhoActionPerformed(evt);
             }
         });
 
-        inputSabor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Calabreza", "Kejo", "Fejão", "Sopa", "Çorvete", "Milho com", "Java", "Frangão" }));
-        inputSabor.setSelectedItem(null);
-        inputSabor.addActionListener(new java.awt.event.ActionListener() {
+        comboSabor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Calabreza", "Kejo", "Fejão", "Sopa", "Çorvete", "Milho com", "Java", "Frangão" }));
+        comboSabor.setSelectedItem(null);
+        comboSabor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputSaborActionPerformed(evt);
+                comboSaborActionPerformed(evt);
             }
         });
 
-        inputBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "monari", "Suco de Laranga", "Cashassa do Lula(mortal)", "Doce de Leite do 22", "nada", "água" }));
-        inputBebida.setSelectedItem(null);
-        inputBebida.addActionListener(new java.awt.event.ActionListener() {
+        comboBebida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "monari", "Suco de Laranga", "Cashassa do Lula(mortal)", "Doce de Leite do 22", "nada", "água" }));
+        comboBebida.setSelectedItem(null);
+        comboBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputBebidaActionPerformed(evt);
+                comboBebidaActionPerformed(evt);
             }
         });
 
@@ -212,18 +213,18 @@ public class IntPizza extends javax.swing.JFrame {
                         .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputSabor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboSabor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(comboBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,9 +237,9 @@ public class IntPizza extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputSabor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboSabor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(179, 179, 179)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clienteNome)
@@ -271,17 +272,17 @@ public class IntPizza extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTamanhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputTamanhoActionPerformed
+    private void comboTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTamanhoActionPerformed
+        listaTamanhos();
+    }//GEN-LAST:event_comboTamanhoActionPerformed
 
-    private void inputSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSaborActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputSaborActionPerformed
+    private void comboSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSaborActionPerformed
+        listaSabores();
+    }//GEN-LAST:event_comboSaborActionPerformed
 
-    private void inputBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputBebidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputBebidaActionPerformed
+    private void comboBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBebidaActionPerformed
+        
+    }//GEN-LAST:event_comboBebidaActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         this.dispose();
@@ -342,17 +343,17 @@ public class IntPizza extends javax.swing.JFrame {
     private javax.swing.JLabel bairro;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel clienteNome;
+    private javax.swing.JComboBox<String> comboBebida;
+    private javax.swing.JComboBox<String> comboSabor;
+    private javax.swing.JComboBox<String> comboTamanho;
     private javax.swing.JButton enviar;
     private javax.swing.JLabel hora;
     private javax.swing.JTextField inputBairro;
-    private javax.swing.JComboBox<String> inputBebida;
     private javax.swing.JTextField inputHora;
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputNumeroCasa;
     private javax.swing.JTextField inputPreco;
     private javax.swing.JTextField inputRua;
-    private javax.swing.JComboBox<String> inputSabor;
-    private javax.swing.JComboBox<String> inputTamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -367,9 +368,9 @@ public class IntPizza extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     public void print() {
-        String tamanho = inputTamanho.getSelectedItem().toString();
-        String sabor = inputSabor.getSelectedItem().toString();
-        String bebida = inputBebida.getSelectedItem().toString();
+        String tamanho = comboTamanho.getSelectedItem().toString();
+        String sabor = comboSabor.getSelectedItem().toString();
+        String bebida = comboBebida.getSelectedItem().toString();
         
         //    NOMEC PARA NOME_CLIENTE
         String nomeC = inputNome.getText();
@@ -412,4 +413,81 @@ public class IntPizza extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Beta");
         }
     }
+    
+   public void listaSabores() {
+    Connection conn = Database.getConnection();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    
+    try {
+        String sql = "SELECT sabor FROM sabor";
+        stmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery();
+
+        // Obtém o modelo do combo box
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboSabor.getModel();
+
+        // Limpa os itens atuais do combo box
+        model.removeAllElements();
+        
+        // Adiciona os novos itens ao combo box
+        while (rs.next()) {
+            String sabor = rs.getString("sabor");
+
+            // Se quiser exibir apenas o sabor
+            model.addElement(sabor);
+
+            // Se quiser exibir o sabor e o preço juntos
+            // String displayText = sabor + " - R$" + precoSabor;
+            // model.addElement(displayText);
+        }
+    
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+    
+    public void listaTamanhos() {
+    Connection conn = Database.getConnection();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    try {
+        String sql = "SELECT tamanho FROM tamanho";  // Agora, vamos pegar apenas o tamanho
+        stmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery();
+
+        // Obtém o modelo do combo box
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboTamanho.getModel();
+
+        // Remove todos os itens atuais do combo box
+        model.removeAllElements();
+
+        // Adiciona os itens ao combo box
+        while (rs.next()) {
+            String tamanho = rs.getString("tamanho");
+            model.addElement(tamanho); // Adiciona apenas o tamanho
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 }
