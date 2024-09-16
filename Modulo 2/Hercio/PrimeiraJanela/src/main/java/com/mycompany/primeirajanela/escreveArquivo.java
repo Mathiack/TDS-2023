@@ -1,20 +1,15 @@
 package com.mycompany.primeirajanela;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
  import java.io.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class escreveArquivo {    
 
     public static void main(String[] args){    
-        JFrame j = new JFrame("CALCULADORA");
+        JFrame j = new JFrame("ARQUIVO");
         j.setSize(400,350);
         j.setLocationRelativeTo(j);
         j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -30,7 +25,6 @@ public class escreveArquivo {
         jLbnum1.setHorizontalTextPosition(JLabel.CENTER);
         JTextField jTxnome = new JTextField();
         jTxnome.setPreferredSize(new Dimension( 50, 24 ));
-        
         
         JLabel jLbnum2 = new JLabel("E-mail");
         jLbnum2.setHorizontalAlignment(JLabel.CENTER);
@@ -62,11 +56,13 @@ public class escreveArquivo {
         JTextField jTxestado = new JTextField();
         jTxestado.setPreferredSize(new Dimension( 50, 24 ));
         
-        JButton jBtSoma=new JButton("Toma");  
+        JButton jBtEscreva = new JButton("Toma");  
+        JButton jBtLer = new JButton("Ler");  
         
-        jBtSoma.setBounds(50,100,95,30);
+        jBtEscreva.setBounds(50,100,95,30);
+        jBtLer.setBounds(50,100,95,30);
         
-        jBtSoma.addActionListener(new ActionListener(){
+        jBtEscreva.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
                     String nome = jTxnome.getText();
@@ -113,7 +109,8 @@ public class escreveArquivo {
         p.add(jLbnum6);
         p.add(jTxestado);
         
-        p.add(jBtSoma);
+        p.add(jBtEscreva);
+        p.add(jBtLer);
         j.add(p);
         j.pack();
         j.setVisible(true);

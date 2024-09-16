@@ -498,12 +498,13 @@ public class ExemploLabel extends JFrame {
         JTextField jTxestado = new JTextField();
         jTxestado.setPreferredSize(new Dimension( 50, 24 ));
         
-        JButton jBtSoma = new JButton("Escrever");  
+        JButton jBtEscrever = new JButton("Escrever");  
         JButton jBtLer = new JButton("Ler ");  
         
-        jBtSoma.setBounds(50,100,95,30);
+        jBtEscrever.setBounds(50,100,95,30);
+        jBtEscrever.setBounds(50,100,95,30);
         
-        jBtSoma.addActionListener(new ActionListener(){
+        jBtEscrever.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
                     String nome = jTxnome.getText();
@@ -550,7 +551,7 @@ public class ExemploLabel extends JFrame {
         p.add(jLbnum6);
         p.add(jTxestado);
         
-        p.add(jBtSoma);
+        p.add(jBtEscrever);
         p.add(jBtLer);
         
         j.add(p);
