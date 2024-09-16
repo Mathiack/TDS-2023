@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -502,7 +504,7 @@ public class ExemploLabel extends JFrame {
         JButton jBtLer = new JButton("Ler ");  
         
         jBtEscrever.setBounds(50,100,95,30);
-        jBtEscrever.setBounds(50,100,95,30);
+        jBtLer.setBounds(50,100,95,30);
         
         jBtEscrever.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
@@ -531,6 +533,21 @@ public class ExemploLabel extends JFrame {
                     e.printStackTrace();
                 }
             }
+        });
+        
+        jBtLer.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                try (BufferedReader reader = new
+                    BufferedReader(new FileReader("saida.txt"))) {
+                    String linha;
+                    
+                    while ((linha = reader.readLine()) != null) {
+                        System.out.println(linha);
+                    }
+                } catch(IOException e) {
+                    e.printStackTrace();
+                } 
+            } 
         });
         
         p.add(jLbnum1);
