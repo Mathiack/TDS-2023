@@ -1,16 +1,12 @@
 package com.mycompany.primeirajanela;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+import java.io.*;
 
 public class ExemploLabel extends JFrame {
     JLabel rotulo1, rotulo2, rotulo3, rotulo4;
