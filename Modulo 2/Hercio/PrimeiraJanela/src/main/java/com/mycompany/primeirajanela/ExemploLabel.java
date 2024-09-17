@@ -9,12 +9,14 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 public class ExemploLabel extends JFrame {
     JLabel rotulo1, rotulo2, rotulo3, rotulo4;
     JTextField texto1, texto2, texto3, texto4;
     JButton botao, botaoCadastro, botaoSair, botaoCalculadora, botaoEstados;
-    JButton botaoDialogo, botaoArquivo;
+    JButton botaoDialogo, botaoArquivo, botaoTabela;
 
     // Painéis para exibir
     JPanel panelMain, panelCadastro;
@@ -37,6 +39,7 @@ public class ExemploLabel extends JFrame {
         botaoEstados = new JButton("Estados");
         botaoDialogo = new JButton("Dialogar");
         botaoArquivo = new JButton("Arquivo");
+        botaoTabela = new JButton("Tabela");
 
         texto1 = new JTextField(50);
         texto2 = new JTextField(3);
@@ -57,9 +60,10 @@ public class ExemploLabel extends JFrame {
         botaoSair.setBounds(35, 210, 100, 20);
         botaoCadastro.setBounds(35, 240, 100, 20);
         botaoCalculadora.setBounds(35, 270, 100, 20);
-        botaoEstados.setBounds(35, 300, 100, 20);
-        botaoDialogo.setBounds(35, 330, 100, 20);
-        botaoArquivo.setBounds(35, 360, 100, 20);
+        botaoEstados.setBounds(190, 180, 100, 20);
+        botaoDialogo.setBounds(190, 210, 100, 20);
+        botaoArquivo.setBounds(190, 240, 100, 20);
+        botaoTabela.setBounds(190, 270, 100, 20);
 
         rotulo1.setForeground(Color.red);
         rotulo2.setForeground(Color.blue);
@@ -87,6 +91,7 @@ public class ExemploLabel extends JFrame {
         panelMain.add(botaoEstados);
         panelMain.add(botaoDialogo);
         panelMain.add(botaoArquivo);
+        panelMain.add(botaoTabela);
 
         // Define o comportamento dos botões
         botaoCadastro.addActionListener(new ActionListener() {
@@ -130,6 +135,15 @@ public class ExemploLabel extends JFrame {
                 janArq();
             }
         });
+        
+        botaoTabela.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                janTab();
+            }
+        });
+        
+        
         
         setSize(400, 430);
         setVisible(true);
@@ -575,4 +589,26 @@ public class ExemploLabel extends JFrame {
         j.pack();
         j.setVisible(true);
     }    
+    
+    static void janTab() {
+        JFrame j = new JFrame("TABELA");
+        j.setSize(400,350);
+        j.setLocationRelativeTo(j);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel p = new JPanel();
+        p.setLayout(null);
+        
+        GridLayout layout = new GridLayout(0,2,20,20);
+        p.setLayout(layout);
+        
+        TableModel dataModel = new AbstractTableModel() {
+          public int getColumnCount() { return 6; }
+          public int getRowCount() { return 1;}
+          public Object getValueAt(int row, int col) { return new Integer(row*col); }
+        };
+        JTable table = new JTable(dataModel);
+        JScrollPane scrollpane = new JScrollPane(table);
+        
+        j.setVisible(true);
+    }
 }
