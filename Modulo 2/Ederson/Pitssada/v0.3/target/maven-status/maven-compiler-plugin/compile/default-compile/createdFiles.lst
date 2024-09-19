@@ -6,6 +6,7 @@ PedidoInt\IntPizza.class
 PedidoInt\IntPizza$6.class
 CardapioInt\JCardapio.class
 PedidoInt\IntPizza$1.class
+PedidoInt\OpsPedidos$1.class
 InicioInt\homee.class
 Pedido\Pedido.class
 CardapioInt\addTamanho$1.class
@@ -25,6 +26,7 @@ CardapioInt\addSabor$1.class
 CardapioInt\addTamanho$2.class
 InicioInt\homee$4.class
 PedidoInt\IntPizza$7.class
+PedidoInt\OpsPedidos.class
 CardapioInt\addSabor$2.class
 PedidoInt\IntPizza$5.class
 InicioInt\homee$2.class
