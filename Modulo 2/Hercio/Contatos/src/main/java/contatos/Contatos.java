@@ -8,6 +8,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -69,12 +71,12 @@ public class Contatos {
         // JPanel for filtering
         JPanel filterPanel = new JPanel();
         JLabel filterLabel = new JLabel("Filtrar por Categoria:");
-        filtroCategoria = new JComboBox<>(new String[]{ });
+        filtroCategoria = new JComboBox<>(new String[]{});
 
         filterPanel.add(filterLabel);
         filterPanel.add(filtroCategoria);
 
-        // Filter functionality
+        // Filter functionality (pode ser implementada mais tarde se necessário)
         filtroCategoria.addActionListener(e -> filterContacts());
 
         // Adicionando componentes ao frame
@@ -100,6 +102,8 @@ public class Contatos {
                 }
             }
         });
+
+        // Carregar contatos do arquivo ao iniciar
         loadContactsFromFile();
 
         j.setVisible(true);
@@ -138,7 +142,7 @@ public class Contatos {
                     jTxEndereco.getText(),
                     jTxCategoria.getText()
                 };
-                
+
                 if (rowIndex == null) {
                     tableModel.addRow(rowData);
                 } else {
@@ -148,6 +152,7 @@ public class Contatos {
                 }
                 d.dispose();
                 updateOutputFile();
+                updateCategoryFilter(); // Atualiza as categorias no combo box
             }
         });
 
@@ -229,8 +234,26 @@ public class Contatos {
             if (index > 0) {
                 tableModel.addRow(contactData);
             }
+            updateCategoryFilter(); // Atualiza as categorias no combo box
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void updateCategoryFilter() {
+        filtroCategoria.removeAllItems(); // Limpa todas as categorias anteriores
+        Set<String> categorias = new HashSet<>(); // Usamos um Set para evitar duplicatas
+
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            String categoria = (String) tableModel.getValueAt(i, 4); // Categoria está na 5ª coluna
+            if (categoria != null && !categoria.isEmpty()) {
+                categorias.add(categoria); // Adiciona a categoria ao Set
+            }
+        }
+
+        // Adiciona as categorias únicas ao combo box
+        for (String categoria : categorias) {
+            filtroCategoria.addItem(categoria);
         }
     }
 
@@ -243,5 +266,3 @@ public class Contatos {
         framePrincipal();
     }
 }
-
-
