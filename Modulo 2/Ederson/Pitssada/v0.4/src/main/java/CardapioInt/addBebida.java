@@ -5,21 +5,24 @@
 package CardapioInt;
 
 import Pedido.Database;
-import java.sql.*;
-import java.util.*;
-import java.util.logging.*;
 import javax.swing.*;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author GUILHERMEMATHIACK
  */
-public class addSabor extends javax.swing.JFrame {
+public class addBebida extends javax.swing.JFrame {
 
     /**
-     * Creates new form addSabor
+     * Creates new form addBebida
      */
-    public addSabor() {
+    public addBebida() {
         JFrame j = new JFrame();
         j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
@@ -34,15 +37,24 @@ public class addSabor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        inputPrecoB = new javax.swing.JTextField();
         btnAddSabor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        inputSabor = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        inputPrecoS = new javax.swing.JTextField();
+        inputBebida = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAddSabor.setText("Adicionar Sabor");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Preço");
+
+        inputPrecoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPrecoBActionPerformed(evt);
+            }
+        });
+
+        btnAddSabor.setText("Adicionar Bebida");
         btnAddSabor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddSaborActionPerformed(evt);
@@ -50,20 +62,11 @@ public class addSabor extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Novo Sabor");
+        jLabel1.setText("Nova Bebida");
 
-        inputSabor.addActionListener(new java.awt.event.ActionListener() {
+        inputBebida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputSaborActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Preço");
-
-        inputPrecoS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPrecoSActionPerformed(evt);
+                inputBebidaActionPerformed(evt);
             }
         });
 
@@ -74,19 +77,18 @@ public class addSabor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(inputSabor, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputPrecoS, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(btnAddSabor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(inputPrecoB)
+                            .addComponent(btnAddSabor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,11 +97,11 @@ public class addSabor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputSabor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputPrecoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputPrecoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnAddSabor)
                 .addContainerGap(68, Short.MAX_VALUE))
@@ -108,26 +110,26 @@ public class addSabor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inputPrecoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPrecoBActionPerformed
+
     private void btnAddSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSaborActionPerformed
         Integer print = JOptionPane.showConfirmDialog(rootPane,
-            "Deseja adicionar esse sabor?"
+            "Deseja adicionar essa bebida?"
         );
         if (print == JOptionPane.YES_OPTION ) {
-            JOptionPane.showMessageDialog(rootPane, "Sabor Adicionado");
-            inserirSabor();
+            JOptionPane.showMessageDialog(rootPane, "Bebida Adicionada");
+            inserirBebida();
 
         } else if (print == JOptionPane.NO_OPTION || print == JOptionPane.CANCEL_OPTION) {
-            JOptionPane.showMessageDialog(rootPane, "Sabor Não Adicionado");
+            JOptionPane.showMessageDialog(rootPane, "Bebida não Adicionado");
         }
     }//GEN-LAST:event_btnAddSaborActionPerformed
 
-    private void inputSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSaborActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputSaborActionPerformed
-
-    private void inputPrecoSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPrecoSActionPerformed
+    private void inputBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputBebidaActionPerformed
+        
+    }//GEN-LAST:event_inputBebidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,34 +148,33 @@ public class addSabor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addSabor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addSabor().setVisible(true);
+                new addBebida().setVisible(true);
             }
         });
     }
     
-    public void inserirSabor() {
-        String sabor = inputSabor.getText();
-        
-        String precoSa = inputPrecoS.getText();
+    public void inserirBebida() {
+        String sabor = inputBebida.getText();
+        String precoSa = inputPrecoB.getText();
         double precoS = Double.parseDouble(precoSa);
         
         Connection conn = Database.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO sabor(sabor, precoSabor) VALUES (?, ?)");
-            
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO bebida(bebida, precoBebida) VALUES (?, ?)");
+                       
             stmt.setString(1, sabor);
             stmt.setDouble(2, precoS);
             stmt.execute();
@@ -185,8 +186,8 @@ public class addSabor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSabor;
-    private javax.swing.JTextField inputPrecoS;
-    private javax.swing.JTextField inputSabor;
+    private javax.swing.JTextField inputBebida;
+    private javax.swing.JTextField inputPrecoB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

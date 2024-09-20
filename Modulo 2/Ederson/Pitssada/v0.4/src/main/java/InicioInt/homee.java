@@ -30,9 +30,10 @@ public class homee extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         fazP = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        verCardapio = new javax.swing.JMenuItem();
         menuTamanho = new javax.swing.JMenuItem();
         menuSabor = new javax.swing.JMenuItem();
-        verCardapio = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu2.setText("jMenu2");
 
@@ -78,6 +79,14 @@ public class homee extends javax.swing.JFrame {
 
         jMenu3.setText("Cardápio");
 
+        verCardapio.setText("Ver Cardápio");
+        verCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verCardapioActionPerformed(evt);
+            }
+        });
+        jMenu3.add(verCardapio);
+
         menuTamanho.setText("Novo Tamanho");
         menuTamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,13 +103,13 @@ public class homee extends javax.swing.JFrame {
         });
         jMenu3.add(menuSabor);
 
-        verCardapio.setText("Ver Cardápio");
-        verCardapio.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Nova Bebida");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verCardapioActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu3.add(verCardapio);
+        jMenu3.add(jMenuItem2);
 
         jMenuBar1.add(jMenu3);
 
@@ -152,6 +161,12 @@ public class homee extends javax.swing.JFrame {
         j.setLocationRelativeTo(null);
     }//GEN-LAST:event_verCardapioActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JFrame j = new addBebida();
+        j.setVisible(true);
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -194,6 +209,7 @@ public class homee extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem menuSabor;

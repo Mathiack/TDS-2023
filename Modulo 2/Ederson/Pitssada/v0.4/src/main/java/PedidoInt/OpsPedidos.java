@@ -14,6 +14,7 @@ public class OpsPedidos extends javax.swing.JFrame {
      * Creates new form OpsPedidos
      */
     public OpsPedidos() {
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
     }
 

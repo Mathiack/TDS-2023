@@ -32,54 +32,72 @@
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="clienteNome" min="-2" max="-2" attributes="0"/>
-                          <Component id="nCasa" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="inputNome" max="32767" attributes="0"/>
-                          <Component id="inputNumeroCasa" min="-2" pref="165" max="-2" attributes="0"/>
+                          <Component id="inputNome" min="-2" pref="165" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="rua" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="inputRua" alignment="0" pref="175" max="32767" attributes="0"/>
-                              <Component id="inputHora" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="rua" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Component id="hora" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="inputRua" min="-2" pref="171" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bairro" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputBairro" min="-2" pref="175" max="-2" attributes="0"/>
-                          <Component id="inputPreco" min="-2" pref="175" max="-2" attributes="0"/>
-                          <Component id="preco" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="bairro" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="inputBairro" pref="183" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
-                      <Component id="enviar" min="-2" pref="88" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="comboTamanho" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboSabor" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="comboBebida" min="-2" pref="171" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
+                              <Component id="enviar" min="-2" pref="88" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="comboTamanho" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboSabor" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Component id="comboBebida" min="-2" pref="171" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="inputNumeroCasa" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="nCasa" min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="hora" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="inputHora" min="-2" pref="175" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -114,23 +132,14 @@
                   <Component id="inputNome" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="nCasa" min="-2" max="-2" attributes="0"/>
-                          <Component id="preco" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="inputNumeroCasa" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputPreco" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputHora" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="hora" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nCasa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hora" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="inputNumeroCasa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputHora" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Component id="enviar" min="-2" pref="75" max="-2" attributes="0"/>
@@ -268,14 +277,6 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="comboBebida">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="&#xc1;gua"/>
-            <StringItem index="1" value="Coca-Cola"/>
-            <StringItem index="2" value="Guaran&#xe1;"/>
-            <StringItem index="3" value=" "/>
-          </StringArray>
-        </Property>
         <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="null" type="code"/>
         </Property>
@@ -344,22 +345,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="inputNome">
     </Component>
-    <Component class="javax.swing.JTextField" name="inputPreco">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputPrecoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="hora">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hora"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputHora">
-    </Component>
-    <Component class="javax.swing.JLabel" name="preco">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Pre&#xe7;o (R$)"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

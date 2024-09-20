@@ -18,6 +18,8 @@ public class addTamanho extends javax.swing.JFrame {
      * Creates new form addTamanho
      */
     public addTamanho() {
+        JFrame j = new JFrame();
+        j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
     }
 
@@ -176,7 +178,6 @@ public class addTamanho extends javax.swing.JFrame {
             stmt.execute();
             
         } catch (SQLException ex) {
-            
             Logger.getLogger(addTamanho.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
