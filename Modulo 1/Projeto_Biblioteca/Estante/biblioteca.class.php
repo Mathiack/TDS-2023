@@ -54,9 +54,9 @@
             return $this->editora;
         }
 
-
-
-
+        // coisas para editar e atualizar, mas
+        // não são as funções, são para funcionar
+        // o código taokei
         public function setId_LivroA($id_LivroA) {
             $this->id_Livro2 = $id_LivroA;
         }
@@ -92,21 +92,14 @@
             return $this->editoraA;
         }
 
-
-
         function setId_User($id_usuario){
             $this->id_usuario = $id_usuario;
         }
         function getId_User(){
             return $this->id_usuario;
         }
-
-
-
-
-
-
         
+        // funções para os livros: inserir, deletar, listar e atualizar
         function inserirLivros() {
             $database = new Conexao(); //nova instancia da conexao
             $db = $database->getConnection(); //tenta conectar
@@ -156,7 +149,6 @@
             $autorLivro = $this->getAutor();
             $ISBN = $this->getISBN();
             $editora = $this->getEditora();
-            
             
            // Preparando a consulta SQL
             $sql = "UPDATE livro SET Nome=:Nome, Autor=:Autor, ISBN=:ISBN, Editora=:Editora WHERE ID_Livro=:ID_Livro";

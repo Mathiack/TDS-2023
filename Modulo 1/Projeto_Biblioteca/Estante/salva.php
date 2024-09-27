@@ -1,5 +1,4 @@
 <?php
-
 include_once "../Cadastro/sessao.php";
 include "biblioteca.class.php";
 
@@ -31,6 +30,5 @@ echo "
 <div class='link'>
 <a href='verLivros.php'>TABELA LIVROS</a>
 </div>
-"
-
+";
 ?>

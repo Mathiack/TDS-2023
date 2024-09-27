@@ -1,6 +1,4 @@
 <?php
-
-
 include_once "../conexao.php";
 include "cadastro.class.php";
 
@@ -19,3 +17,4 @@ if ($logado) {
 } else {
     echo "Usuário não está logado.";
 }
+?>

@@ -52,12 +52,11 @@ echo "
         ";
 //link para o listarPessoas.php
 echo "
-        <div class='centralizado'>
-            <div id='tabelaB'>
-                <p>Show de Bola!</p>
-                <a href='../Estante/verLivros.php'>Voltar Para Os Registros</a>
-            </div>
+    <div class='centralizado'>
+        <div id='tabelaB'>
+            <p>Show de Bola!</p>
+            <a href='../Estante/verLivros.php'>Voltar Para Os Registros</a>
         </div>
-    ";
-
+    </div>
+";
 ?>

@@ -7,7 +7,6 @@ if (!isset($_SESSION['ID_User'])) {
     
     $ID_User = $_SESSION['ID_User'];
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

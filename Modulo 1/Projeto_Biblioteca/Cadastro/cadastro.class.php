@@ -1,6 +1,7 @@
 <?php
 include_once "../conexao.php";
 include "testeL.php";
+
 class Cadastro{
     private $ID_User;
     private $email;
@@ -25,6 +26,7 @@ class Cadastro{
     function setSenha($senha){
         $this->senha = $senha;
     }
+    
     function inserirUsuario() {
         $database = new Conexao(); 
         $db = $database->getConnection(); 

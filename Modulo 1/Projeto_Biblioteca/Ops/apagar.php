@@ -27,15 +27,14 @@
                 $id_Livro = $_GET['id'];
 
                 $b = new Biblioteca();
-                ?>
-                <style>
-                    div.linkVolta > a {
-                        text-decoration: none;
-                        color: black;
-                    }
-                </style>
-                <?php
-
+        ?>
+            <style>
+                div.linkVolta > a {
+                    text-decoration: none;
+                    color: black;
+                }
+            </style>
+        <?php
                 $b->setId_Livro2($id_Livro);
                 echo "<link rel='stylesheet' href='../style.css'>";
                 if ($b->deletarLivros()) {
