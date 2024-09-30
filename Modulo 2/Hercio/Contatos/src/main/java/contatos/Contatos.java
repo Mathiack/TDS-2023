@@ -1,5 +1,7 @@
 package contatos;
 
+// Importing java libraries
+// Importando bibliotecas do java
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,21 +12,31 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class Contatos {
-
+    
+    // Graphic Interface items
+    // Itens da interface gráfica
     private static DefaultTableModel tableModel;
     private static JTable contactTable;
     private static JComboBox<String> categoryFilter;
     private static JTextField searchField;
 
+    // Main frame
+    // Janela principal
     static void framePrincipal() {
+        // JFrame settings
+        // Configurações do JFrame
         JFrame j = new JFrame("Contatos do Hércio");
         j.setSize(600, 400);
         j.setLocationRelativeTo(null);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Menu Bar
+        // Barra de Menu
         JMenuBar menuBar = new JMenuBar();
-
         j.setJMenuBar(menuBar);
 
+        // More menus
+        // Mais menus
         JMenu arqMenu = new JMenu("Arquivo");
         JMenu editMenu = new JMenu("Editar");
         JMenu ajudaMenu = new JMenu("Ajuda");
@@ -32,6 +44,8 @@ public class Contatos {
         menuBar.add(editMenu);
         menuBar.add(ajudaMenu);
 
+        // Menu items
+        // Itens do menu
         JMenuItem addAction = new JMenuItem("Adicionar");
         JMenuItem editAction = new JMenuItem("Editar");
         JMenuItem excAction = new JMenuItem("Excluir");
@@ -46,6 +60,8 @@ public class Contatos {
         arqMenu.add(cargAction);
         ajudaMenu.add(ajudaAction);
 
+        // Tool Bar
+        // Barra de Tarefas
         JToolBar toolBar = new JToolBar();
         JButton addButton = new JButton("Adicionar");
         JButton editButton = new JButton("Editar");
@@ -59,11 +75,15 @@ public class Contatos {
         toolBar.add(saveButton);
         toolBar.add(cargButton);
 
+        // Some Table settings
+        // Algumas configurações da tabela
         String[] columnNames = {"Nome", "Telefone", "E-mail", "Endereço", "Categoria"};
         tableModel = new DefaultTableModel(columnNames, 0);
         contactTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(contactTable);
 
+        // Panel to filter by category
+        // Painel pra filtrar por categoria
         JPanel filterPanel = new JPanel();
         JLabel filterLabel = new JLabel("Filtrar por Categoria:");
         categoryFilter = new JComboBox<>(new String[]{"Todos", "Amigo", "Trabalho", "Família"});
@@ -75,6 +95,8 @@ public class Contatos {
         filterPanel.add(searchLabel);
         filterPanel.add(searchField);
 
+        // Action for buttons
+        // Ação para os botões
         categoryFilter.addActionListener(e -> filterContacts());
         searchField.addActionListener(e -> filterContacts());
 
@@ -84,7 +106,12 @@ public class Contatos {
         j.add(filterPanel, BorderLayout.SOUTH);
         j.setJMenuBar(menuBar);
 
+        // Action for Adicionar button
+        // Ação para o botão de Adicionar
         addButton.addActionListener(e -> showAddEditDialog(j, null, -1));
+        
+        // Action for Edit button
+        // Ação para o botão de Editar
         editButton.addActionListener(e -> {
             int selectedRow = contactTable.getSelectedRow();
             if (selectedRow != -1) {
@@ -94,15 +121,24 @@ public class Contatos {
             }
         });
 
+        // Action for Delete button
+        // Ação para o botão de Excluir
         excButton.addActionListener(e -> deleteContact());
+        
+        // Action for Load button
+        // Ação para o botão de Carregar
         cargButton.addActionListener(e -> loadContactsFromFile());
 
         // Load contacts from file on startup
         loadContactsFromFile();
 
+        // Make the JFrame visible
+        // Faz o JFrame ficar visível
         j.setVisible(true);
     }
 
+    // Function to delete contact
+    // Função para deletar o contato
     private static void deleteContact() {
         int selectedRow = contactTable.getSelectedRow();
         if (selectedRow != -1) {
@@ -113,6 +149,8 @@ public class Contatos {
         }
     }
 
+    // Function to edit contact
+    // Função para editar o contato
     private static void showAddEditDialog(JFrame parent, Integer rowIndex, int tableRow) {
         JDialog d = new JDialog(parent, rowIndex == null ? "Adicionar Contato" : "Editar Contato", true);
         d.setLayout(new GridLayout(0, 2, 10, 10));
@@ -176,6 +214,8 @@ public class Contatos {
         d.setVisible(true);
     }
 
+    // Function to update the output file (saida.txt)
+    // Função para atualizar o arquivo de saída (saida.txt)
     private static void updateOutputFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
             for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -183,13 +223,15 @@ public class Contatos {
                     writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
                     writer.newLine();
                 }
-                writer.newLine(); // Add a blank line between contacts
+                writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    // Function to load contacts from output file
+    // Função para carregar contatos do arquivo de saída
     private static void loadContactsFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader("saida.txt"))) {
             String line;
@@ -229,6 +271,8 @@ public class Contatos {
         }
     }
 
+    // Function to filter contacts from output file
+    // Função para filtrar contatos do arquivo de saída
     private static void filterContacts() {
         String selectedCategory = (String) categoryFilter.getSelectedItem();
         String searchTerm = searchField.getText().toLowerCase();
@@ -254,7 +298,6 @@ public class Contatos {
                             tableModel.addRow(contactData);
                         }
 
-                        // Reset for the next contact
                         contactData = new String[5]; 
                         index = 0;
                     }
@@ -276,7 +319,6 @@ public class Contatos {
                     }
                 }
             }
-            // Add the last contact if necessary
             if (index > 0) {
                 String nome = contactData[0].toLowerCase();
                 String email = contactData[2].toLowerCase();

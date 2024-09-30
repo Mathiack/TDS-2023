@@ -1,10 +1,4 @@
-Nome: bom
-Telefone: ola
-E-mail: meu
-Endereço: 34823498940w86djgbfiohjsio
-Categoria: ola
-
-Nome: e
+Nome: eu tenteeei
 Telefone: e
 E-mail: e
 Endereço: e
