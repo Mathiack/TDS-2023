@@ -1,15 +1,11 @@
 package contatos;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,11 +13,12 @@ public class Contatos {
 
     private static DefaultTableModel tableModel;
     private static JTable contactTable;
-    private static JComboBox<String> filtroCategoria;
+    private static JComboBox<String> categoryFilter;
+    private static JTextField searchField;
 
     static void framePrincipal() {
-        JFrame j = new JFrame("Salvar");
-        j.setSize(400, 400);
+        JFrame j = new JFrame("Contatos do Hércio");
+        j.setSize(600, 400);
         j.setLocationRelativeTo(null);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JMenuBar menuBar = new JMenuBar();
@@ -62,51 +59,58 @@ public class Contatos {
         toolBar.add(saveButton);
         toolBar.add(cargButton);
 
-        // Definindo modelo e tabela
         String[] columnNames = {"Nome", "Telefone", "E-mail", "Endereço", "Categoria"};
         tableModel = new DefaultTableModel(columnNames, 0);
         contactTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(contactTable);
 
-        // JPanel for filtering
         JPanel filterPanel = new JPanel();
         JLabel filterLabel = new JLabel("Filtrar por Categoria:");
-        filtroCategoria = new JComboBox<>(new String[]{});
+        categoryFilter = new JComboBox<>(new String[]{"Todos", "Amigo", "Trabalho", "Família"});
+        JLabel searchLabel = new JLabel("Buscar:");
+        searchField = new JTextField(15);
 
         filterPanel.add(filterLabel);
-        filterPanel.add(filtroCategoria);
+        filterPanel.add(categoryFilter);
+        filterPanel.add(searchLabel);
+        filterPanel.add(searchField);
 
-        // Filter functionality (pode ser implementada mais tarde se necessário)
-        filtroCategoria.addActionListener(e -> filterContacts());
+        categoryFilter.addActionListener(e -> filterContacts());
+        searchField.addActionListener(e -> filterContacts());
 
-        // Adicionando componentes ao frame
         j.setLayout(new BorderLayout());
         j.add(toolBar, BorderLayout.NORTH);
         j.add(scrollPane, BorderLayout.CENTER);
         j.add(filterPanel, BorderLayout.SOUTH);
         j.setJMenuBar(menuBar);
 
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showAddEditDialog(j, null, -1);
+        addButton.addActionListener(e -> showAddEditDialog(j, null, -1));
+        editButton.addActionListener(e -> {
+            int selectedRow = contactTable.getSelectedRow();
+            if (selectedRow != -1) {
+                showAddEditDialog(j, selectedRow, selectedRow);
+            } else {
+                JOptionPane.showMessageDialog(j, "Selecione um contato para editar.");
             }
         });
 
-        editButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = contactTable.getSelectedRow();
-                if (selectedRow != -1) {
-                    showAddEditDialog(j, selectedRow, selectedRow);
-                } else {
-                    JOptionPane.showMessageDialog(j, "Selecione um contato para editar.");
-                }
-            }
-        });
+        excButton.addActionListener(e -> deleteContact());
+        cargButton.addActionListener(e -> loadContactsFromFile());
 
-        // Carregar contatos do arquivo ao iniciar
+        // Load contacts from file on startup
         loadContactsFromFile();
 
         j.setVisible(true);
+    }
+
+    private static void deleteContact() {
+        int selectedRow = contactTable.getSelectedRow();
+        if (selectedRow != -1) {
+            tableModel.removeRow(selectedRow);
+            updateOutputFile();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um contato para excluir.");
+        }
     }
 
     private static void showAddEditDialog(JFrame parent, Integer rowIndex, int tableRow) {
@@ -133,27 +137,24 @@ public class Contatos {
         }
 
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String[] rowData = {
-                    jTxNome.getText(),
-                    jTxTelefone.getText(),
-                    jTxEmail.getText(),
-                    jTxEndereco.getText(),
-                    jTxCategoria.getText()
-                };
-
-                if (rowIndex == null) {
-                    tableModel.addRow(rowData);
-                } else {
-                    for (int i = 0; i < rowData.length; i++) {
-                        tableModel.setValueAt(rowData[i], rowIndex, i);
-                    }
+        okButton.addActionListener(e -> {
+            String[] rowData = {
+                jTxNome.getText(),
+                jTxTelefone.getText(),
+                jTxEmail.getText(),
+                jTxEndereco.getText(),
+                jTxCategoria.getText()
+            };
+            
+            if (rowIndex == null) {
+                tableModel.addRow(rowData);
+            } else {
+                for (int i = 0; i < rowData.length; i++) {
+                    tableModel.setValueAt(rowData[i], rowIndex, i);
                 }
-                d.dispose();
-                updateOutputFile();
-                updateCategoryFilter(); // Atualiza as categorias no combo box
             }
+            d.dispose();
+            updateOutputFile();
         });
 
         d.add(jLbNome);
@@ -182,7 +183,7 @@ public class Contatos {
                     writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
                     writer.newLine();
                 }
-                writer.newLine();
+                writer.newLine(); // Add a blank line between contacts
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -205,24 +206,14 @@ public class Contatos {
                 } else {
                     String[] parts = line.split(": ");
                     if (parts.length == 2) {
-                        int colIndex = -1;
-                        switch (parts[0]) {
-                            case "Nome":
-                                colIndex = 0;
-                                break;
-                            case "Telefone":
-                                colIndex = 1;
-                                break;
-                            case "E-mail":
-                                colIndex = 2;
-                                break;
-                            case "Endereço":
-                                colIndex = 3;
-                                break;
-                            case "Categoria":
-                                colIndex = 4;
-                                break;
-                        }
+                        int colIndex = switch (parts[0]) {
+                            case "Nome" -> 0;
+                            case "Telefone" -> 1;
+                            case "E-mail" -> 2;
+                            case "Endereço" -> 3;
+                            case "Categoria" -> 4;
+                            default -> -1;
+                        };
                         if (colIndex != -1) {
                             contactData[colIndex] = parts[1];
                             index++;
@@ -230,36 +221,77 @@ public class Contatos {
                     }
                 }
             }
-            // Adiciona o último contato se necessário
             if (index > 0) {
                 tableModel.addRow(contactData);
             }
-            updateCategoryFilter(); // Atualiza as categorias no combo box
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void updateCategoryFilter() {
-        filtroCategoria.removeAllItems(); // Limpa todas as categorias anteriores
-        Set<String> categorias = new HashSet<>(); // Usamos um Set para evitar duplicatas
-
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            String categoria = (String) tableModel.getValueAt(i, 4); // Categoria está na 5ª coluna
-            if (categoria != null && !categoria.isEmpty()) {
-                categorias.add(categoria); // Adiciona a categoria ao Set
-            }
-        }
-
-        // Adiciona as categorias únicas ao combo box
-        for (String categoria : categorias) {
-            filtroCategoria.addItem(categoria);
-        }
-    }
-
     private static void filterContacts() {
-        String selectedCategory = (String) filtroCategoria.getSelectedItem();
-        // Aqui você pode implementar a lógica de filtragem se necessário
+        String selectedCategory = (String) categoryFilter.getSelectedItem();
+        String searchTerm = searchField.getText().toLowerCase();
+
+        tableModel.setRowCount(0);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("saida.txt"))) {
+            String line;
+            String[] contactData = new String[5];
+            int index = 0;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
+                    if (index > 0) {
+                        String nome = contactData[0].toLowerCase();
+                        String email = contactData[2].toLowerCase();
+                        String categoria = contactData[4];
+
+                        boolean matchesCategory = selectedCategory.equals("Todos") || categoria.equals(selectedCategory);
+                        boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
+
+                        if (matchesCategory && matchesSearch) {
+                            tableModel.addRow(contactData);
+                        }
+
+                        // Reset for the next contact
+                        contactData = new String[5]; 
+                        index = 0;
+                    }
+                } else {
+                    String[] parts = line.split(": ");
+                    if (parts.length == 2) {
+                        int colIndex = switch (parts[0]) {
+                            case "Nome" -> 0;
+                            case "Telefone" -> 1;
+                            case "E-mail" -> 2;
+                            case "Endereço" -> 3;
+                            case "Categoria" -> 4;
+                            default -> -1;
+                        };
+                        if (colIndex != -1) {
+                            contactData[colIndex] = parts[1];
+                            index++;
+                        }
+                    }
+                }
+            }
+            // Add the last contact if necessary
+            if (index > 0) {
+                String nome = contactData[0].toLowerCase();
+                String email = contactData[2].toLowerCase();
+                String categoria = contactData[4];
+
+                boolean matchesCategory = selectedCategory.equals("Todos") || categoria.equals(selectedCategory);
+                boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
+
+                if (matchesCategory && matchesSearch) {
+                    tableModel.addRow(contactData);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
