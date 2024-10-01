@@ -23,6 +23,7 @@ public class IntPizza extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         listaSabores();
         listaTamanhos();
+        listaBebidas();
     }
 
     /**
@@ -478,21 +479,20 @@ public class IntPizza extends javax.swing.JFrame {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT id_bebdia, bebida, precoBebida FROM bebida";
+            String sql = "SELECT id_bebida, bebida, precoBebida FROM bebida";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             // Obtém o modelo do combo box
             DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBebida.getModel();
-
             // Remove todos os itens atuais do combo box
             model.removeAllElements();
 
             // Adiciona os itens ao combo box
             while (rs.next()) {
-                String tamanho = rs.getString("tamanho");
-                precoTamanho = rs.getDouble("precoTamanho");
-                model.addElement(tamanho);
+                String bebida = rs.getString("bebida");
+                precoBebida = rs.getDouble("precoBebida");
+                model.addElement(bebida);
             }
 
         } catch (Exception e) {

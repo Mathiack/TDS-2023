@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package CardapioInt;
 
 import Pedido.Database;
@@ -9,23 +5,17 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-/**
- *
- * @author GUILHERMEMATHIACK
- */
 public class JCardapio extends javax.swing.JFrame {
 
     private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
     private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
     private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
-    /**
-     * Creates new form JCardapio
-     */
+    
     public JCardapio() {
-        initComponents();
         JFrame j = new JFrame();
         j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
+        initComponents();
         listaSabores();
         listaTamanhos();
         listaBebidas();
@@ -155,6 +145,8 @@ public class JCardapio extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JCardapio().setVisible(true);
+                JFrame j = new JFrame();
+        j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         });
     }
