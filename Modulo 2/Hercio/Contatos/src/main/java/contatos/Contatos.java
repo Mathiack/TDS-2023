@@ -99,6 +99,7 @@ public class Contatos {
         // Ação para os botões
         categoryFilter.addActionListener(e -> filterContacts());
         searchField.addActionListener(e -> filterContacts());
+        saveButton.addActionListener(e -> saveContactsToFile());  // Agora o botão "Salvar" grava os contatos no arquivo
 
         j.setLayout(new BorderLayout());
         j.add(toolBar, BorderLayout.NORTH);
@@ -183,16 +184,15 @@ public class Contatos {
                 jTxEndereco.getText(),
                 jTxCategoria.getText()
             };
-            
+
             if (rowIndex == null) {
-                tableModel.addRow(rowData);
+                tableModel.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
             } else {
                 for (int i = 0; i < rowData.length; i++) {
-                    tableModel.setValueAt(rowData[i], rowIndex, i);
+                    tableModel.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
                 }
             }
             d.dispose();
-            updateOutputFile();
         });
 
         d.add(jLbNome);
@@ -271,9 +271,27 @@ public class Contatos {
         }
     }
 
+    // Function to save contacts in output file
+    // Função para salvar contatos no arquivo de saída
+    private static void saveContactsToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
+                    writer.newLine();
+                }
+                writer.newLine();
+            }
+            JOptionPane.showMessageDialog(null, "Contatos salvos com sucesso!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os contatos: " + e.getMessage());
+    }
+}
+    
     // Function to filter contacts from output file
     // Função para filtrar contatos do arquivo de saída
     private static void filterContacts() {
+        
         String selectedCategory = (String) categoryFilter.getSelectedItem();
         String searchTerm = searchField.getText().toLowerCase();
 
@@ -288,17 +306,24 @@ public class Contatos {
                 if (line.trim().isEmpty()) {
                     if (index > 0) {
                         String nome = contactData[0].toLowerCase();
+                        String telefone = contactData[1].toLowerCase();
                         String email = contactData[2].toLowerCase();
-                        String categoria = contactData[4];
+                        String endereco = contactData[3].toLowerCase();
+                        String categoria = contactData[4].toLowerCase();
 
-                        boolean matchesCategory = selectedCategory.equals("Todos") || categoria.equals(selectedCategory);
-                        boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
+                        boolean matchesCategory = selectedCategory.equals("Todos") || categoria.equals(selectedCategory.toLowerCase());
 
+                        boolean matchesSearch = nome.contains(searchTerm) ||
+                                                telefone.contains(searchTerm) ||
+                                                email.contains(searchTerm) ||
+                                                endereco.contains(searchTerm) ||
+                                                categoria.contains(searchTerm);
+                        
                         if (matchesCategory && matchesSearch) {
                             tableModel.addRow(contactData);
                         }
-
-                        contactData = new String[5]; 
+                        
+                        contactData = new String[5];
                         index = 0;
                     }
                 } else {
@@ -319,13 +344,20 @@ public class Contatos {
                     }
                 }
             }
+
             if (index > 0) {
                 String nome = contactData[0].toLowerCase();
+                String telefone = contactData[1].toLowerCase();
                 String email = contactData[2].toLowerCase();
-                String categoria = contactData[4];
+                String endereco = contactData[3].toLowerCase();
+                String categoria = contactData[4].toLowerCase();
 
-                boolean matchesCategory = selectedCategory.equals("Todos") || categoria.equals(selectedCategory);
-                boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
+                boolean matchesCategory = selectedCategory.equals("Todos") || categoria.equals(selectedCategory.toLowerCase());
+                boolean matchesSearch = nome.contains(searchTerm) ||
+                                        telefone.contains(searchTerm) ||
+                                        email.contains(searchTerm) ||
+                                        endereco.contains(searchTerm) ||
+                                        categoria.contains(searchTerm);
 
                 if (matchesCategory && matchesSearch) {
                     tableModel.addRow(contactData);
@@ -336,6 +368,8 @@ public class Contatos {
         }
     }
 
+    // Main function that calls framePrincipal, the main frame
+    // Função principal que chama o framePrincipal, a janela principal
     public static void main(String[] args) {
         framePrincipal();
     }
