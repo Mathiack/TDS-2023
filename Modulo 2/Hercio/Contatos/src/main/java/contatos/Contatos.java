@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -213,6 +214,19 @@ public class Contatos {
         d.setResizable(false);
         d.setVisible(true);
     }
+
+    private static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
+    }
+
+    private static boolean isValidPhone(String phone) {
+        String phoneRegex = "^\\(\\d{2}\\) \\d{5}-\\d{4}$"; // Format: (XX) XXXXX-XXXX
+        Pattern pattern = Pattern.compile(phoneRegex);
+        return pattern.matcher(phone).matches();
+    }
+
 
     // Function to update the output file (saida.txt)
     // Função para atualizar o arquivo de saída (saida.txt)
