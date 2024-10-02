@@ -199,6 +199,7 @@ public class Contatos {
                 }
             }
             d.dispose();
+            updateOutputFile();
         });
 
         d.add(jLbNome);
