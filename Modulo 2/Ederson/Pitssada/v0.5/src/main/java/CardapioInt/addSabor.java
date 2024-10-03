@@ -21,8 +21,8 @@ public class addSabor extends javax.swing.JFrame {
      */
     public addSabor() {
         JFrame j = new JFrame();
-        j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

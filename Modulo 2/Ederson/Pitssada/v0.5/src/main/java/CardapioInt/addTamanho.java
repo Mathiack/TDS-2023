@@ -19,8 +19,8 @@ public class addTamanho extends javax.swing.JFrame {
      */
     public addTamanho() {
         JFrame j = new JFrame();
-        j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

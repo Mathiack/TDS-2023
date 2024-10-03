@@ -20,7 +20,7 @@ public class IntPizza extends javax.swing.JFrame {
         j.setLocationRelativeTo(null);
         j.setUndecorated(true);
         initComponents();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         listaSabores();
         listaTamanhos();
         listaBebidas();
