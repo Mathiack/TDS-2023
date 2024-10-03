@@ -2,11 +2,11 @@ package contatos;
 
 // Importing java libraries
 // Importando bibliotecas do java
+import java.util.regex.*;
 import java.awt.*;
 import java.io.*;
-import java.util.regex.Pattern;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 public class Contatos {
     
@@ -376,6 +376,6 @@ public class Contatos {
     // Main function that calls framePrincipal, the main frame
     // Função principal que chama o framePrincipal, a janela principal
     public static void main(String[] args) {
-        framePrincipal();
+        framePrincipal(); // NÃO REMOVA SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
     }
 }
