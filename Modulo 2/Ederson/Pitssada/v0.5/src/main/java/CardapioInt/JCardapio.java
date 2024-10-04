@@ -1,23 +1,43 @@
 package CardapioInt;
 
 import Pedido.Database;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
 public class JCardapio extends javax.swing.JFrame {
 
+    private static DefaultTableModel tableModel;
     private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
     private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
     private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"Nome", "Preço"}, 0);
     
     public JCardapio() {
-        JFrame j = new JFrame();
-        initComponents();
+        initComponents();  // Inicializa os componentes
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        adicionarListeners();  // Adiciona os listeners dos botões
         listaSabores();
         listaTamanhos();
         listaBebidas();
+    }
+
+    private void adicionarListeners() {
+        // Botão de Excluir
+        btnExcluir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                
+            }
+        });
+
+        // Botão de Editar
+        btnEditar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                showAddEditDialog();
+            }
+        });
     }
 
     /**
@@ -32,6 +52,8 @@ public class JCardapio extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         JTtamanho1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -42,13 +64,19 @@ public class JCardapio extends javax.swing.JFrame {
         JTbebida = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnExcluir = new javax.swing.JMenu();
+        btnOpcoes = new javax.swing.JMenu();
+        btnExcluir = new javax.swing.JMenuItem();
+        btnEditar = new javax.swing.JMenuItem();
 
         JTtamanho1.setModel(tabelaTamanho);
         jScrollPane3.setViewportView(JTtamanho1);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Tamanho");
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,8 +98,15 @@ public class JCardapio extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Bebidas");
 
+        btnOpcoes.setText("Opções");
+
         btnExcluir.setText("Excluir");
-        jMenuBar1.add(btnExcluir);
+        btnOpcoes.add(btnExcluir);
+
+        btnEditar.setText("Editar");
+        btnOpcoes.add(btnEditar);
+
+        jMenuBar1.add(btnOpcoes);
 
         setJMenuBar(jMenuBar1);
 
@@ -92,13 +127,12 @@ public class JCardapio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(90, 90, 90)
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,17 +293,65 @@ public class JCardapio extends javax.swing.JFrame {
         }
     }
     
+    static void showAddEditDialog(JFrame parent, Integer rowIndex, int tableRow) {
+        JDialog d = new JDialog(parent, rowIndex == null ? "Adicionar Contato" : "Editar Contato", true);
+        d.setLayout(new GridLayout(0, 2, 10, 10));
+
+        JLabel jLbNome = new JLabel("Nome:");
+        JTextField nome = new JTextField();
+        JLabel jLbTelefone = new JLabel("Telefone:");
+        JTextField preco = new JTextField();
+
+        if (rowIndex != null) {
+            nome.setText((String) tableModel.getValueAt(rowIndex, 0));
+            preco.setText((String) tableModel.getValueAt(rowIndex, 1));
+        }
+
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(e -> {
+            String nomee = nome.getText();
+            String precoo = preco.getText();
+            
+            String[] rowData = {nomee, precoo};
+
+            if (rowIndex == null) {
+                tableModel.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
+            } else {
+                for (int i = 0; i < rowData.length; i++) {
+                    tableModel.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
+                }
+            }
+            d.dispose();
+        });
+
+        d.add(jLbNome);
+        d.add(nome);
+        d.add(jLbTelefone);
+        d.add(preco);
+        d.add(new JLabel());
+        d.add(okButton);
+
+        d.setSize(300, 300);
+        d.setLocationRelativeTo(parent);
+        d.setResizable(false);
+        d.setVisible(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTbebida;
     private javax.swing.JTable JTsabores;
     private javax.swing.JTable JTtamanho;
     private javax.swing.JTable JTtamanho1;
-    private javax.swing.JMenu btnExcluir;
+    private javax.swing.JMenuItem btnEditar;
+    private javax.swing.JMenuItem btnExcluir;
+    private javax.swing.JMenu btnOpcoes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
