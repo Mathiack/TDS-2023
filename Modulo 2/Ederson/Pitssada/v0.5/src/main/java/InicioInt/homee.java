@@ -11,6 +11,7 @@ public class homee extends javax.swing.JFrame {
         super("Início");
         initComponents();
         setLocationRelativeTo(null);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**

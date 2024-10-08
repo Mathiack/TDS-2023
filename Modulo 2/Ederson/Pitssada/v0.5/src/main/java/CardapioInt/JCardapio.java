@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 
 public class JCardapio extends javax.swing.JFrame {
@@ -18,25 +20,27 @@ public class JCardapio extends javax.swing.JFrame {
     public JCardapio() {
         initComponents();  // Inicializa os componentes
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        adicionarListeners();  // Adiciona os listeners dos botões
+        //adicionarListeners();  // Adiciona os listeners dos botões
         listaSabores();
         listaTamanhos();
         listaBebidas();
-        setExtendedState(MAXIMIZED_BOTH);
-    }
+        
+        tabelaSabor.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+                    // Obter os dados alterados
+                    String nome = (String) tableModel.getValueAt(row, 0);
+                    String preco = (String) tableModel.getValueAt(row, 1);
 
-    private void adicionarListeners() {
-        // Botão de Excluir
-        btnExcluir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                
-            }
-        });
+                    // Aqui você pode pegar o ID da linha se estiver na tabela
+                    // int id = (int) tableModel.getValueAt(row, 2);  // Exemplo se tiver um ID na coluna 2
 
-        // Botão de Editar
-        btnEditar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                showAddEditDialog();
+                    // Atualizar no banco de dados
+                    atualizarPelaTabelaS(nome, preco, row);
+                }
             }
         });
     }
@@ -100,11 +104,26 @@ public class JCardapio extends javax.swing.JFrame {
         jLabel4.setText("Bebidas");
 
         btnOpcoes.setText("Opções");
+        btnOpcoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpcoesActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         btnOpcoes.add(btnExcluir);
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         btnOpcoes.add(btnEditar);
 
         jMenuBar1.add(btnOpcoes);
@@ -154,6 +173,35 @@ public class JCardapio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOpcoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOpcoesActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private static void atualizarPelaTabelaS(String nome, String preco, int row) {
+        try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
+            String query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setString(2, preco);
+
+            // Aqui você teria que passar o ID correto para a atualização, ajustando conforme necessário
+            stmt.setInt(3, row);  // Exemplo: altere este valor pelo ID correto do produto
+
+            stmt.executeUpdate();
+            System.out.println("Dados atualizados no banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,49 +342,85 @@ public class JCardapio extends javax.swing.JFrame {
         }
     }
     
-    static void showAddEditDialog(JFrame parent, Integer rowIndex, int tableRow) {
-        JDialog d = new JDialog(parent, rowIndex == null ? "Adicionar Contato" : "Editar Contato", true);
-        d.setLayout(new GridLayout(0, 2, 10, 10));
+    /*static void showAddEditDialog(JFrame parent, Integer rowIndex, int tableRow) {
+        // Usando JDialog para modal
+        JDialog dialog = new JDialog(parent, rowIndex == null ? "Adicionar Produto" : "Editar Produto", true);
+        dialog.setLayout(new GridLayout(0, 2, 10, 10));
 
+        // Componentes do formulário
         JLabel jLbNome = new JLabel("Nome:");
         JTextField nome = new JTextField();
-        JLabel jLbTelefone = new JLabel("Telefone:");
+        JLabel jLbPreco = new JLabel("Preço:");
         JTextField preco = new JTextField();
 
+        // Preencher campos se for edição
         if (rowIndex != null) {
-            nome.setText((String) tableModel.getValueAt(rowIndex, 0));
-            preco.setText((String) tableModel.getValueAt(rowIndex, 1));
+            nome.setText((String) tableModel.getValueAt(rowIndex, 0));  // Nome
+            preco.setText((String) tableModel.getValueAt(rowIndex, 1));  // Preço
         }
 
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(e -> {
-            String nomee = nome.getText();
-            String precoo = preco.getText();
-            
-            String[] rowData = {nomee, precoo};
+        // Botão de Salvar
+        JButton saveButton = new JButton("Salvar");
+        saveButton.addActionListener(e -> {
+            String nomeValue = nome.getText();
+            String precoValue = preco.getText();
 
+            // Validação básica
+            if (nomeValue.isEmpty() || precoValue.isEmpty()) {
+                JOptionPane.showMessageDialog(dialog, "Todos os campos devem ser preenchidos.");
+                return;
+            }
+
+            // Adiciona/Atualiza na tabela
+            String[] rowData = {nomeValue, precoValue};
             if (rowIndex == null) {
-                tableModel.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
+                tableModel.addRow(rowData);  // Adicionar nova linha
             } else {
                 for (int i = 0; i < rowData.length; i++) {
-                    tableModel.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
+                    tableModel.setValueAt(rowData[i], rowIndex, i);  // Atualizar linha existente
                 }
             }
-            d.dispose();
+
+            // Atualiza no banco de dados
+            try (Connection conn = Database.getConnection()) {  // Assumindo um método para obter conexão
+                String query;
+                PreparedStatement stmt;
+                if (rowIndex == null) {
+                    // Inserção no banco
+                    query = "INSERT INTO produtos (nome, preco) VALUES (?, ?)";
+                    stmt = conn.prepareStatement(query);
+                } else {
+                    // Atualização no banco
+                    query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";
+                    stmt = conn.prepareStatement(query);
+                    stmt.setInt(3, (int) tableModel.getValueAt(rowIndex, 2));  // Supondo que o ID esteja na tabela
+                }
+                stmt.setString(1, nomeValue);
+                stmt.setString(2, precoValue);
+                stmt.executeUpdate();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Erro ao salvar no banco: " + ex.getMessage());
+                return;
+            }
+
+            // Fecha o diálogo após salvar
+            dialog.dispose();
         });
 
-        d.add(jLbNome);
-        d.add(nome);
-        d.add(jLbTelefone);
-        d.add(preco);
-        d.add(new JLabel());
-        d.add(okButton);
+        // Adicionar componentes ao diálogo
+        dialog.add(jLbNome);
+        dialog.add(nome);
+        dialog.add(jLbPreco);
+        dialog.add(preco);
+        dialog.add(new JLabel());  // Espaço vazio
+        dialog.add(saveButton);
 
-        d.setSize(300, 300);
-        d.setLocationRelativeTo(parent);
-        d.setResizable(false);
-        d.setVisible(true);
-    }
+        // Configurações do diálogo
+        dialog.setSize(300, 200);
+        dialog.setLocationRelativeTo(parent);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
+    }*/
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTbebida;
