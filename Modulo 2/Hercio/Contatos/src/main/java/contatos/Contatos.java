@@ -8,6 +8,9 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+
+// Our class name
+// Nome da nossa classe
 public class Contatos {
     
     // Graphic Interface items
@@ -50,6 +53,8 @@ public class Contatos {
         JMenuItem cargAction = new JMenuItem("Carregar");
         JMenuItem ajudaAction = new JMenuItem("Ajuda");
 
+        // Add the JMenuItems
+        // Adiciona os JmenuItens
         arqMenu.add(addAction);
         arqMenu.add(editAction);
         arqMenu.add(excAction);
@@ -66,6 +71,8 @@ public class Contatos {
         JButton saveButton = new JButton("Salvar");
         JButton cargButton = new JButton("Carregar");
 
+        // Add the buttons on the JToolBar
+        // Adiciona os botões na JToolBar
         toolBar.add(addButton);
         toolBar.add(editButton);
         toolBar.add(excButton);
@@ -87,6 +94,8 @@ public class Contatos {
         JLabel searchLabel = new JLabel("Buscar:");
         searchField = new JTextField(15);
 
+        // Add more things of the JPanel and JLabel
+        // Adiciona mais coisas do JPanel e JLabel
         filterPanel.add(filterLabel);
         filterPanel.add(categoryFilter);
         filterPanel.add(searchLabel);
@@ -98,6 +107,7 @@ public class Contatos {
         searchField.addActionListener(e -> filterContacts());
         saveButton.addActionListener(e -> saveContactsToFile());  // Agora o botão "Salvar" grava os contatos no arquivo
 
+        // Setting layout and add
         j.setLayout(new BorderLayout());
         j.add(toolBar, BorderLayout.NORTH);
         j.add(scrollPane, BorderLayout.CENTER);
@@ -376,6 +386,8 @@ public class Contatos {
     // Main function that calls framePrincipal, the main frame
     // Função principal que chama o framePrincipal, a janela principal
     public static void main(String[] args) {
+        // DON'T REMOVE THE FUNCTION BELLOW! ELSE OUR CODE WON'T WORK CORRECTLY
         framePrincipal(); // NÃO REMOVA SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
+        
     }
 }
