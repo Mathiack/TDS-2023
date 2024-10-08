@@ -22,6 +22,7 @@ public class JCardapio extends javax.swing.JFrame {
         listaSabores();
         listaTamanhos();
         listaBebidas();
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     private void adicionarListeners() {

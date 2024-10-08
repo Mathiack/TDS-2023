@@ -386,8 +386,8 @@ public class Contatos {
     // Main function that calls framePrincipal, the main frame
     // Função principal que chama o framePrincipal, a janela principal
     public static void main(String[] args) {
-        // DON'T REMOVE THE FUNCTION BELLOW! ELSE OUR CODE WON'T WORK CORRECTLY
-        framePrincipal(); // NÃO REMOVA SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
+        // DON'T REMOVE THE FUNCTION BELLOW! ELSE OUR CODE WON'T WORK CORRECTLY 
+        framePrincipal(); // NÃO REMOVA! SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
         
     }
 }
