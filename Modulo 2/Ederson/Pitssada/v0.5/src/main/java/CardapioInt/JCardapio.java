@@ -30,20 +30,39 @@ public class JCardapio extends javax.swing.JFrame {
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
-                    int column = e.getColumn();
-                    // Obter os dados alterados
-                    String nome = (String) tableModel.getValueAt(row, 0);
-                    String preco = (String) tableModel.getValueAt(row, 1);
+                    String nome = (String) tabelaSabor.getValueAt(row, 0);
+                    String preco = tabelaSabor.getValueAt(row, 1).toString();
 
-                    // Aqui você pode pegar o ID da linha se estiver na tabela
-                    // int id = (int) tableModel.getValueAt(row, 2);  // Exemplo se tiver um ID na coluna 2
-
-                    // Atualizar no banco de dados
                     atualizarPelaTabelaS(nome, preco, row);
                 }
             }
         });
-    }
+        
+        tabelaTamanho.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    String nome = (String) tabelaTamanho.getValueAt(row, 0);
+                    String preco = tabelaTamanho.getValueAt(row, 1).toString();
+
+                    atualizarPelaTabelaT(nome, preco, row);
+                }
+            }
+        });
+        
+        tabelaBebidas.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    String nome = (String) tabelaBebidas.getValueAt(row, 0);
+                    String preco = tabelaBebidas.getValueAt(row, 1).toString();
+
+                    atualizarPelaTabelaB(nome, preco, row);
+                }
+            }
+        });
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,6 +201,7 @@ public class JCardapio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    // ATUALIZAÇÕES DA TABELA E UPDATES
     private static void atualizarPelaTabelaS(String nome, String preco, int row) {
         try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
             String query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
@@ -199,6 +219,45 @@ public class JCardapio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
+    
+    private static void atualizarPelaTabelaT(String nome, String preco, int row) {
+        try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
+            String query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setString(2, preco);
+
+            // Aqui você teria que passar o ID correto para a atualização, ajustando conforme necessário
+            stmt.setInt(3, row);  // Exemplo: altere este valor pelo ID correto do produto
+
+            stmt.executeUpdate();
+            System.out.println("Dados atualizados no banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+    
+    private static void atualizarPelaTabelaB(String nome, String preco, int row) {
+        try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
+            String query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setString(2, preco);
+
+            // Aqui você teria que passar o ID correto para a atualização, ajustando conforme necessário
+            stmt.setInt(3, row);  // Exemplo: altere este valor pelo ID correto do produto
+
+            stmt.executeUpdate();
+            System.out.println("Dados atualizados no banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+    
+    
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
     }//GEN-LAST:event_btnEditarActionPerformed
