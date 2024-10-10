@@ -7,6 +7,7 @@ import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import java.net.*;
 
 
 // Our class name
@@ -15,10 +16,10 @@ public class Contatos {
     
     // Graphic Interface items
     // Itens da interface gráfica
-    private static DefaultTableModel tableModel;
-    private static JTable contactTable;
-    private static JComboBox<String> categoryFilter;
-    private static JTextField searchField;
+    private static DefaultTableModel modelT;
+    private static JTable tabela;
+    private static JComboBox<String> filtroDeCategorias;
+    private static JTextField campoPesquisa;
 
     // Main frame
     // Janela principal
@@ -81,31 +82,31 @@ public class Contatos {
 
         // Some Table settings
         // Algumas configurações da tabela
-        String[] columnNames = {"Nome", "Telefone", "E-mail", "Endereço", "Categoria"};
-        tableModel = new DefaultTableModel(columnNames, 0);
-        contactTable = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(contactTable);
+        String[] colunasNome = {"Nome", "Telefone", "E-mail", "Endereço", "Categoria"};
+        modelT = new DefaultTableModel(colunasNome, 0); // Setting the model || Configurando o model
+        tabela= new JTable(modelT); // New table || Nova Tabela
+        JScrollPane scrollPane = new JScrollPane(tabela);
 
         // Panel to filter by category
         // Painel pra filtrar por categoria
         JPanel filterPanel = new JPanel();
         JLabel filterLabel = new JLabel("Filtrar por Categoria:");
-        categoryFilter = new JComboBox<>(new String[]{"Todos", "Amigo", "Trabalho", "Família"});
+        filtroDeCategorias = new JComboBox<>(new String[]{"Todos", "Amigo", "Trabalho", "Família"}); //ComboBox with the categories || ComboBox com as categorias
         JLabel searchLabel = new JLabel("Buscar:");
-        searchField = new JTextField(15);
+        campoPesquisa = new JTextField(15);
 
         // Add more things of the JPanel and JLabel
         // Adiciona mais coisas do JPanel e JLabel
         filterPanel.add(filterLabel);
-        filterPanel.add(categoryFilter);
+        filterPanel.add(filtroDeCategorias);
         filterPanel.add(searchLabel);
-        filterPanel.add(searchField);
+        filterPanel.add(campoPesquisa);
 
         // Action for buttons
         // Ação para os botões
-        categoryFilter.addActionListener(e -> filterContacts());
-        searchField.addActionListener(e -> filterContacts());
-        saveButton.addActionListener(e -> saveContactsToFile());  // Agora o botão "Salvar" grava os contatos no arquivo
+        filtroDeCategorias.addActionListener(e -> filterContacts());
+        campoPesquisa.addActionListener(e -> filterContacts());
+        saveButton.addActionListener(e -> saveContactsToFile());
 
         // Setting layout and add
         j.setLayout(new BorderLayout());
@@ -118,10 +119,11 @@ public class Contatos {
         // Ação para o botão de Adicionar
         addButton.addActionListener(e -> showAddEditDialog(j, null, -1));
         
+        ajudaAction.addActionListener(e -> showAjuda());
         // Action for Edit button
         // Ação para o botão de Editar
         editButton.addActionListener(e -> {
-            int selectedRow = contactTable.getSelectedRow();
+            int selectedRow = tabela.getSelectedRow();
             if (selectedRow != -1) {
                 showAddEditDialog(j, selectedRow, selectedRow);
             } else {
@@ -148,9 +150,9 @@ public class Contatos {
     // Function to delete contact
     // Função para deletar o contato
     private static void deleteContact() {
-        int selectedRow = contactTable.getSelectedRow();
+        int selectedRow = tabela.getSelectedRow();
         if (selectedRow != -1) {
-            tableModel.removeRow(selectedRow);
+            modelT.removeRow(selectedRow);
             updateOutputFile();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um contato para excluir.");
@@ -175,11 +177,11 @@ public class Contatos {
         JTextField jTxCategoria = new JTextField();
 
         if (rowIndex != null) {
-            jTxNome.setText((String) tableModel.getValueAt(rowIndex, 0));
-            jTxTelefone.setText((String) tableModel.getValueAt(rowIndex, 1));
-            jTxEmail.setText((String) tableModel.getValueAt(rowIndex, 2));
-            jTxEndereco.setText((String) tableModel.getValueAt(rowIndex, 3));
-            jTxCategoria.setText((String) tableModel.getValueAt(rowIndex, 4));
+            jTxNome.setText((String) modelT.getValueAt(rowIndex, 0));
+            jTxTelefone.setText((String) modelT.getValueAt(rowIndex, 1));
+            jTxEmail.setText((String) modelT.getValueAt(rowIndex, 2));
+            jTxEndereco.setText((String) modelT.getValueAt(rowIndex, 3));
+            jTxCategoria.setText((String) modelT.getValueAt(rowIndex, 4));
         }
 
         JButton okButton = new JButton("OK");
@@ -202,10 +204,10 @@ public class Contatos {
             String[] rowData = {nome, telefone, email, endereco, categoria};
 
             if (rowIndex == null) {
-                tableModel.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
+                modelT.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
             } else {
                 for (int i = 0; i < rowData.length; i++) {
-                    tableModel.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
+                    modelT.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
                 }
             }
             d.dispose();
@@ -230,6 +232,53 @@ public class Contatos {
         d.setResizable(false);
         d.setVisible(true);
     }
+    
+    static void showAjuda() {
+        
+        // Setting JFrame definitions
+        // Configurando definições do JFrame
+        JFrame ajudaFrame = new JFrame("Ajuda");
+        ajudaFrame.setSize(400, 300);
+        ajudaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ajudaFrame.setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel labelAjuda = new JLabel("Ajuda");
+        labelAjuda.setHorizontalAlignment(SwingConstants.LEFT);
+        labelAjuda.setFont(new Font("Arial", Font.PLAIN, 24));
+        panel.add(labelAjuda);
+
+        JLabel labelContato = new JLabel("Contate-nos em (xx) xxxxx-xxxx");
+        labelContato.setHorizontalAlignment(SwingConstants.LEFT);
+        panel.add(labelContato);
+
+        JLabel labelLink = new JLabel("<html><a href=''>Consulte nosso repositório para mais informações</a></html>");
+        //labelLink.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        /* 
+        botar o labelLink no rodapé, isto é, deixar ele bem para baixo na tela, ainda centralizado
+        */
+        labelLink.setVerticalAlignment(SwingConstants.BOTTOM);
+
+        labelLink.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelLink.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/Mathiack/TDS-2023/tree/main/Modulo%202/Hercio/Contatos"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        panel.add(labelLink);
+
+        ajudaFrame.add(panel);
+
+        ajudaFrame.setVisible(true);
+    }
+
 
     private static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -238,7 +287,7 @@ public class Contatos {
     }
 
     private static boolean isValidPhone(String phone) {
-        String phoneRegex = "^\\(\\d{2}\\) \\d{5}-\\d{4}$"; // Format: (XX) XXXXX-XXXX
+        String phoneRegex = "^\\(\\d{2}\\) \\d{5}-\\d{4}$"; // Format: (XX) XXXXX-XXXX || Formato: (XX) XXXXX-XXXX
         Pattern pattern = Pattern.compile(phoneRegex);
         return pattern.matcher(phone).matches();
     }
@@ -248,9 +297,9 @@ public class Contatos {
     // Função para atualizar o arquivo de saída (saida.txt)
     private static void updateOutputFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
-                for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                    writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
+            for (int i = 0; i < modelT.getRowCount(); i++) {
+                for (int j = 0; j < modelT.getColumnCount(); j++) {
+                    writer.write(modelT.getColumnName(j) + ": " + modelT.getValueAt(i, j));
                     writer.newLine();
                 }
                 writer.newLine();
@@ -271,7 +320,7 @@ public class Contatos {
             while ((line = reader.readLine()) != null) {
                 if (line.trim().isEmpty()) {
                     if (index > 0) {
-                        tableModel.addRow(contactData);
+                        modelT.addRow(contactData);
                         contactData = new String[5];
                         index = 0;
                     }
@@ -294,7 +343,7 @@ public class Contatos {
                 }
             }
             if (index > 0) {
-                tableModel.addRow(contactData);
+                modelT.addRow(contactData);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -305,9 +354,9 @@ public class Contatos {
     // Função para salvar contatos no arquivo de saída
     private static void saveContactsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
-                for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                    writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
+            for (int i = 0; i < modelT.getRowCount(); i++) {
+                for (int j = 0; j < modelT.getColumnCount(); j++) {
+                    writer.write(modelT.getColumnName(j) + ": " + modelT.getValueAt(i, j));
                     writer.newLine();
                 }
                 writer.newLine();
@@ -321,10 +370,10 @@ public class Contatos {
     // Function to filter contacts from output file
     // Função para filtrar contatos do arquivo de saída
     private static void filterContacts() {
-        String selectedCategory = (String) categoryFilter.getSelectedItem();
-        String searchTerm = searchField.getText().toLowerCase();
+        String selectedCategory = (String) filtroDeCategorias.getSelectedItem();
+        String searchTerm = campoPesquisa.getText().toLowerCase();
 
-        tableModel.setRowCount(0);
+        modelT.setRowCount(0);
 
         try (BufferedReader reader = new BufferedReader(new FileReader("saida.txt"))) {
             String line;
@@ -342,7 +391,7 @@ public class Contatos {
                         boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
 
                         if (matchesCategory && matchesSearch) {
-                            tableModel.addRow(contactData);
+                            modelT.addRow(contactData);
                         }
 
                         contactData = new String[5];
@@ -375,7 +424,7 @@ public class Contatos {
                 boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
 
                 if (matchesCategory && matchesSearch) {
-                    tableModel.addRow(contactData);
+                    modelT.addRow(contactData);
                 }
             }
         } catch (IOException e) {
