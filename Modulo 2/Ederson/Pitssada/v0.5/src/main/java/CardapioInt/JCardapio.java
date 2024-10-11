@@ -13,10 +13,10 @@ import javax.swing.table.*;
 public class JCardapio extends javax.swing.JFrame {
 
     private static DefaultTableModel tableModel;
-    private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"ID", "Nome", "Preço"}, 0);
-    private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"ID", "Nome", "Preço"}, 0);
-    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"ID", "Nome", "Preço"}, 0);
-    
+    private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"Sabor", "Preço"}, 0);
+    private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Tamanho", "Preço"}, 0);
+    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"Bebida", "Preço"}, 0);
+
     public JCardapio() {
         initComponents();  // Inicializa os componentes
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -24,48 +24,51 @@ public class JCardapio extends javax.swing.JFrame {
         listaSabores();
         listaTamanhos();
         listaBebidas();
-        
+
         tabelaSabor.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
-                    String nome = (String) tabelaSabor.getValueAt(row, 0);
-                    String preco = tabelaSabor.getValueAt(row, 1).toString();
+                    int id = Integer.parseInt(tabelaSabor.getValueAt(row, 0).toString()); // Supondo que o ID esteja na primeira coluna
+                    String nome = (String) tabelaSabor.getValueAt(row, 1);
+                    String preco = tabelaSabor.getValueAt(row, 2).toString();
 
-                    atualizarPelaTabelaS(nome, preco, row);
+                    atualizarPelaTabelaS(id, nome, preco);
                 }
             }
         });
-        
+
         tabelaTamanho.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
-                    String nome = (String) tabelaTamanho.getValueAt(row, 0);
-                    String preco = tabelaTamanho.getValueAt(row, 1).toString();
+                    int id = Integer.parseInt(tabelaTamanho.getValueAt(row, 0).toString()); // ID na primeira coluna
+                    String nome = (String) tabelaTamanho.getValueAt(row, 1);
+                    String preco = tabelaTamanho.getValueAt(row, 2).toString();
 
-                    atualizarPelaTabelaT(nome, preco, row);
+                    atualizarPelaTabelaT(id, nome, preco);
                 }
             }
         });
-        
+
         tabelaBebidas.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
-                    String nome = (String) tabelaBebidas.getValueAt(row, 0);
-                    String preco = tabelaBebidas.getValueAt(row, 1).toString();
+                    int id = Integer.parseInt(tabelaBebidas.getValueAt(row, 0).toString()); // ID na primeira coluna
+                    String nome = (String) tabelaBebidas.getValueAt(row, 1);
+                    String preco = tabelaBebidas.getValueAt(row, 2).toString();
 
-                    atualizarPelaTabelaB(nome, preco, row);
+                    atualizarPelaTabelaB(id, nome, preco);
                 }
             }
         });
 
-        
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -189,21 +192,35 @@ public class JCardapio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     // ATUALIZAÇÕES DA TABELA E UPDATES
-    private static void atualizarPelaTabelaS(String nome, String preco, int row) {
-        try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
-            String query = "UPDATE sabor SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
+    private static void atualizarPelaTabelaS(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
+            String query = "UPDATE sabor SET sabor = ?, precoSabor = ? WHERE id_sabor = ?";  // SQL com placeholders
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
+            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
+            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
+
+            stmt.executeUpdate();  // Executa a query
+            System.out.println("Dados atualizados no banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+
+    private static void atualizarPelaTabelaT(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {
+            String query = "UPDATE tamanho SET tamanho = ?, precoTamanho = ? WHERE id_tamanho = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nome);
-            stmt.setString(2, preco);
-
-            // Aqui você teria que passar o ID correto para a atualização, ajustando conforme necessário
-            stmt.setInt(3, row);  // Exemplo: altere este valor pelo ID correto do produto
+            stmt.setDouble(2, Double.parseDouble(preco));
+            stmt.setInt(3, id);
 
             stmt.executeUpdate();
             System.out.println("Dados atualizados no banco de dados!");
@@ -212,16 +229,14 @@ public class JCardapio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-    
-    private static void atualizarPelaTabelaT(String nome, String preco, int row) {
-        try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
-            String query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
+
+    private static void atualizarPelaTabelaB(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {
+            String query = "UPDATE bebida SET bebida = ?, precoBebida = ? WHERE id_bebida = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nome);
-            stmt.setString(2, preco);
-
-            // Aqui você teria que passar o ID correto para a atualização, ajustando conforme necessário
-            stmt.setInt(3, row);  // Exemplo: altere este valor pelo ID correto do produto
+            stmt.setDouble(2, Double.parseDouble(preco));
+            stmt.setInt(3, id);
 
             stmt.executeUpdate();
             System.out.println("Dados atualizados no banco de dados!");
@@ -230,29 +245,10 @@ public class JCardapio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-    
-    private static void atualizarPelaTabelaB(String nome, String preco, int row) {
-        try (Connection conn = Database.getConnection()) {  // Assumindo que você tem esse método para obter a conexão
-            String query = "UPDATE produtos SET nome = ?, preco = ? WHERE id = ?";  // Supondo que o id da linha seja conhecido
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);
-            stmt.setString(2, preco);
 
-            // Aqui você teria que passar o ID correto para a atualização, ajustando conforme necessário
-            stmt.setInt(3, row);  // Exemplo: altere este valor pelo ID correto do produto
 
-            stmt.executeUpdate();
-            System.out.println("Dados atualizados no banco de dados!");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
-        }
-    }
-    
-    
-    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
@@ -287,53 +283,59 @@ public class JCardapio extends javax.swing.JFrame {
             public void run() {
                 new JCardapio().setVisible(true);
                 JFrame j = new JFrame();
-        j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                j.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         });
     }
-    
+
     public void listaSabores() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         try {
-            String sql = "SELECT id, sabor, precoSabor FROM sabor";
+            String sql = "SELECT id_sabor, sabor, precoSabor FROM sabor";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) JTsabores.getModel();
 
             model.setRowCount(0);
-            
+
             while (rs.next()) {
-                String id = rs.getString("id");
+                String id = rs.getString("id_sabor");
                 String sabor = rs.getString("sabor");
                 double precoSabor = rs.getDouble("precoSabor");
 
-                model.addRow(new Object[]{id, sabor, precoSabor});
+                model.addRow(new Object[]{sabor, precoSabor});
             }
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     public void listaTamanhos() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
 
-            String sql = "SELECT id, tamanho, precoTamanho FROM tamanho";
+            String sql = "SELECT id_tamanho, tamanho, precoTamanho FROM tamanho";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -342,33 +344,39 @@ public class JCardapio extends javax.swing.JFrame {
             model.setRowCount(0);
 
             while (rs.next()) {
-                String id = rs.getString("id");
+                String id = rs.getString("id_tamanho");
                 String tamanho = rs.getString("tamanho");
                 double precoTamanho = rs.getDouble("precoTamanho");
 
-                model.addRow(new Object[]{id, tamanho, precoTamanho});
+                model.addRow(new Object[]{tamanho, precoTamanho});
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     public void listaBebidas() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
 
-            String sql = "SELECT id, bebida, precoBebida FROM bebida";
+            String sql = "SELECT id_bebida, bebida, precoBebida FROM bebida";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -377,26 +385,32 @@ public class JCardapio extends javax.swing.JFrame {
             model.setRowCount(0);
 
             while (rs.next()) {
-                String id = rs.getString("id");
+                String id = rs.getString("id_bebida");
                 String bebida = rs.getString("bebida");
                 double precoBebida = rs.getDouble("precoBebida");
 
-                model.addRow(new Object[]{id, bebida, precoBebida});
+                model.addRow(new Object[]{bebida, precoBebida});
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTbebida;
     private javax.swing.JTable JTsabores;
