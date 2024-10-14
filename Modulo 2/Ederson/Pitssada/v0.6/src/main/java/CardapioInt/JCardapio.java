@@ -13,7 +13,7 @@ import javax.swing.table.*;
 public class JCardapio extends javax.swing.JFrame {
 
     private static DefaultTableModel tableModel;
-    private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"Sabor", "Preço"}, 0);
+    private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"ID", "Sabor", "Preço"}, 0);
     private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Tamanho", "Preço"}, 0);
     private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"Bebida", "Preço"}, 0);
 
@@ -307,7 +307,7 @@ public class JCardapio extends javax.swing.JFrame {
                 String sabor = rs.getString("sabor");
                 double precoSabor = rs.getDouble("precoSabor");
 
-                model.addRow(new Object[]{sabor, precoSabor});
+                model.addRow(new Object[]{id, sabor, precoSabor});
             }
 
         } catch (Exception e) {

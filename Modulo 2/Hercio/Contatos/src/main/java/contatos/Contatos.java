@@ -7,30 +7,30 @@ import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import java.net.*;
-
 
 // Our class name
 // Nome da nossa classe
 public class Contatos {
-    
+
     // Graphic Interface items
     // Itens da interface gráfica
-    private static DefaultTableModel modelT;
-    private static JTable tabela;
-    private static JComboBox<String> filtroDeCategorias;
-    private static JTextField campoPesquisa;
+    private static DefaultTableModel tableModel;
+    private static JTable contactTable;
+    private static JComboBox<String> categoryFilter;
+    private static JTextField searchField;
+
+    private static File loadedFile = null; // this vai servi for di ZC foi carregado or need carregar one file
 
     // Main frame
     // Janela principal
     static void framePrincipal() {
         // JFrame settings
         // Configurações do JFrame
-        JFrame j = new JFrame("Contatos do Hércio");
+        JFrame j = new JFrame("Contatos");
         j.setSize(600, 400);
         j.setLocationRelativeTo(null);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        j.setResizable(false);
         // Menu Bar
         // Barra de Menu
         JMenuBar menuBar = new JMenuBar();
@@ -80,33 +80,36 @@ public class Contatos {
         toolBar.add(saveButton);
         toolBar.add(cargButton);
 
+        
+        ajudaAction.addActionListener(e -> helpFrame());
+
         // Some Table settings
         // Algumas configurações da tabela
-        String[] colunasNome = {"Nome", "Telefone", "E-mail", "Endereço", "Categoria"};
-        modelT = new DefaultTableModel(colunasNome, 0); // Setting the model || Configurando o model
-        tabela= new JTable(modelT); // New table || Nova Tabela
-        JScrollPane scrollPane = new JScrollPane(tabela);
+        String[] columnNames = {"Nome", "Telefone", "E-mail", "Endereço", "Categoria"};
+        tableModel = new DefaultTableModel(columnNames, 0);
+        contactTable = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(contactTable);
 
         // Panel to filter by category
         // Painel pra filtrar por categoria
         JPanel filterPanel = new JPanel();
         JLabel filterLabel = new JLabel("Filtrar por Categoria:");
-        filtroDeCategorias = new JComboBox<>(new String[]{"Todos", "Amigo", "Trabalho", "Família"}); //ComboBox with the categories || ComboBox com as categorias
+        categoryFilter = new JComboBox<>(new String[]{"Todos", "Amigo", "Trabalho", "Família"});
         JLabel searchLabel = new JLabel("Buscar:");
-        campoPesquisa = new JTextField(15);
+        searchField = new JTextField(15);
 
         // Add more things of the JPanel and JLabel
         // Adiciona mais coisas do JPanel e JLabel
         filterPanel.add(filterLabel);
-        filterPanel.add(filtroDeCategorias);
+        filterPanel.add(categoryFilter);
         filterPanel.add(searchLabel);
-        filterPanel.add(campoPesquisa);
+        filterPanel.add(searchField);
 
         // Action for buttons
         // Ação para os botões
-        filtroDeCategorias.addActionListener(e -> filterContacts());
-        campoPesquisa.addActionListener(e -> filterContacts());
-        saveButton.addActionListener(e -> saveContactsToFile());
+        categoryFilter.addActionListener(e -> filterContacts());
+        searchField.addActionListener(e -> filterContacts());
+        saveButton.addActionListener(e -> saveContactsToFile());  // Agora o botão "Salvar" grava os contatos no arquivo
 
         // Setting layout and add
         j.setLayout(new BorderLayout());
@@ -118,12 +121,20 @@ public class Contatos {
         // Action for Adicionar button
         // Ação para o botão de Adicionar
         addButton.addActionListener(e -> showAddEditDialog(j, null, -1));
-        
-        ajudaAction.addActionListener(e -> showAjuda());
+        addAction.addActionListener(e -> showAddEditDialog(j, null, -1));
         // Action for Edit button
         // Ação para o botão de Editar
         editButton.addActionListener(e -> {
-            int selectedRow = tabela.getSelectedRow();
+            int selectedRow = contactTable.getSelectedRow();
+            if (selectedRow != -1) {
+                showAddEditDialog(j, selectedRow, selectedRow);
+            } else {
+                JOptionPane.showMessageDialog(j, "Selecione um contato para editar.");
+            }
+        });
+
+        editAction.addActionListener(e -> {
+            int selectedRow = contactTable.getSelectedRow();
             if (selectedRow != -1) {
                 showAddEditDialog(j, selectedRow, selectedRow);
             } else {
@@ -134,25 +145,38 @@ public class Contatos {
         // Action for Delete button
         // Ação para o botão de Excluir
         excButton.addActionListener(e -> deleteContact());
-        
+        excAction.addActionListener(e -> deleteContact());
+
         // Action for Load button
         // Ação para o botão de Carregar
         cargButton.addActionListener(e -> loadContactsFromFile());
-
-        // Load contacts from file on startup
-        loadContactsFromFile();
+        cargAction.addActionListener(e -> loadContactsFromFile());
 
         // Make the JFrame visible
         // Faz o JFrame ficar visível
         j.setVisible(true);
     }
 
+    
+    static void helpFrame() {
+        JFrame j = new JFrame("Ajuda");
+        j.setSize(600, 400);
+        j.setLocationRelativeTo(null);
+        j.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        j.setResizable(false);
+
+        JLabel ajuda = new JLabel("Para Adicionar clique em Adicionar");
+        ajuda.setBounds(20, 20, 100, 30);
+        j.add(ajuda);
+        
+        j.setVisible(true);
+    }
     // Function to delete contact
     // Função para deletar o contato
     private static void deleteContact() {
-        int selectedRow = tabela.getSelectedRow();
+        int selectedRow = contactTable.getSelectedRow();
         if (selectedRow != -1) {
-            modelT.removeRow(selectedRow);
+            tableModel.removeRow(selectedRow);
             updateOutputFile();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um contato para excluir.");
@@ -177,11 +201,11 @@ public class Contatos {
         JTextField jTxCategoria = new JTextField();
 
         if (rowIndex != null) {
-            jTxNome.setText((String) modelT.getValueAt(rowIndex, 0));
-            jTxTelefone.setText((String) modelT.getValueAt(rowIndex, 1));
-            jTxEmail.setText((String) modelT.getValueAt(rowIndex, 2));
-            jTxEndereco.setText((String) modelT.getValueAt(rowIndex, 3));
-            jTxCategoria.setText((String) modelT.getValueAt(rowIndex, 4));
+            jTxNome.setText((String) tableModel.getValueAt(rowIndex, 0));
+            jTxTelefone.setText((String) tableModel.getValueAt(rowIndex, 1));
+            jTxEmail.setText((String) tableModel.getValueAt(rowIndex, 2));
+            jTxEndereco.setText((String) tableModel.getValueAt(rowIndex, 3));
+            jTxCategoria.setText((String) tableModel.getValueAt(rowIndex, 4));
         }
 
         JButton okButton = new JButton("OK");
@@ -192,22 +216,22 @@ public class Contatos {
             String endereco = jTxEndereco.getText();
             String categoria = jTxCategoria.getText();
 
-            if (!isValidEmail(email)) {
-                JOptionPane.showMessageDialog(d, "E-mail inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+            if (!isValidPhone(telefone)) {
+                JOptionPane.showMessageDialog(d, "Telefone inválido! Tente: (XX) XXXXX-XXXX", "Erro", JOptionPane.ERROR_MESSAGE); //janelinha de erro pois o que foi digitado no txt do telefone n ta no formato
                 return;
             }
-            if (!isValidPhone(telefone)) {
-                JOptionPane.showMessageDialog(d, "Telefone inválido. Formato esperado: (XX) XXXXX-XXXX", "Erro", JOptionPane.ERROR_MESSAGE);
+            if (!isValidEmail(email)) {
+                JOptionPane.showMessageDialog(d, "E-mail inválido!", "Erro", JOptionPane.ERROR_MESSAGE); //janelinha de erro pois o que foi digitado no txt do email n ta no formato
                 return;
             }
 
             String[] rowData = {nome, telefone, email, endereco, categoria};
 
             if (rowIndex == null) {
-                modelT.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
+                tableModel.addRow(rowData);  // Adiciona na tabela, mas não no arquivo
             } else {
                 for (int i = 0; i < rowData.length; i++) {
-                    modelT.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
+                    tableModel.setValueAt(rowData[i], rowIndex, i);  // Edita na tabela, mas não no arquivo
                 }
             }
             d.dispose();
@@ -232,74 +256,31 @@ public class Contatos {
         d.setResizable(false);
         d.setVisible(true);
     }
-    
-    static void showAjuda() {
-        
-        // Setting JFrame definitions
-        // Configurando definições do JFrame
-        JFrame ajudaFrame = new JFrame("Ajuda");
-        ajudaFrame.setSize(400, 300);
-        ajudaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ajudaFrame.setLocationRelativeTo(null);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        JLabel labelAjuda = new JLabel("Ajuda");
-        labelAjuda.setHorizontalAlignment(SwingConstants.LEFT);
-        labelAjuda.setFont(new Font("Arial", Font.PLAIN, 24));
-        panel.add(labelAjuda);
-
-        JLabel labelContato = new JLabel("Contate-nos em (xx) xxxxx-xxxx");
-        labelContato.setHorizontalAlignment(SwingConstants.LEFT);
-        panel.add(labelContato);
-
-        JLabel labelLink = new JLabel("<html><a href=''>Consulte nosso repositório para mais informações</a></html>");
-        //labelLink.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        /* 
-        botar o labelLink no rodapé, isto é, deixar ele bem para baixo na tela, ainda centralizado
-        */
-        labelLink.setVerticalAlignment(SwingConstants.BOTTOM);
-
-        labelLink.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        labelLink.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://github.com/Mathiack/TDS-2023/tree/main/Modulo%202/Hercio/Contatos"));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        panel.add(labelLink);
-
-        ajudaFrame.add(panel);
-
-        ajudaFrame.setVisible(true);
-    }
-
 
     private static boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // padrão de emails | fica assim -> email@email.email (espero)
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
     }
 
     private static boolean isValidPhone(String phone) {
-        String phoneRegex = "^\\(\\d{2}\\) \\d{5}-\\d{4}$"; // Format: (XX) XXXXX-XXXX || Formato: (XX) XXXXX-XXXX
+        String phoneRegex = "^\\(\\d{2}\\) \\d{5}-\\d{4}$"; // padrão de telefones | fica assim -> (XX) XXXXX-XXXX
         Pattern pattern = Pattern.compile(phoneRegex);
         return pattern.matcher(phone).matches();
     }
 
-
     // Function to update the output file (saida.txt)
     // Função para atualizar o arquivo de saída (saida.txt)
     private static void updateOutputFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
-            for (int i = 0; i < modelT.getRowCount(); i++) {
-                for (int j = 0; j < modelT.getColumnCount(); j++) {
-                    writer.write(modelT.getColumnName(j) + ": " + modelT.getValueAt(i, j));
+        if (loadedFile == null) {
+            // Não faz nada se não houver um arquivo carregado
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(loadedFile))) {
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
                     writer.newLine();
                 }
                 writer.newLine();
@@ -312,51 +293,87 @@ public class Contatos {
     // Function to load contacts from output file
     // Função para carregar contatos do arquivo de saída
     private static void loadContactsFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("saida.txt"))) {
-            String line;
-            String[] contactData = new String[5];
-            int index = 0;
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Selecione um arquivo (.txt)");
 
-            while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) {
-                    if (index > 0) {
-                        modelT.addRow(contactData);
-                        contactData = new String[5];
-                        index = 0;
-                    }
-                } else {
-                    String[] parts = line.split(": ");
-                    if (parts.length == 2) {
-                        int colIndex = switch (parts[0]) {
-                            case "Nome" -> 0;
-                            case "Telefone" -> 1;
-                            case "E-mail" -> 2;
-                            case "Endereço" -> 3;
-                            case "Categoria" -> 4;
-                            default -> -1;
-                        };
-                        if (colIndex != -1) {
-                            contactData[colIndex] = parts[1];
-                            index++;
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            loadedFile = fileChooser.getSelectedFile(); // Armazena o arquivo carregado
+            tableModel.setRowCount(0); // remove os contatos do antigo arquivo que estava carregado
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(loadedFile))) {
+                String line;
+                String[] contactData = new String[5];
+                int index = 0;
+
+                while ((line = reader.readLine()) != null) {
+                    if (line.trim().isEmpty()) {
+                        if (index > 0) {
+                            tableModel.addRow(contactData);
+                            contactData = new String[5];
+                            index = 0;
+                        }
+                    } else {
+                        String[] parts = line.split(": ");
+                        if (parts.length == 2) {
+                            int colIndex = switch (parts[0]) {
+                                case "Nome" ->
+                                    0;
+                                case "Telefone" ->
+                                    1;
+                                case "E-mail" ->
+                                    2;
+                                case "Endereço" ->
+                                    3;
+                                case "Categoria" ->
+                                    4;
+                                default ->
+                                    -1;
+                            };
+                            if (colIndex != -1) {
+                                contactData[colIndex] = parts[1];
+                                index++;
+                            }
                         }
                     }
                 }
+                if (index > 0) {
+                    tableModel.addRow(contactData);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            if (index > 0) {
-                modelT.addRow(contactData);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("");
         }
     }
 
     // Function to save contacts in output file
-    // Função para salvar contatos no arquivo de saída
+    // Função para salvar contatos no arquivo
     private static void saveContactsToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("saida.txt"))) {
-            for (int i = 0; i < modelT.getRowCount(); i++) {
-                for (int j = 0; j < modelT.getColumnCount(); j++) {
-                    writer.write(modelT.getColumnName(j) + ": " + modelT.getValueAt(i, j));
+        File fileToSave = loadedFile;
+
+        // Se não houver arquivo carregado, peça ao usuário para escolher um arquivo para salvar
+        if (fileToSave == null) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Salvar contatos em um arquivo");
+
+            // Abre o diálogo para seleção de arquivo
+            int userSelection = fileChooser.showSaveDialog(null);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                fileToSave = fileChooser.getSelectedFile();
+                loadedFile = fileToSave; // Atualiza o arquivo carregado
+            } else {
+                JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                return;
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave))) {
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    writer.write(tableModel.getColumnName(j) + ": " + tableModel.getValueAt(i, j));
                     writer.newLine();
                 }
                 writer.newLine();
@@ -364,18 +381,24 @@ public class Contatos {
             JOptionPane.showMessageDialog(null, "Contatos salvos com sucesso!");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar os contatos: " + e.getMessage());
+        }
     }
-}
-    
+
     // Function to filter contacts from output file
-    // Função para filtrar contatos do arquivo de saída
+    // Função para filtrar contatos a partir da categoria
     private static void filterContacts() {
-        String selectedCategory = (String) filtroDeCategorias.getSelectedItem();
-        String searchTerm = campoPesquisa.getText().toLowerCase();
+        String selectedCategory = (String) categoryFilter.getSelectedItem();
+        String searchTerm = searchField.getText().toLowerCase();
 
-        modelT.setRowCount(0);
+        tableModel.setRowCount(0);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("saida.txt"))) {
+        // ve se um arquivo foi carregado
+        if (loadedFile == null) {
+            JOptionPane.showMessageDialog(null, "Carregue um arquivo!");
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(loadedFile))) {
             String line;
             String[] contactData = new String[5];
             int index = 0;
@@ -391,7 +414,7 @@ public class Contatos {
                         boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
 
                         if (matchesCategory && matchesSearch) {
-                            modelT.addRow(contactData);
+                            tableModel.addRow(contactData);
                         }
 
                         contactData = new String[5];
@@ -401,12 +424,18 @@ public class Contatos {
                     String[] parts = line.split(": ");
                     if (parts.length == 2) {
                         int colIndex = switch (parts[0]) {
-                            case "Nome" -> 0;
-                            case "Telefone" -> 1;
-                            case "E-mail" -> 2;
-                            case "Endereço" -> 3;
-                            case "Categoria" -> 4;
-                            default -> -1;
+                            case "Nome" ->
+                                0;
+                            case "Telefone" ->
+                                1;
+                            case "E-mail" ->
+                                2;
+                            case "Endereço" ->
+                                3;
+                            case "Categoria" ->
+                                4;
+                            default ->
+                                -1;
                         };
                         if (colIndex != -1) {
                             contactData[colIndex] = parts[1];
@@ -415,6 +444,8 @@ public class Contatos {
                     }
                 }
             }
+
+            // Adiciona o último contato, se existir
             if (index > 0) {
                 String nome = contactData[0].toLowerCase();
                 String email = contactData[2].toLowerCase();
@@ -424,7 +455,7 @@ public class Contatos {
                 boolean matchesSearch = nome.contains(searchTerm) || email.contains(searchTerm);
 
                 if (matchesCategory && matchesSearch) {
-                    modelT.addRow(contactData);
+                    tableModel.addRow(contactData);
                 }
             }
         } catch (IOException e) {
@@ -435,8 +466,8 @@ public class Contatos {
     // Main function that calls framePrincipal, the main frame
     // Função principal que chama o framePrincipal, a janela principal
     public static void main(String[] args) {
-        // DON'T REMOVE THE FUNCTION BELLOW! ELSE OUR CODE WON'T WORK CORRECTLY 
-        framePrincipal(); // NÃO REMOVA! SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
-        
+        framePrincipal(); // NÃO REMOVA SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
     }
 }
+
+
