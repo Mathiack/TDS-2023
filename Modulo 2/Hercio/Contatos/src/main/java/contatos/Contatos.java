@@ -14,10 +14,10 @@ public class Contatos {
 
     // Graphic Interface items
     // Itens da interface gráfica
-    private static DefaultTableModel tableModel;
-    private static JTable contactTable;
-    private static JComboBox<String> categoryFilter;
-    private static JTextField searchField;
+    private static DefaultTableModel tableModel; // tabel model || model da tabela
+    private static JTable contactTable; // contact table || tabela de contatos
+    private static JComboBox<String> categoryFilter; // comboBox for categories || comboBox das categorias
+    private static JTextField searchField; // search field for 
 
     private static File loadedFile = null; // this vai servi for di ZC foi carregado or need carregar one file
 
@@ -461,12 +461,6 @@ public class Contatos {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // Main function that calls framePrincipal, the main frame
-    // Função principal que chama o framePrincipal, a janela principal
-    public static void main(String[] args) {
-        framePrincipal(); // NÃO REMOVA SENÃO NÃO VOSSO CÓDIGO NÃO RODARÁ
     }
 }
 
