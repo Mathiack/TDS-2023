@@ -17,9 +17,8 @@ public class Contatos {
     private static DefaultTableModel tableModel; // tabel model || model da tabela
     private static JTable contactTable; // contact table || tabela de contatos
     private static JComboBox<String> categoryFilter; // comboBox for categories || comboBox das categorias
-    private static JTextField searchField; // search field for 
-
-    private static File loadedFile = null; // this vai servi for di ZC foi carregado or need carregar one file
+    private static JTextField searchField; // search field for search contacts || campo de busca para buscar contatos
+    private static File loadedFile = null; // verifies if a file was loaded || verifica se um arquivo foi carregado
 
     // Main frame
     // Janela principal
@@ -157,7 +156,8 @@ public class Contatos {
         j.setVisible(true);
     }
 
-    
+    // Help frame
+    // Janela de Ajuda
     static void helpFrame() {
         JFrame j = new JFrame("Ajuda");
         j.setSize(600, 400);
