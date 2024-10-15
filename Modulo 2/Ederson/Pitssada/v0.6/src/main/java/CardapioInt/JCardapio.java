@@ -14,8 +14,8 @@ public class JCardapio extends javax.swing.JFrame {
 
     private static DefaultTableModel tableModel;
     private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"ID", "Sabor", "Preço"}, 0);
-    private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"Tamanho", "Preço"}, 0);
-    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"Bebida", "Preço"}, 0);
+    private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"ID", "Tamanho", "Preço"}, 0);
+    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"ID","Bebida", "Preço"}, 0);
 
     public JCardapio() {
         initComponents();  // Inicializa os componentes
@@ -348,7 +348,7 @@ public class JCardapio extends javax.swing.JFrame {
                 String tamanho = rs.getString("tamanho");
                 double precoTamanho = rs.getDouble("precoTamanho");
 
-                model.addRow(new Object[]{tamanho, precoTamanho});
+                model.addRow(new Object[]{id, tamanho, precoTamanho});
             }
 
         } catch (Exception e) {
@@ -389,7 +389,7 @@ public class JCardapio extends javax.swing.JFrame {
                 String bebida = rs.getString("bebida");
                 double precoBebida = rs.getDouble("precoBebida");
 
-                model.addRow(new Object[]{bebida, precoBebida});
+                model.addRow(new Object[]{id, bebida, precoBebida});
             }
 
         } catch (Exception e) {
