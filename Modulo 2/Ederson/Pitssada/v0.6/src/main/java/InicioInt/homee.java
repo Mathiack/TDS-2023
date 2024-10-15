@@ -19,7 +19,7 @@ public class homee extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, 
                       "Vosso XAMPP não encontra-se ativo no momento presente.\n"
                     + "Tua aplicação pode não funcionar de acordo com\n"
-                    + "as especificações incluídas na documentação.7");
+                    + "às especificações incluídas na documentação.");
             
         }
     }

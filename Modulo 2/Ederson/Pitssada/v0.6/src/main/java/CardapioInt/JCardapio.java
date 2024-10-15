@@ -23,9 +23,9 @@ public class JCardapio extends javax.swing.JFrame {
         listaSabores();
         listaTamanhos();
         listaBebidas();
-
-        tabelaSabor.addTableModelListener(new TableModelListener() {
-            @Override
+        
+        tabelaSabor.addTableModelListener(new TableModelListener() {        
+        @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
@@ -36,6 +36,7 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaS(id, nome, preco);
                 }
             }
+            
         });
 
         tabelaTamanho.addTableModelListener(new TableModelListener() {
@@ -50,6 +51,7 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaT(id, nome, preco);
                 }
             }
+            
         });
 
         tabelaBebidas.addTableModelListener(new TableModelListener() {
@@ -64,8 +66,35 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaB(id, nome, preco);
                 }
             }
+            
         });
 
+        // Adicionando ListSelectionListener em JTsabores
+        JTsabores.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                // Desmarcar outras tabelas
+                JTtamanho.clearSelection();
+                JTbebida.clearSelection();
+            }
+        });
+
+        // Adicionando ListSelectionListener em JTtamanho
+        JTtamanho.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                // Desmarcar outras tabelas
+                JTsabores.clearSelection();
+                JTbebida.clearSelection();
+            }
+        });
+
+        // Adicionando ListSelectionListener em JTbebida
+        JTbebida.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                // Desmarcar outras tabelas
+                JTsabores.clearSelection();
+                JTtamanho.clearSelection();
+            }
+        });
     }
 
     /**
@@ -193,9 +222,10 @@ public class JCardapio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    
     // ATUALIZAÇÕES DA TABELA E UPDATES
     private static void atualizarPelaTabelaS(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
