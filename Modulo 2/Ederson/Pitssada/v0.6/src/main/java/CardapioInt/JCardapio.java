@@ -20,7 +20,6 @@ public class JCardapio extends javax.swing.JFrame {
     public JCardapio() {
         initComponents();  // Inicializa os componentes
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        //adicionarListeners();  // Adiciona os listeners dos botões
         listaSabores();
         listaTamanhos();
         listaBebidas();
@@ -240,6 +239,54 @@ public class JCardapio extends javax.swing.JFrame {
 
             stmt.executeUpdate();
             System.out.println("Dados atualizados no banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+    
+    private static void excluirPelaTabelaS(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
+            String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL com placeholders
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
+            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
+            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
+
+            stmt.executeUpdate();  // Executa a query
+            System.out.println("Dados excluídos do banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+
+    private static void excluirPelaTabelaT(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {
+            String query = "DELETE FROM tamanho WHERE id_tamanho = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setDouble(2, Double.parseDouble(preco));
+            stmt.setInt(3, id);
+
+            stmt.executeUpdate();
+            System.out.println("Dados excluídos do banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+
+    private static void excluirPelaTabelaB(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {
+            String query = "DELETE FROM bebida SET bebida = ?, precoBebida = ? WHERE id_bebida = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setDouble(2, Double.parseDouble(preco));
+            stmt.setInt(3, id);
+
+            stmt.executeUpdate();
+            System.out.println("Dados excluídos do banco de dados!");
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());

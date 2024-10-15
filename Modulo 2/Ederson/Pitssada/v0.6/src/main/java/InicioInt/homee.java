@@ -4,6 +4,8 @@ import PedidoInt.IntPizza;
 import java.awt.*;
 import javax.swing.*;
 import CardapioInt.*;
+import Pedido.Database;
+import java.sql.Connection;
 
 public class homee extends javax.swing.JFrame {
     
@@ -12,6 +14,14 @@ public class homee extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
+        Connection conn = Database.getConnection();
+        if (conn == null) {
+            JOptionPane.showMessageDialog(rootPane, 
+                      "Vosso XAMPP não encontra-se ativo no momento presente.\n"
+                    + "Tua aplicação pode não funcionar de acordo com\n"
+                    + "as especificações incluídas na documentação.7");
+            
+        }
     }
 
     /**
