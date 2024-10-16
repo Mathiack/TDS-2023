@@ -1,6 +1,7 @@
 CardapioInt\addBebida$1.class
 CardapioInt\addSabor$4.class
 InicioInt\homee$1.class
+CardapioInt\JCardapio$7.class
 CardapioInt\JCardapio$5.class
 CardapioInt\addTamanho$3.class
 PedidoInt\IntPizza$4.class
@@ -19,6 +20,7 @@ InicioInt\homee$3.class
 Pedido\Database.class
 CardapioInt\addSabor$3.class
 CardapioInt\Cardapio.class
+CardapioInt\JCardapio$8.class
 CardapioInt\JCardapio$6.class
 CardapioInt\addSabor.class
 CardapioInt\addTamanho$4.class

@@ -4,6 +4,7 @@ import Pedido.Database;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -24,6 +25,7 @@ public class JCardapio extends javax.swing.JFrame {
         listaTamanhos();
         listaBebidas();
         
+        // Atualiza diretamente pela tabela
         tabelaSabor.addTableModelListener(new TableModelListener() {        
         @Override
             public void tableChanged(TableModelEvent e) {
@@ -38,7 +40,6 @@ public class JCardapio extends javax.swing.JFrame {
             }
             
         });
-
         tabelaTamanho.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -53,7 +54,6 @@ public class JCardapio extends javax.swing.JFrame {
             }
             
         });
-
         tabelaBebidas.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -69,7 +69,7 @@ public class JCardapio extends javax.swing.JFrame {
             
         });
 
-        // Adicionando ListSelectionListener em JTsabores
+        // Seleção de linhas nas tabelas
         JTsabores.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 // Desmarcar outras tabelas
@@ -77,8 +77,6 @@ public class JCardapio extends javax.swing.JFrame {
                 JTbebida.clearSelection();
             }
         });
-
-        // Adicionando ListSelectionListener em JTtamanho
         JTtamanho.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 // Desmarcar outras tabelas
@@ -86,13 +84,91 @@ public class JCardapio extends javax.swing.JFrame {
                 JTbebida.clearSelection();
             }
         });
-
-        // Adicionando ListSelectionListener em JTbebida
         JTbebida.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 // Desmarcar outras tabelas
                 JTsabores.clearSelection();
                 JTtamanho.clearSelection();
+            }
+        });
+        
+        // Exclui linhas selecionadas
+        JTsabores.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    int selectedRow = JTsabores.getSelectedRow(); // Obtém a linha selecionada
+                    if (selectedRow != -1) {
+                        // Pegando o ID da linha selecionada (assumindo que o ID esteja na primeira coluna)
+                        int id = Integer.parseInt(JTsabores.getValueAt(selectedRow, 0).toString()); // ID na primeira coluna
+                        String nome = (String) JTsabores.getValueAt(selectedRow, 1); // Nome na segunda coluna
+                        String preco = JTsabores.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
+
+                        // Excluindo o item do banco de dados
+                        excluirPelaTabelaS(id, nome, preco);
+
+                        // Removendo a linha da tabela
+                        DefaultTableModel model = (DefaultTableModel) JTsabores.getModel();
+                        model.removeRow(selectedRow);
+
+                        // Exibir uma mensagem de sucesso ou atualizar a interface
+                        JOptionPane.showMessageDialog(null, "Item excluído com sucesso.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.");
+                    }
+                }
+            }
+        });
+        JTtamanho.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    int selectedRow = JTtamanho.getSelectedRow(); // Obtém a linha selecionada
+                    if (selectedRow != -1) {
+                        // Pegando o ID da linha selecionada (assumindo que o ID esteja na primeira coluna)
+                        int id = Integer.parseInt(JTtamanho.getValueAt(selectedRow, 0).toString()); // ID na primeira coluna
+                        String nome = (String) JTtamanho.getValueAt(selectedRow, 1); // Nome na segunda coluna
+                        String preco = JTtamanho.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
+
+                        // Excluindo o item do banco de dados
+                        excluirPelaTabelaT(id, nome, preco);
+
+                        // Removendo a linha da tabela
+                        DefaultTableModel model = (DefaultTableModel) JTtamanho.getModel();
+                        model.removeRow(selectedRow);
+
+                        // Exibir uma mensagem de sucesso ou atualizar a interface
+                        JOptionPane.showMessageDialog(null, "Item excluído com sucesso.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.");
+                    }
+                }
+            }
+        });
+        JTbebida.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    int selectedRow = JTbebida.getSelectedRow(); // Obtém a linha selecionada
+                    if (selectedRow != -1) {
+                        // Pegando o ID da linha selecionada (assumindo que o ID esteja na primeira coluna)
+                        int id = Integer.parseInt(JTbebida.getValueAt(selectedRow, 0).toString()); // ID na primeira coluna
+                        String nome = (String) JTbebida.getValueAt(selectedRow, 1); // Nome na segunda coluna
+                        String preco = JTbebida.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
+
+                        // Excluindo o item do banco de dados
+                        excluirPelaTabelaB(id, nome, preco);
+
+                        // Removendo a linha da tabela
+                        DefaultTableModel model = (DefaultTableModel) JTbebida.getModel();
+                        model.removeRow(selectedRow);
+
+                        // Exibir uma mensagem de sucesso ou atualizar a interface
+                        JOptionPane.showMessageDialog(null, "Item excluído com sucesso.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.");
+                    }
+                }
             }
         });
     }
@@ -158,11 +234,6 @@ public class JCardapio extends javax.swing.JFrame {
         btnOpcoes.setText("Opções");
 
         btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
         btnOpcoes.add(btnExcluir);
 
         btnEditar.setText("Editar");
@@ -221,10 +292,6 @@ public class JCardapio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
-    }//GEN-LAST:event_btnExcluirActionPerformed
-
     
     // ATUALIZAÇÕES DA TABELA E UPDATES
     private static void atualizarPelaTabelaS(int id, String nome, String preco) {
@@ -275,6 +342,7 @@ public class JCardapio extends javax.swing.JFrame {
         }
     }
     
+    // EXCLUI DA TABELA E DELETE NO BANCO
     private static void excluirPelaTabelaS(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
             String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL com placeholders
@@ -323,6 +391,7 @@ public class JCardapio extends javax.swing.JFrame {
         }
     }
 
+    
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
@@ -405,7 +474,6 @@ public class JCardapio extends javax.swing.JFrame {
             }
         }
     }
-
     public void listaTamanhos() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
@@ -446,7 +514,6 @@ public class JCardapio extends javax.swing.JFrame {
             }
         }
     }
-
     public void listaBebidas() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
