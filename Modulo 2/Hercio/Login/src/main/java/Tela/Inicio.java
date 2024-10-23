@@ -11,14 +11,11 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
-        /*Connection conn = Database.getConnection();
+        Connection conn = Database.getConnection();
         if (conn == null) {
-            JOptionPane.showMessageDialog(rootPane, 
-                      "Vosso XAMPP não encontra-se ativo no momento presente.\n"
-                    + "Tua aplicação pode não funcionar de acordo com\n"
-                    + "às especificações incluídas na documentação.");
-            
-        }*/
+            JOptionPane.showMessageDialog(rootPane, "Ligue o XAMPP");
+            System.exit(0);
+        }
     }
 
     /**
@@ -68,11 +65,11 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnCad)
                                 .addGap(44, 44, 44)
-                                .addComponent(loginBtn))
-                            .addComponent(jLabel1))))
+                                .addComponent(loginBtn)))))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -82,11 +79,11 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCad, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();

@@ -28,19 +28,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="usuario" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="usuarioJtx" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
-                          <Component id="nome" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="nomeJtx" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
-                          <Component id="email" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="emailJtx" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
-                          <Component id="senha" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="senhaJtx" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="131" max="-2" attributes="0"/>
+                      <Component id="loginBtn" min="-2" pref="131" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
@@ -59,21 +59,21 @@
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="usuario" min="-2" max="-2" attributes="0"/>
+              <Component id="usuarioJtx" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nome" min="-2" max="-2" attributes="0"/>
+              <Component id="nomeJtx" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="email" min="-2" max="-2" attributes="0"/>
+              <Component id="emailJtx" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="senha" min="-2" max="-2" attributes="0"/>
+              <Component id="senhaJtx" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="loginBtn" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace pref="98" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -88,23 +88,23 @@
         <Property name="text" type="java.lang.String" value="Login"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="usuario">
+    <Component class="javax.swing.JTextField" name="usuarioJtx">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nome">
+    <Component class="javax.swing.JTextField" name="nomeJtx">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="email">
+    <Component class="javax.swing.JTextField" name="emailJtx">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="loginBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Logar"/>
       </Properties>
@@ -114,7 +114,7 @@
         <Property name="text" type="java.lang.String" value="E-mail"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="senha">
+    <Component class="javax.swing.JTextField" name="senhaJtx">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
