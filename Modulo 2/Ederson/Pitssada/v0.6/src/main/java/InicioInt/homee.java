@@ -6,14 +6,23 @@ import javax.swing.*;
 import CardapioInt.*;
 import Pedido.Database;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 public class homee extends javax.swing.JFrame {
+    
+    private static DefaultTableModel tableModel;
+    private DefaultTableModel tabelaPedidos = new DefaultTableModel(new Object[]{"ID", "id_sabor", "id_tamanho", "id_bebida", "Cliente", "Rua", "Bairro", "Nº", "Hora", "Preço"}, 0);
+    // id_sabor == sabor
+    // ...
+    // ...
     
     public homee() {
         super("Início");
         initComponents();
-        setLocationRelativeTo(null);
-        setExtendedState(MAXIMIZED_BOTH);
+        //setSize(700, 600);
+        //setExtendedState(MAXIMIZED_BOTH); //<< --- Maximiza
         Connection conn = Database.getConnection();
         if (conn == null) {
             JOptionPane.showMessageDialog(rootPane, 
@@ -21,6 +30,84 @@ public class homee extends javax.swing.JFrame {
                     + "Tua aplicação pode não funcionar de acordo com\n"
                     + "às especificações incluídas na documentação.");
             
+        }
+        listaPedidos();
+    }
+    
+    private static void atualizarPelaTabelaP(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
+            String query = "UPDATE sabor SET sabor = ?, precoSabor = ? WHERE id_sabor = ?";  // SQL com placeholders
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
+            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
+            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
+
+            stmt.executeUpdate();  // Executa a query
+            System.out.println("Dados atualizados no banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+    
+    // EXCLUI DA TABELA E DELETE NO BANCO
+    private static void excluirPelaTabelaP(int id, String nome, String preco) {
+        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
+            String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL com placeholders
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
+            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
+            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
+
+            stmt.executeUpdate();  // Executa a query
+            System.out.println("Dados excluídos do banco de dados!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+        }
+    }
+    
+    public void listaPedidos() {
+        Connection conn = Database.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT id_pedido, id_sabor, id_tamanho, id_bebida, nomeCliente, rua, bairro, numero, hora, precoFinalFROM pedido";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) JTpedidos.getModel();
+
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                String id = rs.getString("id_pedido");
+                String id_sabor = rs.getString("id_sabor");
+                String id_tamanho = rs.getString("id_tamanho");
+                String id_bebida = rs.getString("id_bebida");
+                String sabor = rs.getString("sabor");
+                double precoSabor = rs.getDouble("precoSabor");
+
+                model.addRow(new Object[]{id, sabor, precoSabor});
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -36,6 +123,8 @@ public class homee extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTpedidos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -52,16 +141,27 @@ public class homee extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        JTpedidos.setModel(tabelaPedidos);
+        jScrollPane1.setViewportView(JTpedidos);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -75,6 +175,8 @@ public class homee extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jMenu1.setText("Ações");
 
@@ -126,26 +228,8 @@ public class homee extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fazPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fazPActionPerformed
@@ -214,6 +298,7 @@ public class homee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTpedidos;
     private javax.swing.JMenuItem fazP;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -223,6 +308,7 @@ public class homee extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuSabor;
     private javax.swing.JMenuItem menuTamanho;
     private javax.swing.JMenuItem verCardapio;

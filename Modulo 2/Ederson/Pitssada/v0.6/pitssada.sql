@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/09/2024 às 02:39
+-- Tempo de geração: 23/10/2024 às 01:47
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `bebida` (
   `id_bebida` int(11) NOT NULL,
   `bebida` varchar(255) DEFAULT NULL,
-  `qntBebida` int(11) NOT NULL,
   `precoBebida` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -38,8 +37,10 @@ CREATE TABLE `bebida` (
 -- Despejando dados para a tabela `bebida`
 --
 
-INSERT INTO `bebida` (`id_bebida`, `bebida`, `qntBebida`, `precoBebida`) VALUES
-(1, NULL, 0, 0);
+INSERT INTO `bebida` (`id_bebida`, `bebida`, `precoBebida`) VALUES
+(2, 'laanjadfvsdfvsdfvsdfvsd', 14),
+(3, 'pinga', 16),
+(4, 'monari', 14);
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,7 @@ CREATE TABLE `sabor` (
 --
 
 INSERT INTO `sabor` (`id_sabor`, `sabor`, `precoSabor`) VALUES
-(1, 'couro', 123412412);
+(1, 'couttttttttrof', 2.5);
 
 -- --------------------------------------------------------
 
@@ -96,9 +97,9 @@ CREATE TABLE `tamanho` (
 --
 
 INSERT INTO `tamanho` (`id_tamanho`, `tamanho`, `precoTamanho`) VALUES
-(1, 'sim', 15),
-(2, 'segh', 235),
-(3, 'sim', 16.78);
+(1, 'simtatata  ', 25),
+(2, 'seghggggggggggggggggggggggggg52', 235),
+(3, '0', 16.78);
 
 --
 -- Índices para tabelas despejadas
@@ -139,7 +140,7 @@ ALTER TABLE `tamanho`
 -- AUTO_INCREMENT de tabela `bebida`
 --
 ALTER TABLE `bebida`
-  MODIFY `id_bebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_bebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
