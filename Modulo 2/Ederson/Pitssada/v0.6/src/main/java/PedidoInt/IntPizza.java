@@ -4,6 +4,8 @@ import Pedido.Database;
 import Pedido.Pedido;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -122,25 +124,10 @@ public class IntPizza extends javax.swing.JFrame {
         nada.getAccessibleContext().setAccessibleName("Pitzzada");
 
         comboTamanho.setSelectedItem(null);
-        comboTamanho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTamanhoActionPerformed(evt);
-            }
-        });
 
         comboSabor.setSelectedItem(null);
-        comboSabor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboSaborActionPerformed(evt);
-            }
-        });
 
         comboBebida.setSelectedItem(null);
-        comboBebida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBebidaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Tamanho");
 
@@ -163,12 +150,6 @@ public class IntPizza extends javax.swing.JFrame {
         bairro.setText("Bairro");
 
         nCasa.setText("Nº");
-
-        inputNumeroCasa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNumeroCasaActionPerformed(evt);
-            }
-        });
 
         hora.setText("Hora");
 
@@ -270,18 +251,6 @@ public class IntPizza extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTamanhoActionPerformed
-        
-    }//GEN-LAST:event_comboTamanhoActionPerformed
-
-    private void comboSaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSaborActionPerformed
-        
-    }//GEN-LAST:event_comboSaborActionPerformed
-
-    private void comboBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBebidaActionPerformed
-        
-    }//GEN-LAST:event_comboBebidaActionPerformed
-
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         this.dispose();
     }//GEN-LAST:event_sairActionPerformed
@@ -292,10 +261,6 @@ public class IntPizza extends javax.swing.JFrame {
         p.inserirPedido();
         //System.out.println(Database.getConnection().getCatalog());
     }//GEN-LAST:event_enviarActionPerformed
-
-    private void inputNumeroCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNumeroCasaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputNumeroCasaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,6 +364,7 @@ public class IntPizza extends javax.swing.JFrame {
         
         if (print == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Fasido");
+            enviarPedido();
         } else if (print == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Beta");
         } else {
@@ -505,6 +471,50 @@ public class IntPizza extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+    
+    public void enviarPedido() {
+        Connection conn = Database.getConnection();
+
+        String tamanho = comboTamanho.getSelectedItem().toString();
+        String sabor = comboSabor.getSelectedItem().toString();
+        String bebida = comboBebida.getSelectedItem().toString();
+
+        String nome_Cliente = inputNome.getText();
+        String endereco = inputRua.getText();
+
+        String bairro = inputBairro.getText();
+        int nCasa = Integer.parseInt(inputNumeroCasa.getText());
+        String horaP = inputHora.getText();
+        double precoFinal = precoTamanho + precoSabor + precoBebida;
+
+        try {
+            // Query sem o `id_pedido` (auto-incremento)
+            String sql = "INSERT INTO `pedido`(`sabor`, `tamanho`, `bebida`, `nomeCliente`, `rua`, `bairro`, `numero`, `hora`, `precoFinal`) VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, sabor);
+            stmt.setString(2, tamanho);
+            stmt.setString(3, bebida);
+            stmt.setString(4, nome_Cliente);
+            stmt.setString(5, endereco);
+            stmt.setString(6, bairro);
+            stmt.setInt(7, nCasa);
+            stmt.setString(8, horaP);  // Corrigido para a posição 8
+            stmt.setDouble(9, precoFinal);  // Posição 9 para `precoFinal`
+
+            stmt.executeUpdate();
+
+            // Recupera o id gerado
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                long idPedido = generatedKeys.getLong(1);  // Aqui você tem o id_pedido gerado
+                System.out.println("Pedido enviado com sucesso. ID do Pedido: " + idPedido);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 }

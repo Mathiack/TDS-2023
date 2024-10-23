@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/10/2024 às 01:47
+-- Tempo de geração: 23/10/2024 às 20:28
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -50,16 +50,16 @@ INSERT INTO `bebida` (`id_bebida`, `bebida`, `precoBebida`) VALUES
 
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
-  `id_sabor` int(11) DEFAULT NULL,
-  `id_tamanho` int(11) DEFAULT NULL,
-  `id_bebida` int(11) DEFAULT NULL,
+  `sabor` varchar(255) DEFAULT NULL,
+  `tamanho` varchar(255) DEFAULT NULL,
+  `bebida` varchar(255) DEFAULT NULL,
   `nomeCliente` varchar(255) DEFAULT NULL,
   `rua` varchar(255) DEFAULT NULL,
   `bairro` varchar(255) DEFAULT NULL,
   `numero` double DEFAULT NULL,
   `hora` varchar(255) DEFAULT NULL,
   `precoFinal` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -112,15 +112,6 @@ ALTER TABLE `bebida`
   ADD PRIMARY KEY (`id_bebida`);
 
 --
--- Índices de tabela `pedido`
---
-ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id_pedido`),
-  ADD KEY `id_sabor` (`id_sabor`),
-  ADD KEY `id_tamanho` (`id_tamanho`),
-  ADD KEY `id_bebida` (`id_bebida`);
-
---
 -- Índices de tabela `sabor`
 --
 ALTER TABLE `sabor`
@@ -143,12 +134,6 @@ ALTER TABLE `bebida`
   MODIFY `id_bebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `pedido`
---
-ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `sabor`
 --
 ALTER TABLE `sabor`
@@ -159,18 +144,6 @@ ALTER TABLE `sabor`
 --
 ALTER TABLE `tamanho`
   MODIFY `id_tamanho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `pedido`
---
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_sabor`) REFERENCES `sabor` (`id_sabor`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_tamanho`) REFERENCES `tamanho` (`id_tamanho`),
-  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`id_bebida`) REFERENCES `bebida` (`id_bebida`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

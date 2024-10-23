@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class homee extends javax.swing.JFrame {
     
     private static DefaultTableModel tableModel;
-    private DefaultTableModel tabelaPedidos = new DefaultTableModel(new Object[]{"ID", "id_sabor", "id_tamanho", "id_bebida", "Cliente", "Rua", "Bairro", "Nº", "Hora", "Preço"}, 0);
+    private DefaultTableModel tabelaPedidos = new DefaultTableModel(new Object[]{"ID", "Sabor", "Tamanho", "Bebida", "Cliente", "Rua", "Bairro", "Nº", "Hora", "Preço"}, 0);
     // id_sabor == sabor
     // ...
     // ...
@@ -36,7 +36,7 @@ public class homee extends javax.swing.JFrame {
     
     private static void atualizarPelaTabelaP(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
-            String query = "UPDATE sabor SET sabor = ?, precoSabor = ? WHERE id_sabor = ?";  // SQL com placeholders
+            String query = "UPDATE `pedido` SET `id_pedido`='?',`sabor`='?',`tamanho`='?',`bebida`='??',`nomeCliente`='?',`rua`='?',`bairro`='?',`numero`='?',`hora`='?',`precoFinal`='?' WHERE id_pedido = ?";  // SQL com placeholders
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
             stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
@@ -53,7 +53,7 @@ public class homee extends javax.swing.JFrame {
     // EXCLUI DA TABELA E DELETE NO BANCO
     private static void excluirPelaTabelaP(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
-            String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL com placeholders
+            String query = "DELETE FROM pedido WHERE id_pedido = ?";  // SQL com placeholders
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
             stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
@@ -73,43 +73,44 @@ public class homee extends javax.swing.JFrame {
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT id_pedido, id_sabor, id_tamanho, id_bebida, nomeCliente, rua, bairro, numero, hora, precoFinalFROM pedido";
+            String sql = "SELECT id_pedido, sabor, tamanho, bebida, nomeCliente, rua, bairro, numero, hora, precoFinal FROM pedido";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
-            DefaultTableModel model = (DefaultTableModel) JTpedidos.getModel();
-
-            model.setRowCount(0);
+            // Use o modelo tabelaPedidos diretamente
+            tabelaPedidos.setRowCount(0);  // Limpa a tabela antes de adicionar novos dados
 
             while (rs.next()) {
+                // Recupera os dados da consulta
                 String id = rs.getString("id_pedido");
-                String id_sabor = rs.getString("id_sabor");
-                String id_tamanho = rs.getString("id_tamanho");
-                String id_bebida = rs.getString("id_bebida");
                 String sabor = rs.getString("sabor");
-                double precoSabor = rs.getDouble("precoSabor");
+                String tamanho = rs.getString("tamanho");
+                String bebida = rs.getString("bebida");
+                String cliente = rs.getString("nomeCliente");
+                String rua = rs.getString("rua");
+                String bairro = rs.getString("bairro");
+                String numero = rs.getString("numero");
+                String hora = rs.getString("hora");
+                String preco = rs.getString("precoFinal");
 
-                model.addRow(new Object[]{id, sabor, precoSabor});
+                // Adiciona a linha ao modelo da tabela
+                tabelaPedidos.addRow(new Object[]{id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco});
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao listar pedidos: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,16 +150,16 @@ public class homee extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -169,7 +170,7 @@ public class homee extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 674, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
