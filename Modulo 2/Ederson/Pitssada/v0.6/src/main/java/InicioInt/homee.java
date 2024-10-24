@@ -5,18 +5,19 @@ import java.awt.*;
 import javax.swing.*;
 import CardapioInt.*;
 import Pedido.Database;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 public class homee extends javax.swing.JFrame {
-    
+
     private static DefaultTableModel tableModel;
     private DefaultTableModel tabelaPedidos = new DefaultTableModel(new Object[]{"ID", "Sabor", "Tamanho", "Bebida", "Cliente", "Rua", "Bairro", "Nº", "Hora", "Preço"}, 0);
-    // id_sabor == sabor
-    // ...
-    // ...
     
     public homee() {
         super("Início");
@@ -25,48 +26,120 @@ public class homee extends javax.swing.JFrame {
         //setExtendedState(MAXIMIZED_BOTH); //<< --- Maximiza
         Connection conn = Database.getConnection();
         if (conn == null) {
-            JOptionPane.showMessageDialog(rootPane, 
-                      "Vosso XAMPP não encontra-se ativo no momento presente.\n"
+            JOptionPane.showMessageDialog(rootPane,
+                    "Vosso XAMPP não encontra-se ativo no momento presente.\n"
                     + "Tua aplicação pode não funcionar de acordo com\n"
                     + "às especificações incluídas na documentação.");
-            
+
         }
         listaPedidos();
-    }
-    
-    private static void atualizarPelaTabelaP(int id, String nome, String preco) {
-        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
-            String query = "UPDATE `pedido` SET `id_pedido`='?',`sabor`='?',`tamanho`='?',`bebida`='??',`nomeCliente`='?',`rua`='?',`bairro`='?',`numero`='?',`hora`='?',`precoFinal`='?' WHERE id_pedido = ?";  // SQL com placeholders
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
-            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
-            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
 
-            stmt.executeUpdate();  // Executa a query
-            System.out.println("Dados atualizados no banco de dados!");
+        // Atualiza diretamente pela tabela
+        tabelaPedidos.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int id = Integer.parseInt(tabelaPedidos.getValueAt(row, 0).toString());
+                    String sabor = (String) tabelaPedidos.getValueAt(row, 1);
+                    String tamanho = (String) tabelaPedidos.getValueAt(row, 2);
+                    String bebida = (String) tabelaPedidos.getValueAt(row, 3);
+                    String cliente = (String) tabelaPedidos.getValueAt(row, 4);
+                    String rua = (String) tabelaPedidos.getValueAt(row, 5);
+                    String bairro = (String) tabelaPedidos.getValueAt(row, 6);
+                    int numero = (int) tabelaPedidos.getValueAt(row, 7);
+                    String hora = (String) tabelaPedidos.getValueAt(row, 8);
+                    double preco = (double) tabelaPedidos.getValueAt(row, 9);
+
+                    atualizarPelaTabelaP(id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco);
+                }
+            }
+
+        });
+
+        // Exclui linhas selecionadas
+        JTpedidos.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    int selectedRow = JTpedidos.getSelectedRow(); // Obtém a linha selecionada
+                    if (selectedRow != -1) {
+                        // Pegando o ID da linha selecionada (assumindo que o ID esteja na primeira coluna)
+                        int id = Integer.parseInt(JTpedidos.getValueAt(selectedRow, 0).toString());
+                        String sabor = (String) JTpedidos.getValueAt(selectedRow, 1);
+                        String tamanho = (String) JTpedidos.getValueAt(selectedRow, 2);
+                        String bebida = (String) JTpedidos.getValueAt(selectedRow, 3);
+                        String cliente = (String) JTpedidos.getValueAt(selectedRow, 4);
+                        String rua = (String) JTpedidos.getValueAt(selectedRow, 5);
+                        String bairro = (String) JTpedidos.getValueAt(selectedRow, 6);
+                        int numero = (int) JTpedidos.getValueAt(selectedRow, 7);
+                        String hora = (String) JTpedidos.getValueAt(selectedRow, 8);
+                        double preco = (double) JTpedidos.getValueAt(selectedRow, 9);
+
+                        // Excluindo o item do banco de dados
+                        excluirPelaTabelaP(id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco);
+
+                        // Removendo a linha da tabela
+                        DefaultTableModel model = (DefaultTableModel) JTpedidos.getModel();
+                        model.removeRow(selectedRow);
+
+                        // Exibir uma mensagem de sucesso ou atualizar a interface
+                        JOptionPane.showMessageDialog(null, "Item excluído com sucesso.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.");
+                    }
+                }
+            }
+        });
+    }
+
+    private static void atualizarPelaTabelaP(int id, String sabor, String tamanho, String bebida, String cliente, String rua, String bairro, int numero, String hora, double preco) {
+        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
+            String query = "UPDATE pedido SET sabor = ?, tamanho = ?, bebida = ?, nomeCliente = ?, rua = ?, bairro = ?, numero = ?, hora = ?, precoFinal = ? WHERE id_pedido = ?";  // SQL com placeholders
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, sabor);
+            stmt.setString(2, tamanho);
+            stmt.setString(3, bebida);
+            stmt.setString(4, cliente);
+            stmt.setString(5, rua);
+            stmt.setString(6, bairro);
+            stmt.setInt(7, numero);
+            stmt.setString(8, hora);
+            stmt.setDouble(9, preco);
+            stmt.setInt(10, id);
+            stmt.executeUpdate();
+
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-    
+
     // EXCLUI DA TABELA E DELETE NO BANCO
-    private static void excluirPelaTabelaP(int id, String nome, String preco) {
+    private static void excluirPelaTabelaP(int id, String sabor, String tamanho, String bebida, String cliente, String rua, String bairro, int numero, String hora, double preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
             String query = "DELETE FROM pedido WHERE id_pedido = ?";  // SQL com placeholders
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
-            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
-            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
+            
+            stmt.setInt(1, id);
+            stmt.setString(2, sabor);
+            stmt.setString(3, tamanho);
+            stmt.setString(4, bebida);
+            stmt.setString(5, cliente);
+            stmt.setString(6, rua);
+            stmt.setString(7, bairro);
+            stmt.setInt(8, numero);
+            stmt.setString(9, hora);
+            stmt.setDouble(10, preco);
+            stmt.executeUpdate();
 
-            stmt.executeUpdate();  // Executa a query
-            System.out.println("Dados excluídos do banco de dados!");
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-    
+
     public void listaPedidos() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
@@ -89,9 +162,9 @@ public class homee extends javax.swing.JFrame {
                 String cliente = rs.getString("nomeCliente");
                 String rua = rs.getString("rua");
                 String bairro = rs.getString("bairro");
-                String numero = rs.getString("numero");
+                int numero = rs.getInt("numero");
                 String hora = rs.getString("hora");
-                String preco = rs.getString("precoFinal");
+                Double preco = rs.getDouble("precoFinal");
 
                 // Adiciona a linha ao modelo da tabela
                 tabelaPedidos.addRow(new Object[]{id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco});
@@ -102,15 +175,20 @@ public class homee extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao listar pedidos: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
