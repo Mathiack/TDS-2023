@@ -16,7 +16,7 @@ public class JCardapio extends javax.swing.JFrame {
     private static DefaultTableModel tableModel;
     private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"ID", "Sabor", "Preço"}, 0);
     private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"ID", "Tamanho", "Preço"}, 0);
-    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"ID","Bebida", "Preço"}, 0);
+    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"ID", "Bebida", "Preço"}, 0);
 
     public JCardapio() {
         initComponents();  // Inicializa os componentes
@@ -24,10 +24,10 @@ public class JCardapio extends javax.swing.JFrame {
         listaSabores();
         listaTamanhos();
         listaBebidas();
-        
+
         // Atualiza diretamente pela tabela
-        tabelaSabor.addTableModelListener(new TableModelListener() {        
-        @Override
+        tabelaSabor.addTableModelListener(new TableModelListener() {
+            @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
@@ -38,7 +38,7 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaS(id, nome, preco);
                 }
             }
-            
+
         });
         tabelaTamanho.addTableModelListener(new TableModelListener() {
             @Override
@@ -52,7 +52,7 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaT(id, nome, preco);
                 }
             }
-            
+
         });
         tabelaBebidas.addTableModelListener(new TableModelListener() {
             @Override
@@ -66,7 +66,7 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaB(id, nome, preco);
                 }
             }
-            
+
         });
 
         // Seleção de linhas nas tabelas
@@ -91,7 +91,7 @@ public class JCardapio extends javax.swing.JFrame {
                 JTtamanho.clearSelection();
             }
         });
-        
+
         // Exclui linhas selecionadas
         JTsabores.addKeyListener(new KeyAdapter() {
             @Override
@@ -105,7 +105,7 @@ public class JCardapio extends javax.swing.JFrame {
                         String preco = JTsabores.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
 
                         // Excluindo o item do banco de dados
-                        excluirPelaTabelaS(id, nome, preco);
+                        excluirPelaTabelaS(id);
 
                         // Removendo a linha da tabela
                         DefaultTableModel model = (DefaultTableModel) JTsabores.getModel();
@@ -131,7 +131,7 @@ public class JCardapio extends javax.swing.JFrame {
                         String preco = JTtamanho.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
 
                         // Excluindo o item do banco de dados
-                        excluirPelaTabelaT(id, nome, preco);
+                        excluirPelaTabelaT(id);
 
                         // Removendo a linha da tabela
                         DefaultTableModel model = (DefaultTableModel) JTtamanho.getModel();
@@ -157,7 +157,7 @@ public class JCardapio extends javax.swing.JFrame {
                         String preco = JTbebida.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
 
                         // Excluindo o item do banco de dados
-                        excluirPelaTabelaB(id, nome, preco);
+                        excluirPelaTabelaB(id);
 
                         // Removendo a linha da tabela
                         DefaultTableModel model = (DefaultTableModel) JTbebida.getModel();
@@ -292,7 +292,6 @@ public class JCardapio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     // ATUALIZAÇÕES DA TABELA E UPDATES
     private static void atualizarPelaTabelaS(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
@@ -341,57 +340,64 @@ public class JCardapio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-    
-    // EXCLUI DA TABELA E DELETE NO BANCO
-    private static void excluirPelaTabelaS(int id, String nome, String preco) {
-        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
-            String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL com placeholders
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);  // Define o valor do primeiro placeholder (sabor)
-            stmt.setDouble(2, Double.parseDouble(preco));  // Converte preco para double e define o segundo placeholder
-            stmt.setInt(3, id);  // Define o valor do terceiro placeholder (id)
 
-            stmt.executeUpdate();  // Executa a query
-            System.out.println("Dados excluídos do banco de dados!");
+    private static void excluirPelaTabelaS(int id) {
+        try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
+            String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL para excluir com base no id_sabor
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);  // Define o valor do placeholder (id)
+
+            int rowsAffected = stmt.executeUpdate();  // Executa a query e retorna o número de linhas afetadas
+
+            if (rowsAffected > 0) {
+                System.out.println("Dados excluídos do banco de dados!");
+            } else {
+                System.out.println("Nenhum dado foi encontrado com o ID fornecido.");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao excluir do banco de dados: " + ex.getMessage());
         }
     }
 
-    private static void excluirPelaTabelaT(int id, String nome, String preco) {
+    private static void excluirPelaTabelaT(int id) {
         try (Connection conn = Database.getConnection()) {
             String query = "DELETE FROM tamanho WHERE id_tamanho = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);
-            stmt.setDouble(2, Double.parseDouble(preco));
-            stmt.setInt(3, id);
+            stmt.setInt(1, id);  // Define o valor do placeholder (id)
 
-            stmt.executeUpdate();
-            System.out.println("Dados excluídos do banco de dados!");
+            int rowsAffected = stmt.executeUpdate();  // Executa a query e retorna o número de linhas afetadas
+
+            if (rowsAffected > 0) {
+                System.out.println("Dados excluídos do banco de dados!");
+            } else {
+                System.out.println("Nenhum dado foi encontrado com o ID fornecido.");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
 
-    private static void excluirPelaTabelaB(int id, String nome, String preco) {
+    private static void excluirPelaTabelaB(int id) {
         try (Connection conn = Database.getConnection()) {
-            String query = "DELETE FROM bebida SET bebida = ?, precoBebida = ? WHERE id_bebida = ?";
+            String query = "DELETE FROM bebida WHERE id_bebida = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);
-            stmt.setDouble(2, Double.parseDouble(preco));
-            stmt.setInt(3, id);
+            stmt.setInt(1, id);  // Define o valor do placeholder (id)
 
-            stmt.executeUpdate();
-            System.out.println("Dados excluídos do banco de dados!");
+            int rowsAffected = stmt.executeUpdate();  // Executa a query e retorna o número de linhas afetadas
+
+            if (rowsAffected > 0) {
+                System.out.println("Dados excluídos do banco de dados!");
+            } else {
+                System.out.println("Nenhum dado foi encontrado com o ID fornecido.");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
 
-    
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
@@ -474,6 +480,7 @@ public class JCardapio extends javax.swing.JFrame {
             }
         }
     }
+
     public void listaTamanhos() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
@@ -514,6 +521,7 @@ public class JCardapio extends javax.swing.JFrame {
             }
         }
     }
+
     public void listaBebidas() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
