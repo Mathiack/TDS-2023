@@ -1,10 +1,9 @@
 package Tela;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.*;
+import java.util.*;
+import java.util.regex.*;
+import javax.swing.*;
 
 public class Cadastro extends javax.swing.JFrame {
 
@@ -156,6 +155,21 @@ public class Cadastro extends javax.swing.JFrame {
         String email = emailJtx.getText();
         String senha = senhaJtx.getText();
         
+        if (!verificarCamposPreenchidos(usuario, nome, email, senha)) {
+            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!");
+            return;
+        }
+
+        if (!validarEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Email inválido!");
+            return;
+        }
+
+        if (!validarSenha(senha)) {
+            JOptionPane.showMessageDialog(this, "A senha deve ter pelo menos 8 caracteres!");
+            return;
+        }
+
         cadastrar(usuario, nome, email, senha);
         this.dispose();
     }//GEN-LAST:event_cadastrarBtnActionPerformed
@@ -177,6 +191,31 @@ public class Cadastro extends javax.swing.JFrame {
             
         } catch (SQLException ex) {
         }
+    }
+    
+    private boolean verificarCamposPreenchidos(String usuario, String nome, String email, String senha) {
+        return !usuario.isEmpty() && !nome.isEmpty() && !email.isEmpty() && !senha.isEmpty();
+    }
+
+    // Método para validar o email usando regex e exibir o formato correto
+    private boolean validarEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+
+        if (!pat.matcher(email).matches()) {
+            JOptionPane.showMessageDialog(this, "Formato de email inválido. Use o formato: exemplo@dominio.com");
+            return false;
+        }
+        return true;
+    }
+
+    // Método para validar a senha e exibir instruções sobre o formato correto
+    private boolean validarSenha(String senha) {
+        if (senha.length() < 8) {
+            JOptionPane.showMessageDialog(this, "A senha deve ter pelo menos 8 caracteres.");
+            return false;
+        }
+        return true;
     }
     /**
      * @param args the command line arguments
