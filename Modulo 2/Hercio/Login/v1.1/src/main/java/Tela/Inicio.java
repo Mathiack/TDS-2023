@@ -39,6 +39,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1.setText("Faça seu cadastro ou login para iniciar");
 
+        loginBtn.setBackground(new java.awt.Color(0, 153, 102));
         loginBtn.setText("Login");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,6 +47,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        btnCad.setBackground(new java.awt.Color(0, 153, 102));
         btnCad.setText("Cadastro");
         btnCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,13 +66,14 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(lbl1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCad)
-                                .addGap(44, 44, 44)
-                                .addComponent(loginBtn)))))
-                .addContainerGap(104, Short.MAX_VALUE))
+                        .addComponent(btnCad)
+                        .addGap(44, 44, 44)
+                        .addComponent(loginBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 96, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

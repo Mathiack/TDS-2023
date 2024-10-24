@@ -1,6 +1,7 @@
 Tela\Cadastro.class
 Tela\Cadastro$1.class
 Tela\Inicio$3.class
+Tela\Login$3.class
 Tela\Login$2.class
 Logado\InicioL$1.class
 Tela\Cadastro$2.class
@@ -10,5 +11,6 @@ Tela\Login.class
 Tela\Inicio.class
 Tela\Inicio$1.class
 Logado\InicioL.class
+Tela\Cadastro$3.class
 Tela\Inicio$2.class
 Tela\Database.class

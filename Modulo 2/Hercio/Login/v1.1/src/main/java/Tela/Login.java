@@ -29,6 +29,9 @@ public class Login extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         senhaJtx = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,6 +40,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Usuário");
 
+        loginBtn.setBackground(new java.awt.Color(153, 102, 255));
         loginBtn.setText("Logar");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +49,40 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Senha");
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Não tem Cadastro?");
+
+        jButton1.setBackground(new java.awt.Color(153, 102, 255));
+        jButton1.setText("Cadastre-se");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(64, 64, 64))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
+                .addGap(35, 35, 35))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,6 +104,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(190, 190, 190)
                         .addComponent(labelLogin)))
                 .addContainerGap(168, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +121,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -95,23 +135,27 @@ public class Login extends javax.swing.JFrame {
         valida(usuario, senha);
     }//GEN-LAST:event_loginBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void valida(String usuario, String senha) {
         Connection conn = Database.getConnection();
-        String query = "SELECT senha FROM cadastro WHERE usuario = ?"; // Query to check if the user exists
+        String query = "SELECT senha FROM cadastro WHERE usuario = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, usuario);
 
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) { // User exists
+ 
+            if (rs.next()) { // usuario existe
                 String storedSenha = rs.getString("senha");
 
-                if (storedSenha.equals(senha)) { // Simple password validation
+                if (storedSenha.equals(senha)) { // validacao de senha
                     JOptionPane.showMessageDialog(this, "Login Bem-sucedido!");
                     // Abre a tela InicioL
-                    InicioL inicio = new InicioL();  // Instancia a tela InicioL
+                    InicioL inicio = new InicioL();
                     inicio.setVisible(true);
                     this.dispose();
                 } else {
@@ -165,8 +209,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelLogin;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField senhaJtx;
