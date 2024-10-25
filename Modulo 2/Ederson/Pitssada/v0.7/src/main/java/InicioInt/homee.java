@@ -85,6 +85,16 @@ public class homee extends javax.swing.JFrame {
                 }
             }
         });
+
+        // Atalho para fechar
+        JRootPane rootPane = this.getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_DOWN_MASK), "closeProgram");
+        rootPane.getActionMap().put("closeProgram", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha o programa
+            }
+        });
     }
 
     private void setStyles() {
