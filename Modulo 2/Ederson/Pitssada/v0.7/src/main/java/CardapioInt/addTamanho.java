@@ -1,14 +1,11 @@
 package CardapioInt;
 
-import Pedido.Database;
-import Pedido.Pedido;
+import DB.Database;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.sql.*;
-import java.util.*;
 import java.util.logging.*;
 
 public class addTamanho extends javax.swing.JFrame {

@@ -1,11 +1,10 @@
 package CardapioInt;
 
-import Pedido.Database;
+import DB.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.sql.*;
-import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
 

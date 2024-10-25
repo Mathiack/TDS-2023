@@ -4,7 +4,7 @@ import PedidoInt.IntPizza;
 import java.awt.*;
 import javax.swing.*;
 import CardapioInt.*;
-import Pedido.Database;
+import DB.Database;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.border.EmptyBorder;

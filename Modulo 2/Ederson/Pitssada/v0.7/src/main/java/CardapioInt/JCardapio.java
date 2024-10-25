@@ -1,6 +1,6 @@
 package CardapioInt;
 
-import Pedido.Database;
+import DB.Database;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;

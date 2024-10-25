@@ -1,8 +1,7 @@
 package PedidoInt;
 
 import InicioInt.homee;
-import Pedido.Database;
-import Pedido.Pedido;
+import DB.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
