@@ -98,11 +98,11 @@ public class homee extends javax.swing.JFrame {
     }
 
     private void setStyles() {
-        // Define cores suaves
-        Color backgroundColor = new Color(240, 248, 255); // Alice Blue
-        Color panelBackgroundColor = new Color(220, 230, 242); // Light soft blue
-        Color tableBackgroundColor = new Color(250, 250, 250); // Almost white
-        Color headerColor = new Color(180, 200, 220); // Soft gray-blue
+        // Define cores neutras em tons de cinza
+        Color backgroundColor = new Color(245, 245, 245); // Cinza claro para o fundo principal
+        Color panelBackgroundColor = new Color(230, 230, 230); // Cinza médio para os painéis
+        Color tableBackgroundColor = new Color(255, 255, 255); // Branco para a tabela
+        Color headerColor = new Color(200, 200, 200); // Cinza suave para o cabeçalho
 
         // Define fonte para títulos e conteúdo
         Font titleFont = new Font("SansSerif", Font.BOLD, 14);
@@ -111,13 +111,13 @@ public class homee extends javax.swing.JFrame {
         // Configura painel principal e borda
         this.getContentPane().setBackground(backgroundColor);
         jPanel1.setBackground(panelBackgroundColor);
-        jPanel2.setBackground(backgroundColor);
+        jPanel2.setBackground(panelBackgroundColor);
         jPanel1.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Configura a tabela
         JTpedidos.setFont(tableFont);
         JTpedidos.setBackground(tableBackgroundColor);
-        JTpedidos.setGridColor(new Color(220, 220, 220));
+        JTpedidos.setGridColor(new Color(210, 210, 210)); // Cinza claro para a grade da tabela
         JTpedidos.getTableHeader().setFont(titleFont);
         JTpedidos.getTableHeader().setBackground(headerColor);
         JTpedidos.getTableHeader().setForeground(Color.DARK_GRAY);

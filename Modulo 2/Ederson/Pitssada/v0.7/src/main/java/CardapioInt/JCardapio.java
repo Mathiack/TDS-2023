@@ -1,6 +1,8 @@
 package CardapioInt;
 
 import Pedido.Database;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -154,7 +156,7 @@ public class JCardapio extends javax.swing.JFrame {
                         String nome = (String) JTbebida.getValueAt(selectedRow, 1); // Nome na segunda coluna
                         String preco = JTbebida.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
                         int qntBebida = Integer.parseInt(JTbebida.getValueAt(selectedRow, 3).toString());
-                        
+
                         // Excluindo o item do banco de dados
                         excluirPelaTabelaB(id);
 
@@ -273,6 +275,42 @@ public class JCardapio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void setStyles() {
+        // Define cores neutras em tons de cinza
+        Color backgroundColor = new Color(245, 245, 245); // Cinza claro para o fundo principal
+        Color panelBackgroundColor = new Color(230, 230, 230); // Cinza médio para os painéis
+        Color tableBackgroundColor = new Color(255, 255, 255); // Branco para a tabela
+        Color headerColor = new Color(200, 200, 200); // Cinza suave para o cabeçalho
+
+        // Define fonte para títulos e conteúdo
+        Font titleFont = new Font("SansSerif", Font.BOLD, 14);
+        Font tableFont = new Font("SansSerif", Font.PLAIN, 12);
+
+        // Configura a tabela Sabores
+        JTsabores.setFont(tableFont);
+        JTsabores.setBackground(tableBackgroundColor);
+        JTsabores.setGridColor(new Color(210, 210, 210));
+        JTsabores.getTableHeader().setFont(titleFont);
+        JTsabores.getTableHeader().setBackground(headerColor);
+        JTsabores.getTableHeader().setForeground(Color.DARK_GRAY);
+
+        // Configura a tabela Tamanhos
+        JTtamanho.setFont(tableFont);
+        JTtamanho.setBackground(tableBackgroundColor);
+        JTtamanho.setGridColor(new Color(210, 210, 210));
+        JTtamanho.getTableHeader().setFont(titleFont);
+        JTtamanho.getTableHeader().setBackground(headerColor);
+        JTtamanho.getTableHeader().setForeground(Color.DARK_GRAY);
+
+        // Configura a tabela Bebidas
+        JTbebida.setFont(tableFont);
+        JTbebida.setBackground(tableBackgroundColor);
+        JTbebida.setGridColor(new Color(210, 210, 210));
+        JTbebida.getTableHeader().setFont(titleFont);
+        JTbebida.getTableHeader().setBackground(headerColor);
+        JTbebida.getTableHeader().setForeground(Color.DARK_GRAY);
+    }
 
     // ATUALIZAÇÕES DA TABELA E UPDATES NO BANCO
     private static void atualizarPelaTabelaS(int id, String nome, String preco) {
@@ -437,7 +475,7 @@ public class JCardapio extends javax.swing.JFrame {
                 String id = rs.getString("id_sabor");
                 String sabor = rs.getString("sabor");
                 double precoSabor = rs.getDouble("precoSabor");
-                
+
                 model.addRow(new Object[]{id, sabor, precoSabor});
             }
 
