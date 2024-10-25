@@ -16,7 +16,7 @@ public class JCardapio extends javax.swing.JFrame {
     private static DefaultTableModel tableModel;
     private DefaultTableModel tabelaSabor = new DefaultTableModel(new Object[]{"ID", "Sabor", "Preço"}, 0);
     private DefaultTableModel tabelaTamanho = new DefaultTableModel(new Object[]{"ID", "Tamanho", "Preço"}, 0);
-    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"ID", "Bebida", "Preço"}, 0);
+    private DefaultTableModel tabelaBebidas = new DefaultTableModel(new Object[]{"ID", "Bebida", "Preço", "Quantidade"}, 0);
 
     public JCardapio() {
         initComponents();  // Inicializa os componentes
@@ -38,7 +38,6 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaS(id, nome, preco);
                 }
             }
-
         });
         tabelaTamanho.addTableModelListener(new TableModelListener() {
             @Override
@@ -52,7 +51,6 @@ public class JCardapio extends javax.swing.JFrame {
                     atualizarPelaTabelaT(id, nome, preco);
                 }
             }
-
         });
         tabelaBebidas.addTableModelListener(new TableModelListener() {
             @Override
@@ -62,11 +60,11 @@ public class JCardapio extends javax.swing.JFrame {
                     int id = Integer.parseInt(tabelaBebidas.getValueAt(row, 0).toString()); // ID na primeira coluna
                     String nome = (String) tabelaBebidas.getValueAt(row, 1);
                     String preco = tabelaBebidas.getValueAt(row, 2).toString();
+                    int qntBebida = Integer.parseInt(tabelaBebidas.getValueAt(row, 3).toString());
 
-                    atualizarPelaTabelaB(id, nome, preco);
+                    atualizarPelaTabelaB(id, nome, preco, qntBebida);
                 }
             }
-
         });
 
         // Seleção de linhas nas tabelas
@@ -155,7 +153,8 @@ public class JCardapio extends javax.swing.JFrame {
                         int id = Integer.parseInt(JTbebida.getValueAt(selectedRow, 0).toString()); // ID na primeira coluna
                         String nome = (String) JTbebida.getValueAt(selectedRow, 1); // Nome na segunda coluna
                         String preco = JTbebida.getValueAt(selectedRow, 2).toString(); // Preço na terceira coluna
-
+                        int qntBebida = Integer.parseInt(JTbebida.getValueAt(selectedRow, 3).toString());
+                        
                         // Excluindo o item do banco de dados
                         excluirPelaTabelaB(id);
 
@@ -308,13 +307,14 @@ public class JCardapio extends javax.swing.JFrame {
         }
     }
 
-    private static void atualizarPelaTabelaB(int id, String nome, String preco) {
+    private static void atualizarPelaTabelaB(int id, String nome, String preco, int qntBebida) {
         try (Connection conn = Database.getConnection()) {
-            String query = "UPDATE bebida SET bebida = ?, precoBebida = ? WHERE id_bebida = ?";
+            String query = "UPDATE bebida SET bebida = ?, precoBebida = ?, qntBebida = ? WHERE id_bebida = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nome);
             stmt.setDouble(2, Double.parseDouble(preco));
-            stmt.setInt(3, id);
+            stmt.setInt(3, qntBebida);
+            stmt.setInt(4, id);
 
             stmt.executeUpdate();
             System.out.println("Dados atualizados no banco de dados!");
@@ -437,7 +437,7 @@ public class JCardapio extends javax.swing.JFrame {
                 String id = rs.getString("id_sabor");
                 String sabor = rs.getString("sabor");
                 double precoSabor = rs.getDouble("precoSabor");
-
+                
                 model.addRow(new Object[]{id, sabor, precoSabor});
             }
 
@@ -507,7 +507,7 @@ public class JCardapio extends javax.swing.JFrame {
         ResultSet rs = null;
         try {
 
-            String sql = "SELECT id_bebida, bebida, precoBebida FROM bebida";
+            String sql = "SELECT id_bebida, bebida, precoBebida, qntBebida FROM bebida";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -519,8 +519,9 @@ public class JCardapio extends javax.swing.JFrame {
                 String id = rs.getString("id_bebida");
                 String bebida = rs.getString("bebida");
                 double precoBebida = rs.getDouble("precoBebida");
+                int qntBebida = rs.getInt("qntBebida");
 
-                model.addRow(new Object[]{id, bebida, precoBebida});
+                model.addRow(new Object[]{id, bebida, precoBebida, qntBebida});
             }
 
         } catch (Exception e) {
