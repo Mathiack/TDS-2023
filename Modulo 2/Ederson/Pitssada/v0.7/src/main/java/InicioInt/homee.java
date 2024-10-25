@@ -7,6 +7,7 @@ import CardapioInt.*;
 import Pedido.Database;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
@@ -16,10 +17,9 @@ public class homee extends javax.swing.JFrame {
     private DefaultTableModel tabelaPedidos = new DefaultTableModel(new Object[]{"ID", "Sabor", "Tamanho", "Bebida", "Cliente", "Rua", "Bairro", "Nº", "Hora", "Preço"}, 0);
 
     public homee() {
-        super("Início");
+        //super("Início");
         initComponents();
-        //setSize(700, 600);
-        //setExtendedState(MAXIMIZED_BOTH); //<< --- Maximiza
+        setStyles();
         Connection conn = Database.getConnection();
         if (conn == null) {
             JOptionPane.showMessageDialog(rootPane, "Ative o Apache e o MySQL");
@@ -85,6 +85,38 @@ public class homee extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    private void setStyles() {
+        // Define cores suaves
+        Color backgroundColor = new Color(240, 248, 255); // Alice Blue
+        Color panelBackgroundColor = new Color(220, 230, 242); // Light soft blue
+        Color tableBackgroundColor = new Color(250, 250, 250); // Almost white
+        Color headerColor = new Color(180, 200, 220); // Soft gray-blue
+
+        // Define fonte para títulos e conteúdo
+        Font titleFont = new Font("SansSerif", Font.BOLD, 14);
+        Font tableFont = new Font("SansSerif", Font.PLAIN, 12);
+
+        // Configura painel principal e borda
+        this.getContentPane().setBackground(backgroundColor);
+        jPanel1.setBackground(panelBackgroundColor);
+        jPanel2.setBackground(backgroundColor);
+        jPanel1.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        // Configura a tabela
+        JTpedidos.setFont(tableFont);
+        JTpedidos.setBackground(tableBackgroundColor);
+        JTpedidos.setGridColor(new Color(220, 220, 220));
+        JTpedidos.getTableHeader().setFont(titleFont);
+        JTpedidos.getTableHeader().setBackground(headerColor);
+        JTpedidos.getTableHeader().setForeground(Color.DARK_GRAY);
+
+        // Barra de menu estilizada
+        jMenuBar1.setBackground(headerColor);
+        jMenuBar1.setBorderPainted(false);
+        jMenu1.setFont(titleFont);
+        jMenu3.setFont(titleFont);
     }
 
     private void setKeyboardShortcuts() {
@@ -243,7 +275,7 @@ public class homee extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +293,7 @@ public class homee extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGap(0, 692, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,6 +301,9 @@ public class homee extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
+        jMenuBar1.setBackground(new java.awt.Color(204, 0, 0));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
 
         jMenu1.setText("Ações");
 

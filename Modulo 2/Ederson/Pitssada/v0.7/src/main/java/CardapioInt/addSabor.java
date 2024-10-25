@@ -44,6 +44,8 @@ public class addSabor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnAddSabor.setBackground(new java.awt.Color(204, 0, 0));
+        btnAddSabor.setForeground(new java.awt.Color(255, 255, 255));
         btnAddSabor.setText("Adicionar Sabor");
         btnAddSabor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
