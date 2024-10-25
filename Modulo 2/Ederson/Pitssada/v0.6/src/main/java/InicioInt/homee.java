@@ -125,24 +125,24 @@ public class homee extends javax.swing.JFrame {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
-            // Use o modelo tabelaPedidos diretamente
-            tabelaPedidos.setRowCount(0);  // Limpa a tabela antes de adicionar novos dados
+            // Limpa a tabela antes de adicionar novos dados
+            tabelaPedidos.setRowCount(0);
 
             while (rs.next()) {
-                // Recupera os dados da consulta
-                String id = rs.getString("id_pedido");
-                String sabor = rs.getString("sabor");
-                String tamanho = rs.getString("tamanho");
-                String bebida = rs.getString("bebida");
-                String cliente = rs.getString("nomeCliente");
-                String rua = rs.getString("rua");
-                String bairro = rs.getString("bairro");
-                int numero = rs.getInt("numero");
-                String hora = rs.getString("hora");
-                Double preco = rs.getDouble("precoFinal");
-
-                // Adiciona a linha ao modelo da tabela
-                tabelaPedidos.addRow(new Object[]{id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco});
+                // Recupera os dados do pedido e adiciona à tabela
+                Object[] row = {
+                    rs.getInt("id_pedido"),
+                    rs.getString("sabor"),
+                    rs.getString("tamanho"),
+                    rs.getString("bebida"),
+                    rs.getString("nomeCliente"),
+                    rs.getString("rua"),
+                    rs.getString("bairro"),
+                    rs.getInt("numero"),
+                    rs.getString("hora"),
+                    rs.getDouble("precoFinal")
+                };
+                tabelaPedidos.addRow(row);  // Adiciona cada linha à tabela
             }
 
         } catch (Exception e) {

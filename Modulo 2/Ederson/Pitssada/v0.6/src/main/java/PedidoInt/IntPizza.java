@@ -1,23 +1,18 @@
-
 package PedidoInt;
 
+import InicioInt.homee;
 import Pedido.Database;
 import Pedido.Pedido;
 import java.sql.*;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
 
 public class IntPizza extends javax.swing.JFrame {
-    
+
     public double precoSabor = 0;
     public double precoTamanho = 0;
     public double precoBebida = 0;
     public double precoFinal;
-    
+
     public IntPizza() {
         super("Pedido");
         JFrame j = new JFrame();
@@ -258,7 +253,6 @@ public class IntPizza extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        Pedido p = new Pedido();
         print();
     }//GEN-LAST:event_enviarActionPerformed
 
@@ -266,36 +260,36 @@ public class IntPizza extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(IntPizza.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new IntPizza().setVisible(true);
-        }
-    });
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new IntPizza().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Pitzzada;
@@ -323,45 +317,43 @@ public class IntPizza extends javax.swing.JFrame {
     private javax.swing.JLabel rua;
     private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
-    
+
     public void print() {
         String tamanho = comboTamanho.getSelectedItem().toString();
         String sabor = comboSabor.getSelectedItem().toString();
         String bebida = comboBebida.getSelectedItem().toString();
-        
+
         //    NOMEC PARA NOME_CLIENTE
         String nomeC = inputNome.getText();
         String nome_Cliente = nomeC;
-        
-        
+
         //    RUA PARA ENDERÇO
         String rua = inputRua.getText();
         String endereco = rua;
-        
-        
+
         String bairro = inputBairro.getText();
         int nCasa = Integer.parseInt(inputNumeroCasa.getText());
         String horaP = inputHora.getText();
         precoFinal = precoTamanho + precoSabor + precoBebida;
-        
-        Integer print = JOptionPane.showConfirmDialog(rootPane, 
-                "-------------------------------\n" +
-                 "Cliente: " + nomeC + "\n" +
-                "Rua: " + rua + "\n" +
-                "Bairro: " + bairro + "\n" +
-                "Número Casa: " + nCasa + "\n" +
-                "Hora: " + horaP + "\n" +
-                "-------------------------------\n" +
-                "PEDIDOS\n" +
-                "Sabor: " + sabor + "\n" +
-                "Tamanho: " + tamanho + "\n" +
-                "Bebida: " + bebida + "\n" +
-                "-------------------------------\n" +
-                "PREÇO\n" +
-                "Total: " + precoFinal + "\n" + 
+
+        Integer print = JOptionPane.showConfirmDialog(rootPane,
                 "-------------------------------\n"
-                );
-        
+                + "Cliente: " + nomeC + "\n"
+                + "Rua: " + rua + "\n"
+                + "Bairro: " + bairro + "\n"
+                + "Número Casa: " + nCasa + "\n"
+                + "Hora: " + horaP + "\n"
+                + "-------------------------------\n"
+                + "PEDIDOS\n"
+                + "Sabor: " + sabor + "\n"
+                + "Tamanho: " + tamanho + "\n"
+                + "Bebida: " + bebida + "\n"
+                + "-------------------------------\n"
+                + "PREÇO\n"
+                + "Total: " + precoFinal + "\n"
+                + "-------------------------------\n"
+        );
+
         if (print == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(rootPane, "Fasido");
             enviarPedido();
@@ -371,7 +363,7 @@ public class IntPizza extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Beta");
         }
     }
-    
+
     public void listaSabores() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
@@ -385,7 +377,7 @@ public class IntPizza extends javax.swing.JFrame {
             DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboSabor.getModel();
 
             model.removeAllElements();
-            
+
             while (rs.next()) {
                 String sabor = rs.getString("sabor");
                 precoSabor = rs.getDouble("precoSabor");
@@ -396,9 +388,15 @@ public class IntPizza extends javax.swing.JFrame {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -431,15 +429,21 @@ public class IntPizza extends javax.swing.JFrame {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     public void listaBebidas() {
         Connection conn = Database.getConnection();
         PreparedStatement stmt = null;
@@ -465,56 +469,68 @@ public class IntPizza extends javax.swing.JFrame {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     public void enviarPedido() {
-        Connection conn = Database.getConnection();
+    Connection conn = Database.getConnection();
 
-        String tamanho = comboTamanho.getSelectedItem().toString();
-        String sabor = comboSabor.getSelectedItem().toString();
-        String bebida = comboBebida.getSelectedItem().toString();
+    String tamanho = comboTamanho.getSelectedItem().toString();
+    String sabor = comboSabor.getSelectedItem().toString();
+    String bebida = comboBebida.getSelectedItem().toString();
 
-        String nome_Cliente = inputNome.getText();
-        String endereco = inputRua.getText();
+    String nome_Cliente = inputNome.getText();
+    String endereco = inputRua.getText();
 
-        String bairro = inputBairro.getText();
-        int nCasa = Integer.parseInt(inputNumeroCasa.getText());
-        String horaP = inputHora.getText();
-        double precoFinal = precoTamanho + precoSabor + precoBebida;
+    String bairro = inputBairro.getText();
+    int nCasa = Integer.parseInt(inputNumeroCasa.getText());
+    String horaP = inputHora.getText();
+    double precoFinal = precoTamanho + precoSabor + precoBebida;
 
-        try {
-            // Query sem o `id_pedido` (auto-incremento)
-            String sql = "INSERT INTO `pedido`(`sabor`, `tamanho`, `bebida`, `nomeCliente`, `rua`, `bairro`, `numero`, `hora`, `precoFinal`) VALUES (?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    try {
+        // Query de inserção sem o `id_pedido` (auto-incremento)
+        String sql = "INSERT INTO `pedido`(`sabor`, `tamanho`, `bebida`, `nomeCliente`, `rua`, `bairro`, `numero`, `hora`, `precoFinal`) VALUES (?,?,?,?,?,?,?,?,?)";
+        PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setString(1, sabor);
-            stmt.setString(2, tamanho);
-            stmt.setString(3, bebida);
-            stmt.setString(4, nome_Cliente);
-            stmt.setString(5, endereco);
-            stmt.setString(6, bairro);
-            stmt.setInt(7, nCasa);
-            stmt.setString(8, horaP);  // Corrigido para a posição 8
-            stmt.setDouble(9, precoFinal);  // Posição 9 para `precoFinal`
+        stmt.setString(1, sabor);
+        stmt.setString(2, tamanho);
+        stmt.setString(3, bebida);
+        stmt.setString(4, nome_Cliente);
+        stmt.setString(5, endereco);
+        stmt.setString(6, bairro);
+        stmt.setInt(7, nCasa);
+        stmt.setString(8, horaP);
+        stmt.setDouble(9, precoFinal);
 
-            stmt.executeUpdate();
+        stmt.executeUpdate();
 
-            // Recupera o id gerado
-            ResultSet generatedKeys = stmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                long idPedido = generatedKeys.getLong(1);  // Aqui você tem o id_pedido gerado
-                System.out.println("Pedido enviado com sucesso. ID do Pedido: " + idPedido);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        // Recupera o id gerado
+        ResultSet generatedKeys = stmt.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            long idPedido = generatedKeys.getLong(1);  // Aqui você tem o id_pedido gerado
+            System.out.println("Pedido enviado com sucesso. ID do Pedido: " + idPedido);
         }
+
+        // Atualiza a tabela com os pedidos
+        homee h = new homee();
+        h.listaPedidos();
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Erro ao enviar o pedido: " + ex.getMessage());
     }
+}
+
 }

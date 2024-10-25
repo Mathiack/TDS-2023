@@ -4,6 +4,7 @@
  */
 package Pedido;
 
+import InicioInt.homee;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -13,10 +14,11 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 public class Pedido {
-    private String nome_Cliente, endereco, bairro, numero, hora, sabor, tamanho, bebidas;
+    private String nome_Cliente, endereco, bairro, hora, sabor, tamanho, bebidas;
+    private int numero;
     
     
-    public Pedido(String nome_Cliente, String endereco, String bairro, int nCasa, JLabel hora1, String numero, String hora, String sabor) {
+    public Pedido(String nome_Cliente, String endereco, String bairro, int nCasa, JLabel hora1, int numero, String hora, String sabor) {
         this.nome_Cliente = nome_Cliente;
         this.endereco = endereco;
         this.bairro = bairro;
@@ -28,11 +30,11 @@ public class Pedido {
     }
     
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -107,23 +109,28 @@ public class Pedido {
         );
     }
     
-    public void inserirPedido() {
+    /*public void inserirPedido() {
         try {
             Connection conn = Database.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO `pedido`(`sabor`, `tamanho`, `bebida`, `nomeCliente`, `rua`, `bairro`, `numero`, `hora`, `precoFinal`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO `pedido`(`sabor`, `tamanho`, `bebida`, `nomeCliente`, `rua`, `bairro`, `numero`, `hora`, `precoFinal`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
-            
-            stmt.setString(1, this.getNome_Cliente());
-            stmt.setString(2, this.getEndereco());
-            stmt.setString(3, this.getBairro());
-            stmt.setString(4, this.getSabor());
-            stmt.setString(5, this.getTamanho());
+            stmt.setString(1, this.getSabor());
+            stmt.setString(2, this.getTamanho());
+            stmt.setString(3, this.getBebidas());
+            stmt.setString(4, this.getNome_Cliente());
+            stmt.setString(5, this.getEndereco());
+            stmt.setString(6, this.getBairro());
+            stmt.setInt(7, this.getNumero());
+            stmt.setString(8, this.getHora());
             
             stmt.executeQuery();
+            
+            homee h = new homee();
+            h.listaPedidos();
             
         } catch (SQLException ex) {
             Logger.getLogger(Pedido.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
+    }*/
 }
