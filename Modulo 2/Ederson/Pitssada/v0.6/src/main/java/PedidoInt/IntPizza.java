@@ -3,6 +3,9 @@ package PedidoInt;
 import InicioInt.homee;
 import Pedido.Database;
 import Pedido.Pedido;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.*;
 
@@ -23,6 +26,16 @@ public class IntPizza extends javax.swing.JFrame {
         listaSabores();
         listaTamanhos();
         listaBebidas();
+        
+        // Atalho para fechar
+        JRootPane rootPane = this.getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_DOWN_MASK), "closeProgram");
+        rootPane.getActionMap().put("closeProgram", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha o programa
+            }
+        });
     }
 
     /**
@@ -40,7 +53,6 @@ public class IntPizza extends javax.swing.JFrame {
         Pitzzada = new javax.swing.JLabel();
         nada2 = new java.awt.Label();
         nada1 = new java.awt.Label();
-        sair = new javax.swing.JButton();
         comboTamanho = new javax.swing.JComboBox<>();
         comboSabor = new javax.swing.JComboBox<>();
         comboBebida = new javax.swing.JComboBox<>();
@@ -77,13 +89,6 @@ public class IntPizza extends javax.swing.JFrame {
         nada1.setBackground(new java.awt.Color(255, 0, 0));
         nada1.setName("nada"); // NOI18N
 
-        sair.setText("Sair");
-        sair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,24 +102,17 @@ public class IntPizza extends javax.swing.JFrame {
                 .addComponent(nada1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Pitzzada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(254, 254, 254)
-                .addComponent(sair)
-                .addGap(21, 21, 21))
+                .addGap(347, 347, 347))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nada1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nada2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Pitzzada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(sair)))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nada1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nada2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Pitzzada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -248,10 +246,6 @@ public class IntPizza extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_sairActionPerformed
-
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         print();
     }//GEN-LAST:event_enviarActionPerformed
@@ -315,7 +309,6 @@ public class IntPizza extends javax.swing.JFrame {
     private java.awt.Label nada1;
     private java.awt.Label nada2;
     private javax.swing.JLabel rua;
-    private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 
     public void print() {

@@ -4,19 +4,29 @@ import Pedido.Database;
 import Pedido.Pedido;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
 public class addTamanho extends javax.swing.JFrame {
 
-    /**
-     * Creates new form addTamanho
-     */
     public addTamanho() {
         JFrame j = new JFrame();
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        // Atalho para fechar
+        JRootPane rootPane = this.getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_DOWN_MASK), "closeProgram");
+        rootPane.getActionMap().put("closeProgram", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha o programa
+            }
+        });
     }
 
     /**

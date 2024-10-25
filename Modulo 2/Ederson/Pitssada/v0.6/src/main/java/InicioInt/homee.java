@@ -5,14 +5,10 @@ import java.awt.*;
 import javax.swing.*;
 import CardapioInt.*;
 import Pedido.Database;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.*;
+import java.sql.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
 public class homee extends javax.swing.JFrame {
 
@@ -26,13 +22,26 @@ public class homee extends javax.swing.JFrame {
         //setExtendedState(MAXIMIZED_BOTH); //<< --- Maximiza
         Connection conn = Database.getConnection();
         if (conn == null) {
-            JOptionPane.showMessageDialog(rootPane,
-                    "Vosso XAMPP não encontra-se ativo no momento presente.\n"
-                    + "Tua aplicação pode não funcionar de acordo com\n"
-                    + "às especificações incluídas na documentação.");
+            JOptionPane.showMessageDialog(rootPane, "Ative o Apache e o MySQL");
 
         }
         listaPedidos();
+        setKeyboardShortcuts();
+
+        fazP.setText("Fazer Pedido");
+        fazP.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
+
+        verCardapio.setText("Ver Cardápio");
+        verCardapio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_DOWN_MASK));
+
+        menuTamanho.setText("Novo Tamanho");
+        menuTamanho.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.ALT_DOWN_MASK));
+
+        menuSabor.setText("Novo Sabor");
+        menuSabor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_DOWN_MASK));
+
+        jMenuItem2.setText("Nova Bebida");
+        jMenuItem2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.ALT_DOWN_MASK));
 
         // Atualiza diretamente pela tabela
         tabelaPedidos.addTableModelListener(new TableModelListener() {
@@ -76,7 +85,36 @@ public class homee extends javax.swing.JFrame {
                 }
             }
         });
+    }
 
+    private void setKeyboardShortcuts() {
+        // Shortcut Alt+S para "Sabores"
+        JRootPane rootPane = this.getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.ALT_DOWN_MASK), "openSabor");
+        rootPane.getActionMap().put("openSabor", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuSaborActionPerformed(e);
+            }
+        });
+
+        // Shortcut Alt+T para "Tamanho"
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_T, KeyEvent.ALT_DOWN_MASK), "openTamanho");
+        rootPane.getActionMap().put("openTamanho", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuTamanhoActionPerformed(e);
+            }
+        });
+
+        // Shortcut Alt+B para "Bebidas"
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_B, KeyEvent.ALT_DOWN_MASK), "openBebida");
+        rootPane.getActionMap().put("openBebida", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jMenuItem2ActionPerformed(e);
+            }
+        });
     }
 
     private static void atualizarPelaTabelaP(int id, String sabor, String tamanho, String bebida, String cliente, String rua, String bairro, int numero, String hora, double preco) {
