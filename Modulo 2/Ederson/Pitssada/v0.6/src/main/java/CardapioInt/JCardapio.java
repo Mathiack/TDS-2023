@@ -292,7 +292,7 @@ public class JCardapio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // ATUALIZAÇÕES DA TABELA E UPDATES
+    // ATUALIZAÇÕES DA TABELA E UPDATES NO BANCO
     private static void atualizarPelaTabelaS(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
             String query = "UPDATE sabor SET sabor = ?, precoSabor = ? WHERE id_sabor = ?";  // SQL com placeholders
@@ -308,7 +308,6 @@ public class JCardapio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-
     private static void atualizarPelaTabelaT(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {
             String query = "UPDATE tamanho SET tamanho = ?, precoTamanho = ? WHERE id_tamanho = ?";
@@ -324,7 +323,6 @@ public class JCardapio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
         }
     }
-
     private static void atualizarPelaTabelaB(int id, String nome, String preco) {
         try (Connection conn = Database.getConnection()) {
             String query = "UPDATE bebida SET bebida = ?, precoBebida = ? WHERE id_bebida = ?";
@@ -341,6 +339,7 @@ public class JCardapio extends javax.swing.JFrame {
         }
     }
 
+    // EXCLUSÕES NA TABELA E DELETES NO BANCO
     private static void excluirPelaTabelaS(int id) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
             String query = "DELETE FROM sabor WHERE id_sabor = ?";  // SQL para excluir com base no id_sabor

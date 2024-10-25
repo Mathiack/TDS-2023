@@ -18,7 +18,7 @@ public class homee extends javax.swing.JFrame {
 
     private static DefaultTableModel tableModel;
     private DefaultTableModel tabelaPedidos = new DefaultTableModel(new Object[]{"ID", "Sabor", "Tamanho", "Bebida", "Cliente", "Rua", "Bairro", "Nº", "Hora", "Preço"}, 0);
-    
+
     public homee() {
         super("Início");
         initComponents();
@@ -40,21 +40,20 @@ public class homee extends javax.swing.JFrame {
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     int row = e.getFirstRow();
-                    int id = Integer.parseInt(tabelaPedidos.getValueAt(row, 0).toString());
+                    int id = Integer.parseInt(tabelaPedidos.getValueAt(row, 0).toString());  // ID do pedido
                     String sabor = (String) tabelaPedidos.getValueAt(row, 1);
                     String tamanho = (String) tabelaPedidos.getValueAt(row, 2);
                     String bebida = (String) tabelaPedidos.getValueAt(row, 3);
                     String cliente = (String) tabelaPedidos.getValueAt(row, 4);
                     String rua = (String) tabelaPedidos.getValueAt(row, 5);
                     String bairro = (String) tabelaPedidos.getValueAt(row, 6);
-                    int numero = (int) tabelaPedidos.getValueAt(row, 7);
+                    int numero = Integer.parseInt(tabelaPedidos.getValueAt(row, 7).toString());
                     String hora = (String) tabelaPedidos.getValueAt(row, 8);
-                    double preco = (double) tabelaPedidos.getValueAt(row, 9);
+                    double preco = Double.parseDouble(tabelaPedidos.getValueAt(row, 9).toString());
 
-                    atualizarPelaTabelaP(id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco);
+                    atualizarPelaTabelaP(id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco);  // Atualiza no banco
                 }
             }
-
         });
 
         // Exclui linhas selecionadas
@@ -64,26 +63,12 @@ public class homee extends javax.swing.JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_DELETE) {
                     int selectedRow = JTpedidos.getSelectedRow(); // Obtém a linha selecionada
                     if (selectedRow != -1) {
-                        // Pegando o ID da linha selecionada (assumindo que o ID esteja na primeira coluna)
-                        int id = Integer.parseInt(JTpedidos.getValueAt(selectedRow, 0).toString());
-                        String sabor = (String) JTpedidos.getValueAt(selectedRow, 1);
-                        String tamanho = (String) JTpedidos.getValueAt(selectedRow, 2);
-                        String bebida = (String) JTpedidos.getValueAt(selectedRow, 3);
-                        String cliente = (String) JTpedidos.getValueAt(selectedRow, 4);
-                        String rua = (String) JTpedidos.getValueAt(selectedRow, 5);
-                        String bairro = (String) JTpedidos.getValueAt(selectedRow, 6);
-                        int numero = (int) JTpedidos.getValueAt(selectedRow, 7);
-                        String hora = (String) JTpedidos.getValueAt(selectedRow, 8);
-                        double preco = (double) JTpedidos.getValueAt(selectedRow, 9);
+                        int id = Integer.parseInt(JTpedidos.getValueAt(selectedRow, 0).toString());  // Obtém o ID do pedido
+                        excluirPelaTabelaP(id);  // Exclui do banco de dados
 
-                        // Excluindo o item do banco de dados
-                        excluirPelaTabelaP(id, sabor, tamanho, bebida, cliente, rua, bairro, numero, hora, preco);
-
-                        // Removendo a linha da tabela
                         DefaultTableModel model = (DefaultTableModel) JTpedidos.getModel();
-                        model.removeRow(selectedRow);
+                        model.removeRow(selectedRow);  // Remove a linha da tabela
 
-                        // Exibir uma mensagem de sucesso ou atualizar a interface
                         JOptionPane.showMessageDialog(null, "Item excluído com sucesso.");
                     } else {
                         JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.");
@@ -91,6 +76,7 @@ public class homee extends javax.swing.JFrame {
                 }
             }
         });
+
     }
 
     private static void atualizarPelaTabelaP(int id, String sabor, String tamanho, String bebida, String cliente, String rua, String bairro, int numero, String hora, double preco) {
@@ -117,26 +103,15 @@ public class homee extends javax.swing.JFrame {
     }
 
     // EXCLUI DA TABELA E DELETE NO BANCO
-    private static void excluirPelaTabelaP(int id, String sabor, String tamanho, String bebida, String cliente, String rua, String bairro, int numero, String hora, double preco) {
+    private static void excluirPelaTabelaP(int id) {
         try (Connection conn = Database.getConnection()) {  // Obtém conexão com o banco
             String query = "DELETE FROM pedido WHERE id_pedido = ?";  // SQL com placeholders
             PreparedStatement stmt = conn.prepareStatement(query);
-            
-            stmt.setInt(1, id);
-            stmt.setString(2, sabor);
-            stmt.setString(3, tamanho);
-            stmt.setString(4, bebida);
-            stmt.setString(5, cliente);
-            stmt.setString(6, rua);
-            stmt.setString(7, bairro);
-            stmt.setInt(8, numero);
-            stmt.setString(9, hora);
-            stmt.setDouble(10, preco);
+            stmt.setInt(1, id);  // Apenas o id é necessário para a exclusão
             stmt.executeUpdate();
-
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao excluir do banco de dados: " + ex.getMessage());
         }
     }
 
