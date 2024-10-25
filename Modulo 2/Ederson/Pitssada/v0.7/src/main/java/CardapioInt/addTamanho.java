@@ -43,6 +43,8 @@ public class addTamanho extends javax.swing.JFrame {
         inputTamanho = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         inputPrecoT = new javax.swing.JTextField();
+        inputQntT = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,27 +75,41 @@ public class addTamanho extends javax.swing.JFrame {
             }
         });
 
+        inputQntT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputQntTActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Quantidade");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(inputQntT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(94, 94, 94))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(79, 79, 79)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAddTamanho)
-                            .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addGap(131, 131, 131)
+                        .addComponent(btnAddTamanho)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,20 +119,20 @@ public class addTamanho extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputPrecoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputQntT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(btnAddTamanho)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void inputPrecoTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPrecoTActionPerformed
 
     private void btnAddTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTamanhoActionPerformed
         Integer print = JOptionPane.showConfirmDialog(rootPane,
@@ -134,6 +150,14 @@ public class addTamanho extends javax.swing.JFrame {
     private void inputTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTamanhoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTamanhoActionPerformed
+
+    private void inputPrecoTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPrecoTActionPerformed
+
+    private void inputQntTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputQntTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputQntTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,8 +216,10 @@ public class addTamanho extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddTamanho;
     private javax.swing.JTextField inputPrecoT;
+    private javax.swing.JTextField inputQntT;
     private javax.swing.JTextField inputTamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

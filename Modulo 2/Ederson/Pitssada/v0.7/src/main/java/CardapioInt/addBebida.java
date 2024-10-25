@@ -39,16 +39,28 @@ public class addBebida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        inputPrecoB1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         inputPrecoB = new javax.swing.JTextField();
         btnAddSabor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         inputBebida = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        inputQntB = new javax.swing.JTextField();
+
+        jLabel3.setText("jLabel3");
+
+        inputPrecoB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPrecoB1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Preço");
+        jLabel2.setText("Quantidade");
 
         inputPrecoB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +86,15 @@ public class addBebida extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Preço");
+
+        inputQntB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputQntBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,18 +102,21 @@ public class addBebida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(btnAddSabor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(inputPrecoB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(inputPrecoB, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(inputQntB)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(btnAddSabor)))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,13 +126,17 @@ public class addBebida extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputPrecoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputQntB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputPrecoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(btnAddSabor)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,6 +162,14 @@ public class addBebida extends javax.swing.JFrame {
     private void inputBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputBebidaActionPerformed
         
     }//GEN-LAST:event_inputBebidaActionPerformed
+
+    private void inputPrecoB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPrecoB1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPrecoB1ActionPerformed
+
+    private void inputQntBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputQntBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputQntBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,7 +228,11 @@ public class addBebida extends javax.swing.JFrame {
     private javax.swing.JButton btnAddSabor;
     private javax.swing.JTextField inputBebida;
     private javax.swing.JTextField inputPrecoB;
+    private javax.swing.JTextField inputPrecoB1;
+    private javax.swing.JTextField inputQntB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
