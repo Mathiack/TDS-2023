@@ -208,15 +208,20 @@ public class addBebida extends javax.swing.JFrame {
     
     public void inserirBebida() {
         String sabor = inputBebida.getText();
+        
         String precoSa = inputPrecoB.getText();
         double precoS = Double.parseDouble(precoSa);
         
+        String quantidade = inputQntB.getText();
+        int qnt = Integer.parseInt(quantidade);
+        
         Connection conn = Database.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO bebida(bebida, precoBebida) VALUES (?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO bebida(bebida, precoBebida, qntBebida) VALUES (?, ?, ?)");
                        
             stmt.setString(1, sabor);
             stmt.setDouble(2, precoS);
+            stmt.setInt(3, qnt);
             stmt.execute();
             
         } catch (SQLException ex) {

@@ -200,12 +200,16 @@ public class addTamanho extends javax.swing.JFrame {
         String precoTa = inputPrecoT.getText();
         double precoT = Double.parseDouble(precoTa);
         
+        String quantidade = inputPrecoT.getText();
+        int qnt = Integer.parseInt(quantidade);
+        
         Connection conn = Database.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO tamanho(tamanho, precoTamanho) VALUES (?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO tamanho(tamanho, precoTamanho, qntTamanho) VALUES (?, ?, ?)");
             
             stmt.setString(1, tamanho);
             stmt.setDouble(2, precoT);
+            stmt.setInt(3, qnt);
             stmt.execute();
             
         } catch (SQLException ex) {

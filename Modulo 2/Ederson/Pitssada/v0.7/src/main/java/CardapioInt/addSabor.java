@@ -215,12 +215,16 @@ public class addSabor extends javax.swing.JFrame {
         String precoSa = inputPrecoS.getText();
         double precoS = Double.parseDouble(precoSa);
         
+        String quantidade = inputQntS.getText();
+        int qnt = Integer.parseInt(quantidade);
+        
         Connection conn = Database.getConnection();
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO sabor(sabor, precoSabor) VALUES (?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO sabor(sabor, precoSabor, qntSabor) VALUES (?, ?, ?)");
             
             stmt.setString(1, sabor);
             stmt.setDouble(2, precoS);
+            stmt.setInt(3, qnt);
             stmt.execute();
             
         } catch (SQLException ex) {
