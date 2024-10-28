@@ -31,7 +31,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        entreCad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +41,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Usuário");
 
         loginBtn.setBackground(new java.awt.Color(153, 102, 255));
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Logar");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,11 +56,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Não tem Cadastro?");
 
-        jButton1.setBackground(new java.awt.Color(153, 102, 255));
-        jButton1.setText("Cadastre-se");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        entreCad.setBackground(new java.awt.Color(153, 102, 255));
+        entreCad.setForeground(new java.awt.Color(255, 255, 255));
+        entreCad.setText("Cadastre-se");
+        entreCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                entreCadActionPerformed(evt);
             }
         });
 
@@ -71,7 +73,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(entreCad)
                 .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
@@ -80,7 +82,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(entreCad))
                 .addGap(35, 35, 35))
         );
 
@@ -135,9 +137,11 @@ public class Login extends javax.swing.JFrame {
         valida(usuario, senha);
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void entreCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreCadActionPerformed
+        JFrame j = new Cadastro();
+        j.setVisible(true);
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_entreCadActionPerformed
 
     public void valida(String usuario, String senha) {
         Connection conn = Database.getConnection();
@@ -209,7 +213,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton entreCad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

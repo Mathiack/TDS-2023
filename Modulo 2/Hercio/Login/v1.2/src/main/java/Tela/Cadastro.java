@@ -36,7 +36,7 @@ public class Cadastro extends javax.swing.JFrame {
         cadastrarBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        entreLog = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +52,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4.setText("Senha");
 
         cadastrarBtn.setBackground(new java.awt.Color(153, 102, 255));
+        cadastrarBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarBtn.setText("Cadastrar");
         cadastrarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,11 +65,12 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Já tem uma conta?");
 
-        jButton1.setBackground(new java.awt.Color(153, 102, 255));
-        jButton1.setText("Entre");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        entreLog.setBackground(new java.awt.Color(153, 102, 255));
+        entreLog.setForeground(new java.awt.Color(255, 255, 255));
+        entreLog.setText("Entre");
+        entreLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                entreLogActionPerformed(evt);
             }
         });
 
@@ -80,7 +82,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(entreLog)
                 .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,7 +91,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jButton1))
+                    .addComponent(entreLog))
                 .addGap(35, 35, 35))
         );
 
@@ -174,9 +176,11 @@ public class Cadastro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cadastrarBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void entreLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entreLogActionPerformed
+        JFrame j = new Login();
+        j.setVisible(true);
+        j.setLocationRelativeTo(null);
+    }//GEN-LAST:event_entreLogActionPerformed
 
     private static void cadastrar(String usuario, String nome, String email, String senha) {
         Connection conn = Database.getConnection();
@@ -255,7 +259,7 @@ public class Cadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrarBtn;
     private javax.swing.JTextField emailJtx;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton entreLog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
