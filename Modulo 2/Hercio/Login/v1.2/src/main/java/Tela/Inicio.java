@@ -3,6 +3,7 @@ package Tela;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.Connection;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -10,26 +11,28 @@ import javax.swing.UIManager;
 public class Inicio extends javax.swing.JFrame {
 
     /**
-     * Creates new form Inicio
+     * Cria um novo formulário de início.
      */
     public Inicio() {
         initComponents();
         checkDatabaseConnection();
-        setWindowIcon();
     }
 
+    /**
+     * Verifica a conexão com o banco de dados.
+     */
     private void checkDatabaseConnection() {
-        Connection conn = Database.getConnection();
-        if (conn == null) {
-            JOptionPane.showMessageDialog(this, "Ligue o XAMPP");
+        try (Connection conn = Database.getConnection()) {
+            if (conn == null || conn.isClosed()) {
+                JOptionPane.showMessageDialog(this, "Falha na conexão com o banco de dados. Ligue o XAMPP.");
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados: " + e.getMessage());
             System.exit(0);
         }
     }
-
-    private void setWindowIcon() {
-        // Future icon implementation, if needed
-    }
-
+    
     @SuppressWarnings("unchecked")
     private void initComponents() {
         lblTitle = new javax.swing.JLabel();
@@ -99,17 +102,19 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     /**
-     * Main method to start the application with FlatLaf theme
+     * Método principal para iniciar a aplicação com o tema FlatLaf.
      */
     public static void main(String args[]) {
-        setLookAndFeel("light");  // Change to "dark" for FlatDarkLaf
+        // Solicita ao usuário que escolha o tema
+        String theme = JOptionPane.showInputDialog(null, "Escolha o tema: 'light' ou 'dark'", "Configuração de Tema", JOptionPane.QUESTION_MESSAGE);
+        setLookAndFeel(theme);
 
         java.awt.EventQueue.invokeLater(() -> new Inicio().setVisible(true));
     }
 
     /**
-     * Configures the Look and Feel for the application.
-     * @param theme the theme to set ("light" for FlatLightLaf, "dark" for FlatDarkLaf)
+     * Configura o Look and Feel da aplicação.
+     * @param theme o tema a ser definido ("light" para FlatLightLaf, "dark" para FlatDarkLaf)
      */
     private static void setLookAndFeel(String theme) {
         try {
@@ -123,10 +128,10 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
 
-    // Variables declaration                     
+    // Declaração de variáveis                     
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
-    // End of variables declaration                   
+    // Fim da declaração de variáveis                   
 }
