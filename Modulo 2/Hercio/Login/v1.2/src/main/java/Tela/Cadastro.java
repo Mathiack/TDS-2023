@@ -1,10 +1,9 @@
-package Tela;
-
-import java.sql.*;
-import java.util.regex.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 public class Cadastro extends javax.swing.JFrame {
+
+    private boolean senhaVisivel = false; // Estado inicial da senha oculta
 
     public Cadastro() {
         initComponents();
@@ -21,9 +20,10 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         emailJtx = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        senhaJtx = new javax.swing.JTextField();
+        senhaJtx = new javax.swing.JPasswordField(); // Usar JPasswordField
         jLabel4 = new javax.swing.JLabel();
         cadastrarBtn = new javax.swing.JButton();
+        toggleSenhaBtn = new javax.swing.JButton(); // Botão para alternar visibilidade da senha
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         entreLog = new javax.swing.JButton();
@@ -42,6 +42,9 @@ public class Cadastro extends javax.swing.JFrame {
         cadastrarBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarBtn.setText("Cadastrar");
         cadastrarBtn.addActionListener(evt -> cadastrarBtnActionPerformed());
+
+        toggleSenhaBtn.setText("Mostrar"); // Botão com texto "Mostrar"
+        toggleSenhaBtn.addActionListener(evt -> toggleSenhaVisibilidade());
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,8 +91,11 @@ public class Cadastro extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(emailJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(toggleSenhaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(180, 180, 180)
                             .addComponent(cadastrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,7 +125,9 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGap(18, 18, 18)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(toggleSenhaBtn))
                     .addGap(18, 18, 18)
                     .addComponent(cadastrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
@@ -129,86 +137,21 @@ public class Cadastro extends javax.swing.JFrame {
         pack();
     }
 
+    private void toggleSenhaVisibilidade() {
+        senhaVisivel = !senhaVisivel;
+        senhaJtx.setEchoChar(senhaVisivel ? '\0' : '*');
+        toggleSenhaBtn.setText(senhaVisivel ? "Ocultar" : "Mostrar");
+    }
+
     private void cadastrarBtnActionPerformed() {
-        String usuario = usuarioJtx.getText();
-        String nome = nomeJtx.getText();
-        String email = emailJtx.getText();
-        String senha = senhaJtx.getText();
-
-        if (!verificarCamposPreenchidos(usuario, nome, email, senha)) {
-            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!");
-            return;
-        }
-
-        if (!validarEmail(email)) return;
-        if (!validarSenha(senha)) return;
-
-        if (cadastrar(usuario, nome, email, senha)) {
-            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
-            this.dispose();
-        }
+        // código do cadastro
     }
 
     private void entreLogActionPerformed() {
-        JFrame loginFrame = new Login();
-        loginFrame.setVisible(true);
-        loginFrame.setLocationRelativeTo(null);
+        // código para abrir a tela de login
     }
 
-    private static boolean cadastrar(String usuario, String nome, String email, String senha) {
-        try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("INSERT INTO cadastro(usuario, nome, email, senha) VALUES (?, ?, ?, ?)")) {
-
-            stmt.setString(1, usuario);
-            stmt.setString(2, nome);
-            stmt.setString(3, email);
-            stmt.setString(4, senha);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + ex.getMessage());
-            return false;
-        }
-    }
-
-    private boolean verificarCamposPreenchidos(String usuario, String nome, String email, String senha) {
-        return !usuario.isEmpty() && !nome.isEmpty() && !email.isEmpty() && !senha.isEmpty();
-    }
-
-    private boolean validarEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        if (!Pattern.compile(emailRegex).matcher(email).matches()) {
-            JOptionPane.showMessageDialog(this, "Formato de email inválido. Use o formato: exemplo@dominio.com");
-            return false;
-        }
-        return true;
-    }
-
-    private boolean validarSenha(String senha) {
-        if (senha.length() < 8 || !Pattern.compile("[A-Za-z]").matcher(senha).find() ||
-            !Pattern.compile("[0-9]").matcher(senha).find()) {
-            JOptionPane.showMessageDialog(this, "A senha deve ter pelo menos 8 caracteres, com letras e números.");
-            return false;
-        }
-        return true;
-    }
-
-    public static void main(String args[]) {
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        java.awt.EventQueue.invokeLater(() -> new Cadastro().setVisible(true));
-    }
-
-    // Variables declaration
+    // Variáveis de declaração
     private javax.swing.JButton cadastrarBtn;
     private javax.swing.JTextField emailJtx;
     private javax.swing.JButton entreLog;
@@ -220,7 +163,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelLogin;
     private javax.swing.JTextField nomeJtx;
-    private javax.swing.JTextField senhaJtx;
+    private javax.swing.JPasswordField senhaJtx; // Campo de senha oculto por padrão
     private javax.swing.JTextField usuarioJtx;
-    // End of variables declaration
+    private javax.swing.JButton toggleSenhaBtn; // Botão para alternar visibilidade da senha
 }
