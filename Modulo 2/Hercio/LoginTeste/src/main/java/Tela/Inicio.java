@@ -1,5 +1,7 @@
 package Tela;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.Connection;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -9,6 +11,7 @@ public class Inicio extends javax.swing.JFrame {
 
     public Inicio() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -35,21 +38,78 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bomDiaLbl = new javax.swing.JLabel();
+        logarBtn = new javax.swing.JButton();
+        cadBtn = new javax.swing.JButton();
+        logMsg = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        bomDiaLbl.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        bomDiaLbl.setText("Bom dia");
+
+        logarBtn.setText("Logar");
+        logarBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        logarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logarBtnActionPerformed(evt);
+            }
+        });
+
+        cadBtn.setText("Cadastrar");
+        cadBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        cadBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadBtnActionPerformed(evt);
+            }
+        });
+
+        logMsg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        logMsg.setText("Não Logado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(bomDiaLbl))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(logarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(logMsg)))))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bomDiaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadBtnActionPerformed
+        openCadastro();
+    }//GEN-LAST:event_cadBtnActionPerformed
+
+    private void logarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logarBtnActionPerformed
+        openLogin();
+    }//GEN-LAST:event_logarBtnActionPerformed
 
     private void openLogin() {
         JFrame loginFrame = new Login();
@@ -62,15 +122,11 @@ public class Inicio extends javax.swing.JFrame {
         cadastroFrame.setVisible(true);
         cadastroFrame.setLocationRelativeTo(null);
     }
-
-    /**
-     * Método principal para iniciar a aplicação com o tema FlatLaf.
-     */
+    
     public static void main(String args[]) {
         // Solicita ao usuário que escolha o tema
         String theme = JOptionPane.showInputDialog(null, "Escolha o tema: 'light' ou 'dark'", "Configuração de Tema", JOptionPane.QUESTION_MESSAGE);
         setLookAndFeel(theme);
-
         java.awt.EventQueue.invokeLater(() -> new Inicio().setVisible(true));
     }
 
@@ -81,9 +137,9 @@ public class Inicio extends javax.swing.JFrame {
     private static void setLookAndFeel(String theme) {
         try {
             if ("dark".equalsIgnoreCase(theme)) {
-                //UIManager.setLookAndFeel(new FlatDarkLaf());
+                UIManager.setLookAndFeel(new FlatDarkLaf());
             } else {
-                //UIManager.setLookAndFeel(new FlatLightLaf());
+                UIManager.setLookAndFeel(new FlatLightLaf());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,5 +147,9 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bomDiaLbl;
+    private javax.swing.JButton cadBtn;
+    private javax.swing.JLabel logMsg;
+    private javax.swing.JButton logarBtn;
     // End of variables declaration//GEN-END:variables
 }
