@@ -28,38 +28,117 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         usuarioJtx = new javax.swing.JTextField();
-        senhaJtx = new javax.swing.JTextField();
+        logarBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        cadastrarBtn = new javax.swing.JButton();
+        nTemCJtx = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        senhaJtx = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 700));
 
-        usuarioJtx.setText("jTextField1");
+        usuarioJtx.setMinimumSize(null);
 
-        senhaJtx.setText("jTextField2");
+        logarBtn.setText("Logar");
+        logarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logarBtnActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        cadastrarBtn.setText("Cadastrar");
+
+        nTemCJtx.setBackground(new java.awt.Color(153, 153, 153));
+        nTemCJtx.setText("Não possui uma conta?");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(nTemCJtx)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cadastrarBtn)
+                .addGap(50, 50, 50))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cadastrarBtn)
+                    .addComponent(nTemCJtx))
+                .addGap(35, 35, 35))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Apelido");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Senha");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("Logar");
+
+        senhaJtx.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
+                .addGap(275, 275, 275)
+                .addComponent(jLabel4)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(215, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuarioJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usuarioJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(215, 215, 215))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(logarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(usuarioJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGap(82, 82, 82)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usuarioJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(senhaJtx, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(logarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void logarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logarBtnActionPerformed
+        loginBtnActionPerformed();
+    }//GEN-LAST:event_logarBtnActionPerformed
+
+// Função para login ao clicar no botão
     private void loginBtnActionPerformed() {
         String usuario = usuarioJtx.getText();
         String senha = senhaJtx.getText();
@@ -72,12 +151,14 @@ public class Login extends javax.swing.JFrame {
         valida(usuario, senha);
     }
 
+// Função para abrir a tela de cadastro ao clicar no botão "Cadastrar"
     private void entreCadActionPerformed() {
         JFrame cadastroFrame = new Cadastro();
         cadastroFrame.setVisible(true);
         cadastroFrame.setLocationRelativeTo(null);
     }
 
+// Função para validar o login no banco de dados
     public void valida(String usuario, String senha) {
         Connection conn = Database.getConnection();
         String query = "SELECT senha FROM cadastro WHERE usuario = ?";
@@ -85,15 +166,16 @@ public class Login extends javax.swing.JFrame {
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, usuario);
-
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) { // usuario existe
+            if (rs.next()) { // Usuário existe
                 String storedSenha = rs.getString("senha");
 
-                if (storedSenha.equals(senha)) { // validacao de senha
+                // Compara o hash da senha fornecida com o hash armazenado
+                if (storedSenha.equals(hashPassword(senha))) {
                     JOptionPane.showMessageDialog(this, "Login Bem-sucedido!");
-                    // Abre a tela InicioL
+
+                    // Abre a tela InicioL após login
                     InicioL inicio = new InicioL(usuario);
                     inicio.setVisible(true);
                     this.dispose();
@@ -101,7 +183,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Senha Incorreta!", "Erro de Login", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Usuario não encontrado", "Login Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuário não encontrado", "Erro de Login", JOptionPane.ERROR_MESSAGE);
             }
 
             rs.close();
@@ -112,12 +194,7 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Hash de senha usando SHA-256.
-     *
-     * @param senha a senha a ser hash
-     * @return hash da senha em hexadecimal
-     */
+// Função para gerar hash de senha usando SHA-256
     private String hashPassword(String senha) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -150,7 +227,14 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField senhaJtx;
+    private javax.swing.JButton cadastrarBtn;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logarBtn;
+    private javax.swing.JLabel nTemCJtx;
+    private javax.swing.JPasswordField senhaJtx;
     private javax.swing.JTextField usuarioJtx;
     // End of variables declaration//GEN-END:variables
 }
