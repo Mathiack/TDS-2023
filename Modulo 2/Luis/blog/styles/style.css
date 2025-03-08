@@ -1,0 +1,203 @@
+/* style.css */
+
+/* Definindo cores do tema claro e escuro */
+:root {
+        --cor-fundo-claro: #fff;
+        --cor-fundo-escuro: #121212;
+        --cor-texto-claro: #333;
+        --cor-texto-escuro: #ccc;
+        --cor-primaria: #e21b4d;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--cor-fundo-claro);
+        color: var(--cor-texto-claro);
+        transition: background-color 0.3s, color 0.3s;
+    }
+    
+    body.dark-mode {
+        background-color: var(--cor-fundo-escuro);
+        color: var(--cor-texto-escuro);
+    }
+    
+    header {
+        position: fixed;
+        width: 100%;
+        background-color: var(--cor-fundo-claro);
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    header .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;  /* Ajuste o espaçamento entre logo e título */
+        padding-left: 20px;
+    }
+    
+    header .logo img {
+        width: 100px;
+    }
+    
+    header nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    header nav {
+        align-items: right;
+    }
+    
+    header nav ul li {
+        margin-right: 20px;
+    }
+    
+    header nav ul li a {
+        text-decoration: none;
+        color: var(--cor-texto-claro);
+    }
+    
+    header button {
+        background: none;
+        padding-right: 20px;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }    
+    
+    .hero {
+        height: 400px;
+        background: url('banner.jpg') no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .hero .cta-button {
+        background-color: var(--cor-primaria);
+        padding: 10px 20px;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        font-size: 1.2rem;
+    }
+    
+    section {
+        padding: 40px;
+        text-align: center;
+    }
+    
+    .post {
+        display: inline-block;
+        width: 30%;
+        margin: 15px;
+        box-sizing: border-box;
+        transition: transform 0.3s ease;
+        background-color: white;
+        overflow: hidden;
+        border: 1px lightgray solid;
+        box-shadow: 0px 10px 20px #00000055;
+        border-radius: 10px;
+    }
+    
+    .post:hover {
+        transform: scale(1.05);
+    }
+    
+    .post img {
+        width: 100%;
+        height: auto;
+    }
+
+    .post p {
+    }
+
+    .post .data {
+        color: #b1b1b1;
+    }
+    
+    .social-icons a {
+        margin: 10px;
+        text-decoration: none;
+        color: var(--cor-primaria);
+    }
+
+    #sobre {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: 0 auto;  /* Centraliza o formulário */
+        padding: 20px;
+    }
+    
+    #contato {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: 0 auto;  /* Centraliza o formulário */
+        padding: 20px;
+    }
+    
+    #contato input,
+    #contato textarea {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 15px; /* Espaçamento entre os campos */
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    #contato button {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        background-color: var(--cor-primaria);
+        color: white;
+        cursor: pointer;
+    }
+    
+    #contato button:hover {
+        background-color: #e21b4d;  /* Cor de hover para o botão */
+    }    
+    
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: var(--cor-fundo-claro);
+    }
+    
+    footer a {
+        text-decoration: none;
+        color: var(--cor-primaria);
+    }
+
+    .linkComum {
+        color: #e21b4d;
+        text-decoration: none;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .post {
+            width: 100%;
+        }
+    
+        header nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+    }

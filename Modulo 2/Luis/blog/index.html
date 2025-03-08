@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Responsivo</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div style="padding-left: 20px; display: flex; align-items: center; gap: 30px;" class="logo">
+            <h1>Meu Blog</h1> 
+            <a href="https://youtu.be/t1rrBZ6_AGQ?si=YaWg5lJWfyZuuQyM"><img src="styles/images/redOracle.avif" alt="logoRedBull"></a>
+        </div>
+        <nav style="align-self: center;">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#posts">Posts</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle">🌙</button> <!-- Botão para alternar entre modo claro/escuro -->
+    </header>
+
+    <!-- Seção Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Bem-vindo ao Meu Blog</h2>
+            <p>Aqui você encontra as melhores postagens!</p>
+            <a href="#posts" class="cta-button">Ver Posts Recentes</a>
+        </div>
+    </section>
+
+    <!-- Seção de Posts Recentes -->
+    <section id="posts">
+        <h2>Posts Recentes</h2>
+        <div class="post">
+            <img src="styles/images/flaromNeo.png" alt="Imagem Post 1">
+            <h3>Flarom inicia mais uma atualização de seu blog de arte</h3>
+            <p></p>
+            <p class="data">07/03/2025</p>
+        </div>
+        <div class="post">
+            <img src="styles/images/niXZanRepo.png" alt="niXZan repo img">
+            <h3>É anunciado o novo site da niXZan!</h3>
+            <p>Foi anunciado na noite de ontem, quinta feira (7), a nova rede social da niXZan! O proprietário Monari fez o anúncio durante uma reunião com os programadores sênior Mathiack e Wesley, sêniors destaques da região de Erechim</p>
+            <a href="https://github.com/niXZan/vila-niXZan/tree/Mathiack" class="linkComum">Confira o repositório aqui</a>
+            <p class="data">07/03/2025</p>
+        </div>
+        <div class="post">
+            <img src="styles/images/f1redBull.jpg" alt="Imagem Post 3">
+            <h3>Red bull anuncia novo desempenho no carro para a temporada 2025</h3>
+            <p>A Red Bull Racing Team anunciou que novo carro da temporada 2025 é 4 décimos mais rápido que o da temporada passada</p>
+            <a href="https://www.f1mania.net/f1/formula-1-rb21-e-4-decimos-mais-rapido-que-o-rb20-de-acordo-com-a-red-bull/" class="linkComum">Confira a matéria completa aqui</a>
+            <p class="data">07/03/2025</p>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre">
+        <h2>Sobre Mim</h2>
+        <p>Sou um programador júnior em Java e PHP e concurseiro</p>
+        <div class="social-icons">
+            <a href="https://github.com/Mathiack" class="linkComum" target="_blank">Meu Github</a>
+            <a href="https://wakatime.com/@Mathiack" class="linkComum" target="_blank">Meu Wakatime</a>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <!-- Seção Contato -->  
+    <section id="contato">
+        <h2>Contato</h2>
+        <form action="#">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <br>
+            <br>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <br>
+            <br>
+            <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
+            <br>
+            <br>
+            <button type="submit" id="send">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2025 Guilherme Mathiack</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+Desafio: Criando um Blog Responsivo com Tema Escuro/Claro
+Objetivo:
+Criar um blog responsivo com modo escuro/claro, animações em CSS, e um layout moderno utilizando CSS Grid e Flexbox.
+
+Requisitos do Projeto
+Cabeçalho fixo com menu de navegação:
+
+Logo do blog.
+Links para "Home", "Posts", "Sobre" e "Contato".
+Botão para alternar entre modo escuro e claro (dark/light mode).
+Seção Hero (Destaque inicial):
+
+Um grande banner responsivo com uma chamada para ação.
+Um botão para ver os posts mais recentes.
+Seção de Posts Recentes:
+
+Listar pelo menos três posts, cada um com imagem, título e resumo.
+Ao passar o mouse sobre um post, deve haver um efeito hover suave.
+Seção "Sobre Mim":
+
+Uma breve descrição do autor.
+Ícones para redes sociais.
+Seção "Contato":
+
+Formulário com campos para nome, e-mail e mensagem.
+Botão de envio estilizado.
+Rodapé estilizado:
+
+Créditos e links úteis.
+Responsividade total:
