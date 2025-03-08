@@ -1,14 +1,15 @@
-/* style.css */
-
 /* Definindo cores do tema claro e escuro */
 :root {
         --cor-fundo-claro: #fff;
-        --cor-fundo-escuro: #121212;
+        --cor-fundo-escuro: #2b2b2b;
+        --cor-fundo-pouco-claro: #969696;
         --cor-texto-claro: #333;
         --cor-texto-escuro: #ccc;
         --cor-primaria: #e21b4d;
+        --cor-borda-clara: lightgray;
     }
     
+    /* Estilos Gerais */
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -18,11 +19,27 @@
         transition: background-color 0.3s, color 0.3s;
     }
     
+    /* Modo escuro */
     body.dark-mode {
         background-color: var(--cor-fundo-escuro);
         color: var(--cor-texto-escuro);
     }
     
+    header.dark-mode {
+        background-color: var(--cor-fundo-escuro);
+        color: var(--cor-texto-escuro);
+    }
+    
+    header nav ul li a {
+        color: var(--cor-texto-escuro);
+    }
+    
+    .post.dark-mode {
+        background-color: #2b2b2b;
+        border: 1px var(--cor-borda-clara) solid;
+    }
+    
+    /* Modo claro */
     header {
         position: fixed;
         width: 100%;
@@ -38,7 +55,7 @@
     header .logo {
         display: flex;
         align-items: center;
-        gap: 15px;  /* Ajuste o espaçamento entre logo e título */
+        gap: 15px;
         padding-left: 20px;
     }
     
@@ -52,7 +69,7 @@
         padding: 0;
         display: flex;
     }
-
+    
     header nav {
         align-items: right;
     }
@@ -72,7 +89,7 @@
         border: none;
         font-size: 1.5rem;
         cursor: pointer;
-    }    
+    }
     
     .hero {
         height: 400px;
@@ -106,7 +123,7 @@
         transition: transform 0.3s ease;
         background-color: white;
         overflow: hidden;
-        border: 1px lightgray solid;
+        border: 1px var(--cor-borda-clara) solid;
         box-shadow: 0px 10px 20px #00000055;
         border-radius: 10px;
     }
@@ -119,10 +136,10 @@
         width: 100%;
         height: auto;
     }
-
+    
     .post p {
     }
-
+    
     .post .data {
         color: #b1b1b1;
     }
@@ -132,12 +149,12 @@
         text-decoration: none;
         color: var(--cor-primaria);
     }
-
+    
     #sobre {
         background-color: #f1f1f1;
         border-radius: 10px;
         max-width: 500px;
-        margin: 0 auto;  /* Centraliza o formulário */
+        margin: 0 auto;
         padding: 20px;
     }
     
@@ -145,7 +162,7 @@
         background-color: #f1f1f1;
         border-radius: 10px;
         max-width: 500px;
-        margin: 0 auto;  /* Centraliza o formulário */
+        margin: 0 auto;
         padding: 20px;
     }
     
@@ -153,7 +170,7 @@
     #contato textarea {
         width: 90%;
         padding: 10px;
-        margin-bottom: 15px; /* Espaçamento entre os campos */
+        margin-bottom: 15px;
         border-radius: 5px;
         border: 1px solid #ccc;
     }
@@ -171,8 +188,8 @@
     }
     
     #contato button:hover {
-        background-color: #e21b4d;  /* Cor de hover para o botão */
-    }    
+        background-color: #e21b4d;
+    }
     
     footer {
         text-align: center;
@@ -184,7 +201,7 @@
         text-decoration: none;
         color: var(--cor-primaria);
     }
-
+    
     .linkComum {
         color: #e21b4d;
         text-decoration: none;
@@ -201,3 +218,4 @@
             align-items: center;
         }
     }
+    
