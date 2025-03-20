@@ -36,9 +36,40 @@ header {
     font-size: 24px;
 }
 
+/* Menu inicialmente escondido fora da tela */
 .menu {
     list-style: none;
     display: flex;
+    transition: transform 0.3s ease-in-out; /* Transição suave */
+    transform: translateX(100%); /* Menu começa fora da tela */
+}
+
+/* Menu visível quando a classe 'show' é adicionada */
+.menu.show {
+    transform: translateX(0); /* Menu desliza para dentro */
+}
+
+/* Estilos do menu para telas pequenas */
+@media (max-width: 768px) {
+    .menu {
+        position: absolute;
+        top: 60px; /* Alinha o menu abaixo do cabeçalho */
+        right: 0;
+        background-color: #333;
+        width: 200px;
+        height: 100vh; /* O menu ocupa toda a altura da tela */
+        flex-direction: column; /* Exibe os itens em uma coluna */
+        padding-top: 20px;
+    }
+
+    /* Estilo do botão de menu */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+    }
 }
 
 .menu li {
@@ -64,6 +95,14 @@ header {
     color: #fff;
     padding: 100px 0;
     text-align: center;
+    opacity: 0; /* Inicialmente invisível */
+    animation: fadeIn 2s forwards; /* Animação de fade-in com duração de 2 segundos */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* Finaliza com opacidade 1, ou seja, totalmente visível */
+    }
 }
 
 .hero h1 {
@@ -83,6 +122,13 @@ header {
     text-decoration: none;
     border-radius: 5px;
     font-size: 18px;
+    transition: background-color 0.3s, color 0.5s;
+    border: 1px white solid;
+}
+
+.cta-button:hover {
+    background-color: #3498db;
+    color: white;
 }
 
 .services {
@@ -105,7 +151,11 @@ header {
 }
 
 .about {
+    justify-self: center;
     padding: 60px 20px;
+    width: 50vw;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     background-color: #f4f4f4;
 }
