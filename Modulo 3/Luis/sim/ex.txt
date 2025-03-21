@@ -1,0 +1,31 @@
+1. Formulário de Cadastro de Usuário
+Crie um formulário que inclua os seguintes campos:
+Nome completo (input tipo text, obrigatório).
+E-mail (input tipo email, obrigatório).
+Senha e confirmação de senha (inputs tipo password, ambos obrigatórios).
+Data de nascimento (input tipo date).
+Gênero (radio buttons: "Masculino", "Feminino", "Outro").
+Checkbox para aceitar os "Termos e Condições".
+Botão de envio que só pode ser pressionado se todos os campos estiverem preenchidos
+corretamente.
+
+2. Formulário de Feedback
+Crie um formulário para coletar feedback de clientes com:
+Nome (opcional).
+E-mail para contato (obrigatório).
+Um campo de seleção (<select>) com opções de avaliação: "Ótimo", "Bom", "Regular" e
+"Ruim".
+Caixa de texto (<textarea>) para comentários adicionais.
+Um campo range (0 a 10) para o cliente dar uma nota de satisfação.
+Botão de envio do feedback.
+
+3. Formulário de Pedido de Orçamento
+Crie um formulário para solicitar orçamento de um serviço:
+Nome e e-mail do cliente.
+Tipo de serviço desejado (<select> com opções como "Desenvolvimento Web", "Design
+Gráfico", "Marketing Digital").
+Orçamento disponível (<input type="number">).
+Data prevista para início (<input type="date">).
+Preferência de contato (radio buttons para "E-mail" ou "WhatsApp").
+Caixa de texto (<textarea>) para informações adicionais.
+Botão de envio.
