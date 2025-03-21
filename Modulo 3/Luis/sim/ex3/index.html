@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola mundo</title>
+</head>
+<body>
+    <div>
+        <form action="post">
+            <label for="nome">Nome</label>
+            <input type="text">
+            <br>
+
+            <label for="email">E-mail</label>
+            <input type="text">
+            <br>
+
+            <label for="servico">Serviço Desejado</label>
+            <select name="servico" id="servico">
+                <option value="webDev">Desenvolvimento Web</option>
+                <option value="graphicDes">Design Gráfico</option>
+                <option value="digMark">Marketing Digital</option>
+            </select>
+            <br>
+
+            <label for="orcamento">Orçamento Disponível</label>
+            <input type="number" name="orcamento" id="orcamento">
+            <br>
+
+            <label for="dataPrev">Data Prevista de Inicio</label>
+            <input type="date" name="dataPrev" id="dataPrev">
+            <br>
+
+            <fieldset>
+                <legend>Contato</legend>
+                <div>
+                  <input type="radio" id="huey" name="drone" value="huey" />
+                  <label for="huey">E-mail</label>
+                </div>
+              
+                <div>
+                  <input type="radio" id="dewey" name="drone" value="dewey" />
+                  <label for="dewey">WhatsApp</label>
+                </div>
+              
+                <div>
+                  <input type="radio" id="louie" name="drone" value="louie" />
+                  <label for="louie">Cartas escritas à mão</label>
+                </div>
+            </fieldset>
+            <br>
+
+            <label for="infoAdd">Informações Adicionais</label>
+            <br>
+            <textarea name="infoAdd" id="infoAdd"></textarea>
+        </form>
+    </div>
+</body>
+</html>
