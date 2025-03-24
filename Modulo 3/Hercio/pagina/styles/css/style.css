@@ -195,13 +195,14 @@ header {
 .client-img {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
+    border-radius: 100%;
     margin-bottom: 20px;
-    transition: transform 0.3s;
+    transition: all 0.3s;
 }
 
 .client-img:hover {
-    transform: scale(1.1);
+    transform: scale(1.3);
+    border-radius: 10%;
 }
 
 .contact {
