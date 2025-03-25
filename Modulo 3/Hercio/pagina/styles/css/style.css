@@ -179,6 +179,42 @@ header {
     transition: opacity 0.3s;
 }
 
+.projects {
+    text-align: center;
+}
+
+.post {
+    display: inline-block;
+    width: 30%;
+    margin: 15px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    background-color: white;
+    overflow: hidden;
+    border: 1px var(--cor-borda-clara) solid;
+    box-shadow: 0px 10px 20px #00000055;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.post:hover {
+    transform: scale(1.05);
+}
+
+.post img {
+    width: 100%;
+    height: auto;
+}
+
+.post .data {
+    color: #b1b1b1;
+}
+
+.linkComum {
+    color: #e21b4d;
+    text-decoration: none;
+}
+
 .testimonials {
     padding: 60px 20px;
     text-align: center;
@@ -232,6 +268,11 @@ header {
     border: none;
     border-radius: 5px;
     font-size: 18px;
+}
+
+.contact button {
+    background-color: #3498db;
+    color: white;
 }
 
 footer {
