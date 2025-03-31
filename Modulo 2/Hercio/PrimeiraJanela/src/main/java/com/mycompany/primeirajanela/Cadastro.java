@@ -36,7 +36,6 @@ public class Cadastro extends JFrame {
     
     public Cadastro() {
         super("Tela de Cadastro");
-        Container tela = getContentPane();
         setLayout(null);
         
         //////////////////////////////////////////////////////////////////

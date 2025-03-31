@@ -597,14 +597,6 @@ public class ExemploLabel extends JFrame {
         GridLayout layout = new GridLayout(0,2,20,20);
         p.setLayout(layout);
         
-        TableModel dataModel = new AbstractTableModel() {
-          public int getColumnCount() { return 6; }
-          public int getRowCount() { return 1;}
-          public Object getValueAt(int row, int col) { return new Integer(row*col); }
-        };
-        JTable table = new JTable(dataModel);
-        JScrollPane scrollpane = new JScrollPane(table);
-        
         j.setVisible(true);
     }
 }
