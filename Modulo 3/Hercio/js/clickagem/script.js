@@ -4,9 +4,16 @@ const botao = document.getElementById("botao");
 botao.addEventListener(
     "click", ()=> 
     {
+        /*
         const nome = document.getElementById("nome").value;
         const email = document.getElementById("email").value;
         alert("Botão clikenado");
+        */
+        
+        if (nomeC.trim() === "" || email.trim() === "") {
+            alert("Preencha todos os campos");
+            return;
+        }
         const nomeC = document.getElementById("nomeC");
         const emailC = document.getElementById("emailC");
         
