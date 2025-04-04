@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "titulo": "Primeira nota",
+      "conteudo": "Hoje eu comecei meu diário!",
+      "data": "2025-04-03"
+    },
+    {
+      "id": 2,
+      "titulo": "Segunda nota",
+      "conteudo": "O backend já está funcionando!",
+      "data": "2025-04-03"
+    }
+  ]
+  

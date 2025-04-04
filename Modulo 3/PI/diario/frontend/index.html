@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário Pessoal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">Diário Pessoal</div>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <button class="directBtn"><a href="#">Minhas Notas</a></button>
+            <button class="directBtn"><a href="#">Nova Nota</a></button>
+            <button class="directBtn"><a href="#">Configurações</a></button>
+        </div>
+
+        <div class="container">
+            <div class="diario">
+                <h1>Minhas Notas</h1>
+                <form id="nota-form">
+                    <input type="hidden" id="nota-id">
+                    <input type="text" id="titulo" placeholder="Título" required>
+                    <textarea id="conteudo" placeholder="Escreva sua nota..." required></textarea>
+                    <button type="submit">Salvar Nota</button>
+                </form>
+                <ul id="lista-notas"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
