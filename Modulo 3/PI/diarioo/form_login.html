@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles/styleFormLogin.css">
+  <script>
+    if (document.cookie.includes('PHPSESSID')) {
+      fetch('auth.php').then(r => {
+        if (r.ok) window.location.href = 'diario.php';
+      });
+    }
+  </script>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="form-login">
+    <input type="text" id="usuario" placeholder="Usuário" required>
+    <input type="password" id="senha" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <script>
+    document.getElementById('form-login').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const usuario = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+
+      const res = await fetch('login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, senha })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        window.location.href = 'diario.php';
+      } else {
+        alert(data.erro);
+      }
+    });
+  </script>
+</body>
+</html>
