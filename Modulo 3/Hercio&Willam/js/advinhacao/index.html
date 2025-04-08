@@ -1,0 +1,76 @@
+<!--Desenvolver um jogo onde o sistema gera um número aleatório e o usuário tenta adivinhá-lo.
+    A cada tentativa, exiba mensagens indicando se o palpite é muito alto ou baixo. 
+    O jogo termina quando o usuário acerta, e exibe o número de tentativas realizadas.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advinha ai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Advinha o número!</h1>
+        <p>Estou pensando em um número entre 1 e 100. Tente adivinhar!</p>
+        <input type="number" id="guess" placeholder="Digite seu palpite" min="1" max="100">
+        <button id="submit">Enviar</button>
+        <button id="recomecar">Recomeçar</button>
+        <p id="message"></p>
+        <p id="attempts"></p>
+        <script>
+            let randomNumber = Math.floor(Math.random() * 100) + 1;
+            let attempts = 0;
+
+            document.getElementById('submit').addEventListener('click', function() {
+                const userGuess = parseInt(document.getElementById('guess').value);
+                attempts++;
+                if (userGuess < 1 || userGuess > 100) {
+                    document.getElementById('message').innerText = "Por favor, digite um número entre 1 e 100.";
+                } else if (userGuess < randomNumber) {
+                    document.getElementById('message').innerText = "Muito baixo! Tente novamente.";
+                } else if (userGuess > randomNumber) {
+                    document.getElementById('message').innerText = "Muito alto! Tente novamente.";
+                } else {
+                    document.getElementById('message').innerText = `Parabéns! Você acertou o número ${randomNumber} em ${attempts} tentativas.`;
+                    document.getElementById('submit').disabled = true;
+                }
+                document.getElementById('attempts').innerText = `Tentativas: ${attempts}`;
+            });
+
+            document.getElementById('recomecar').addEventListener('click', function() {
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                document.getElementById('guess').value = '';
+                document.getElementById('message').innerText = '';
+                document.getElementById('attempts').innerText = '';
+                document.getElementById('submit').disabled = false;
+            });
+        </script>
+    </div>
+</body>
+</html>
