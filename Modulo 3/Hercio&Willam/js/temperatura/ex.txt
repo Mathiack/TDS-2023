@@ -1,0 +1,12 @@
+Exercício 1 – Conversor de Temperatura
+    Construir uma pequena aplicação web que permita converter valores de temperatura
+    entre Celsius, Fahrenheit e Kelvin, com uma interface amigável e estilizada.
+Etapas para Desenvolver:
+1. Estrutura HTML
+Requisitos:
+    - Um título para o aplicativo.
+    - Um campo para digitar a temperatura.
+    - Dois menus dropdown (um para escolher a unidade de entrada e outro para a
+    unidade de saída).
+    - Um botão para "Converter".
+    - Um local para mostrar o resultado da conversão.

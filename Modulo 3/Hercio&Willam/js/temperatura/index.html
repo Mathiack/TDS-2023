@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor</title>
+</head>
+
+<body>
+    <h1>Conversor de Temperatura</h1>
+    <label>Temperatura:</label>
+    <input type="number" id="valor">
+    <select id="de">
+        <option value="celsius">°C</option>
+        <option value="fahrenheit">°F</option>
+        <option value="kelvin">K</option>
+    </select>
+
+    <label>⇒</label>
+    <select id="para">
+        <option value="celsius">°C</option>
+        <option value="fahrenheit">°F</option>
+        <option value="kelvin">K</option>
+    </select>
+
+    <button onclick="converter()">Converter</button>
+
+    <p id="resultado"></p>
+    <script>
+        function converter() {
+            const valor = parseFloat(document.getElementById('valor').value);
+            const de = document.getElementById('de').value;
+            const para = document.getElementById('para').value;
+            let resultado;
+
+            if (de === 'celsius') {
+                if (para === 'fahrenheit') {
+                    resultado = (valor * 9/5) + 32;
+                } else if (para === 'kelvin') {
+                    resultado = valor + 273.15;
+                } else {
+                    resultado = valor;
+                }
+            } else if (de === 'fahrenheit') {
+                if (para === 'celsius') {
+                    resultado = (valor - 32) * 5/9;
+                } else if (para === 'kelvin') {
+                    resultado = ((valor - 32) * 5/9) + 273.15;
+                } else {
+                    resultado = valor;
+                }
+            } else if (de === 'kelvin') {
+                if (para === 'celsius') {
+                    resultado = valor - 273.15;
+                } else if (para === 'fahrenheit') {
+                    resultado = ((valor - 273.15) * 9/5) + 32;
+                } else {
+                    resultado = valor;
+                }
+            }
+
+            document.getElementById('resultado').innerText = `Resultado: ${resultado.toFixed(2)} ${para}`;
+        }
+    </script>
+</body>
+</html>
