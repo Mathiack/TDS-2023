@@ -35,6 +35,9 @@ function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+const deleteButton = document.createElement('button');
+deleteButton.className = 'delete-button'; //permite css
+
 // Função para carregar as tarefas do localStorage
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -44,8 +47,7 @@ function loadTasks() {
         li.textContent = task.text;
         if (task.completed) li.classList.add('completed');
 
-        const deleteButton = document.createElement('button');
-        deleteButton.className = 'delete-button'; //permite css
+        
         deleteButton.textContent = 'Excluir';
         deleteButton.addEventListener('click', (e) => {
             e.stopPropagation(); // Evita que o evento de clique no li seja acionado
