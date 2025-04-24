@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criador de Histórias</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            background: #1e1e2f;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #dddddd;
+        }
+
+        select,
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        select {
+            background-color: #2a2a3c;
+            color: #ffffff;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #historia {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Monte sua História</h1>
+        <form id="form-historia">
+            <label for="personagem">Personagem:</label>
+            <select id="personagem">
+                <option value="Mathiack">Mathiack</option>
+                <option value="Czar">Czar</option>
+                <option value="Monari14">Monari14</option>
+                <option value="Mistã Uasli">Mistã Uasli</option>
+                <option value="Bruno">Bruno</option>
+                <option value="Bernardo">Bernardo</option>
+                <option value="Bertua">Bertua</option>
+                <option value="William">William</option>
+                <option value="Enzzo">Enzzo</option>
+                <option value="Tutor">Tutor</option>
+                <option value="Éder">Éder</option>
+                <option value="Kervin">Kervin</option>
+                <option value="Saddam Hussein">Saddam Hussein</option>
+            </select>
+
+            <label for="local">Lugar:</label>
+            <select id="local">
+                <option value="Senaqer">Senaqer</option>
+                <option value="House">House</option>
+                <option value="Praça Daltro Filho">Praça Daltro Filho</option>
+                <option value="Rua Santo Bergamin">Rua Santo Bergamin</option>
+                <option value="Mantova">Mantova</option>
+                <option value="Dóris Lanches">Dóris Lanches</option>
+            </select>
+
+            <label for="objeto">Objeto:</label>
+            <select id="objeto">
+                <option value="um Código Java completo">Código Java completo</option>
+                <option value="um Laravel podre">Laravel podre</option>
+                <option value="um celular que reproduz algo continuamente">Celular maluco</option>
+                <option value="um código Portugol na Unity">Código Portugol na Unity</option>
+                <option value="um contrabaixo afinadamente desafinado">Contrabaixo afinadamente desafinado</option>
+                <option value="um capacete do Max Verstappen com uma latinha de RedBull">Capacete do Max Verstappen</option>
+                <option value="um tênis Fila Racer Speedzone">Tênis Fila Racer Speedzone</option>
+                <option value="um Golf 2011 branco com porta-malas caindo">Golf 2011 branco</option>
+                <option value="um caderno">Caderno</option>
+                <option value="uma urna eletrônica">Urna eletrônica</option>
+            </select>
+
+            <label for="acao">Ação:</label>
+            <select id="acao">
+                <option value="votou 13 (bad ending)">Votar 13 (bad ending)</option>
+                <option value="codou em HTML e CSS">Codar em HTML e CSS</option>
+                <option value="trocou Laravel por HardCoding + VibeCoding + adrenalina (sigma ending)">Trocar Laravel</option>
+                <option value="foi para Treza">Ir para Treza</option>
+                <option value="correu com o Tutor">Correr com o Tutor</option>
+                <option value="codou em Java (good ending)">Codar em Java (good ending)</option>
+                <option value="jogou truco">Jogar truco</option>
+                <option value="escreveu uma carta para o Trump">Escrever uma carta para o Trump</option>
+                <option value="achou Saddam Hussein">Achar Saddam Hussein</option>
+                <option value="não fez absolutamente nada">Não fazer nada</option>
+                <option value="atravessou a fronteira México/EUA">Atravessar a fronteira México/EUA</option>
+                <option value="viu anime">Ver anime</option>
+                <option value="enfrentou um desafio supremo">Enfrentou</option>
+            </select>
+
+            <button type="button" onclick="criarHistoria()">Criar História</button>
+            <button type="button" onclick="reiniciar()">Reiniciar</button>
+        </form>
+
+        <div id="historia"></div>
+    </main>
+
+    <script>
+        function criarHistoria() {
+            const personagem = document.querySelector('#personagem').value;
+            const local = document.querySelector('#local').value;
+            const objeto = document.querySelector('#objeto').value;
+            const acao = document.querySelector('#acao').value;
+
+            const frase = `${personagem} foi até ${local}, levando ${objeto} e lá ${acao}.`;
+
+            document.querySelector('#historia').textContent = frase;
+        }
+
+        function reiniciar() {
+            document.querySelector('#form-historia').reset();
+            document.querySelector('#historia').textContent = '';
+        }
+    </script>
+</body>
+
+</html>

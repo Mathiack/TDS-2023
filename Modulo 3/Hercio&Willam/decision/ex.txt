@@ -1,0 +1,54 @@
+Desenvolva uma aplicação que permita ao usuário montar uma pequena história personalizada, escolhendo opções como:
+•
+Um personagem;
+•
+Um local;
+•
+Um objeto;
+•
+Uma ação.
+A partir dessas escolhas, o sistema deverá montar automaticamente uma frase narrativa, apresentando a história ao usuário de forma estilizada. Também deverá haver a opção de reiniciar o processo e criar novas histórias.
+Orientações Técnicas
+Estrutura HTML
+•
+Utilize elementos semânticos na construção da página;
+•
+Crie um formulário simples contendo seletores (como menus dropdown, radio buttons ou botões) para que o usuário escolha:
+o
+Um personagem (ex: uma criança, um dragão, um robô);
+o
+Um lugar (ex: floresta, castelo, espaço);
+o
+Um objeto (ex: livro mágico, skate voador, espada de gelo);
+o
+Uma ação (ex: encontrou, salvou, enfrentou);
+•
+Adicione botões para criar e reiniciar a história.
+Estilo com CSS
+•
+Capriche no visual da página, usando cores, fontes diferenciadas, sombras, bordas arredondadas, etc.;
+•
+Se desejar, utilize animações ou transições simples para deixar a experiência mais agradável.
+Lógica com JavaScript
+•
+Capture as escolhas do usuário e monte uma frase com base nessas seleções;
+•
+Exiba a frase resultante na tela de maneira dinâmica, sem recarregar a página;
+•
+Implemente uma função para reiniciar o processo;
+•
+Utilize eventos (como click) e manipulação do DOM (querySelector, textContent, classList, etc.).
+Exemplo de Frase Gerada
+“Era uma vez um Hobbit que vivia em uma floresta. Certo dia, ele encontrou um anel mágico que mudou sua vida para sempre.”
+Organização e Comentários no Código
+Ao longo do desenvolvimento, comente o código para explicar trechos importantes, como:
+•
+Criação de funções;
+•
+Declaração de variáveis principais;
+•
+Lógica condicional (if, else);
+•
+Manipulação dos elementos da página.
+Exemplo de comentário:
+// Gera a frase final com base nas opções escolhidas
