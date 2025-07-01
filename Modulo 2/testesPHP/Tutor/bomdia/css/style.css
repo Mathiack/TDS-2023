@@ -1,0 +1,76 @@
+/* Estilos gerais */
+div.h6 {
+    text-align: center;
+    background-color: blueviolet;
+    color: aliceblue;
+    padding: 10px;
+}
+
+div.img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(blue, red, pink, brown, black, yellow);
+    padding: 100px;
+    width: 80%; /* Para que a imagem ocupe 80% da tela */
+    max-width: 600px; /* Limita o tamanho máximo */
+    box-sizing: border-box;
+}
+
+div.lorem {
+    margin: 50px;
+    font-size: 16px;
+}
+
+div.lista {
+    background-color: gray;
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+/* Media Query para telas pequenas (smartphones) */
+@media (max-width: 600px) {
+    div.h6 {
+        font-size: 16px;
+        padding: 5px;
+    }
+    
+    div.img {
+        padding: 50px;
+        width: 90%; /* Imagem ocupa mais espaço em telas pequenas */
+    }
+    
+    div.lorem {
+        margin: 20px;
+        font-size: 14px;
+    }
+    
+    div.lista {
+        padding: 10px;
+    }
+}
+
+/* Media Query para telas médias (tablets) */
+@media (max-width: 1024px) {
+    div.h6 {
+        font-size: 18px;
+        padding: 8px;
+    }
+    
+    div.img {
+        padding: 80px;
+        width: 85%; /* Ajusta a imagem para tablets */
+    }
+    
+    div.lorem {
+        margin: 30px;
+        font-size: 15px;
+    }
+    
+    div.lista {
+        padding: 15px;
+    }
+}
+

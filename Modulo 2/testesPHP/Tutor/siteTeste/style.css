@@ -1,0 +1,89 @@
+body {
+    transition: 1s background-color;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    animation: blink 0.1s infinite alternate;
+}
+
+div#bomdia {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+div#bomdia > div {
+    flex: 1;
+    min-width: 200px;
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    div#bomdia {
+        flex-direction: column;
+    }
+}
+
+div#bomdia > div:nth-child(1) {
+    background-color: lightblue;
+    border: 3px solid blue;
+}
+
+div#bomdia > div:nth-child(2) {
+    background-color: lightgreen;
+    border: 3px solid green;
+}
+
+div#bomdia > div:nth-child(3) {
+    background-color: lightcoral;
+    border: 3px solid red;
+}
+
+div#bomdia > div:nth-child(4) {
+    background-color: lightyellow;
+    border: 3px solid orange;
+}
+
+div#bomdia > div:nth-child(5) {
+    background-color: lightpink;
+    border: 3px solid purple;
+}
+
+div#bomdia > div:nth-child(6) {
+    background-color: lightgray;
+    border: 3px solid black;
+}
+
+@keyframes blink {
+    0% { background-color: red; }
+    50% { background-color: white; }
+    100% { background-color: red; }
+}
+
+* {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    body {
+        animation: blink 1ms infinite;
+        font-size: 22pt;
+    }
+}
+
+button {
+    cursor: pointer;
+}

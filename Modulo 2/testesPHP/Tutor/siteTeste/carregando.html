@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola bomdia</title>
+    <style>
+        /* CSS Global para todos os navegadores */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Estilo para quem está no Google Chrome */
+        .chrome body {
+            background-color: #ffcc00;
+            color: #000;
+            border: 2px solid #f00;
+        }
+
+        /* Estilo do botão */
+        button {
+            background-color: #ff3333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Use Chrome para melhor experiência. Faça as listas de exercícios abaixo e junto das propriedades coligativas do ferro (ferrismo). Permita os pop-ups caso te pidam.
+        <br><br>
+        <a href="carregando.html" target="_blank"><button onclick="abrirAbas()">É CÉRIO</button></a>
+    </div>
+
+    <script>
+        // Função para abrir várias abas
+        function abrirAbas() {
+            alert("Você tem certeza que deseja continuar?");
+
+            let urls = [
+                "https://monari14.github.io/concatenacao/", 
+                "https://monari14.github.io/concatenacao/",
+                "https://monari14.github.io/concatenacao/", 
+                "https://www.pmerechim.rs.gov.br", 
+                "https://www.pmerechim.rs.gov.br", 
+                "https://flarom.neocities.org",
+                "https://flarom.neocities.org",
+                "https://flarom.neocities.org",
+                "https://github.com/Wesw3s",
+                "https://github.com/Wesw3s",
+                "https://github.com/Wesw3s",
+                "https://github.com/flarom",
+                "https://github.com/edtsz",
+                "https://www.motorola.com.br",
+                "https://www.donothingfor2minutes.com",
+            ];
+            urls.forEach(url => {
+                window.open(url, '_blank');
+            });
+        }
+
+        // Função para verificar se o navegador é o Google Chrome (somente Google Chrome)
+        function detectChrome() {
+            var userAgent = navigator.userAgent.toLowerCase();
+            // Verifica se o "Chrome" está presente e "Chromium" ou "Edge" não estão
+            if (userAgent.indexOf('chrome') > -1 &&
+                userAgent.indexOf('chromium') == -1 && // Exclui Chromium
+                userAgent.indexOf('edge') == -1 &&     // Exclui Edge
+                userAgent.indexOf('opr') == -1 &&      // Exclui Opera
+                userAgent.indexOf('brave') == -1) {    // Exclui Brave
+                // Se for o Google Chrome, adiciona a classe 'chrome' ao body
+                document.body.classList.add('chrome');
+            } else {
+                // Caso não seja o Google Chrome, exibe um alerta e redireciona para uma outra página
+                alert("Este site funciona apenas no Google Chrome. Por favor, abra no Chrome.");
+                window.location.href = "https://www.google.com/chrome/"; // Redireciona para o site do Chrome
+            }
+        }
+
+        // Chama a função para detectar o Chrome
+        detectChrome();
+    </script>
+</body>
+</html>

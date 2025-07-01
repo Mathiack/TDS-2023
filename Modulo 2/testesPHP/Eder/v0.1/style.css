@@ -1,0 +1,46 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #1e1e2e;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.erros {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#404, #405, #found {
+    padding: 20px;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+#404 {
+    background-color: #ff4d4d;
+}
+
+#405 {
+    background-color: #ffcc00;
+    color: #000;
+}
+
+#found {
+    background-color: #4caf50;
+}

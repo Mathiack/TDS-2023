@@ -1,0 +1,11 @@
+1-
+    Criar site mobile-first 
+    Criar um arquivo index.html com um título e um parágrafo. 
+    Adicionar um arquivo style.css e definir um layout básico: 
+    - Fonte grande para leitura em mobile. 
+    - Um fundo de cor diferente para telas menores de 768px. Usar @media screen and (min-width: 768px) 
+    - Testar o layout no DevTools e ajustar se necessário. 
+
+2-  
+    Adicionar no arquivo index.html três blocos que em mobile fiquem um abaixo do outro e em desktop fiquem um ao lado do outro. 
+    Cada bloco com uma cor diferente e uma borda diferente. 

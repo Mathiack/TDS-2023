@@ -1,0 +1,24 @@
+{
+    "nome": "Mathiack",
+    "email": "mathiack@email.com",
+    "idade": 16,
+    "altura": 1.85,
+    "!false": true,
+    "filiação": {
+        "pai": "pai",
+        "mae": "mae",
+        "namorada": "me falta",
+        "filho\/a": "n quero",
+        "cahcorro": "tenho"
+    },
+    "langs": [
+        "c",
+        "js",
+        "java",
+        "html",
+        "css",
+        "python",
+        "ruby",
+        "c#"
+    ]
+}

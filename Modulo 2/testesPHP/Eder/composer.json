@@ -1,0 +1,6 @@
+{
+    "require": {
+        "nikic/fast-route": "v1.3.0",
+        "alrik11es/cowsayphp": "^1.2"
+    }
+}
