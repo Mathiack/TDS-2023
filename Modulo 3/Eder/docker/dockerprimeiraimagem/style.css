@@ -1,0 +1,32 @@
+body {
+    background-color: #242424;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.center:hover {
+    box-shadow: 0 0 20px rgba(247, 0, 255, 0.5);
+}
+
+.btn {
+    display: inline-block;
+    background-color: #00ff00;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #0b8300;
+}

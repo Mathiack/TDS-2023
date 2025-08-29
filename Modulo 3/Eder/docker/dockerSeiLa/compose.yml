@@ -1,0 +1,36 @@
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  redis-gui:
+    image: "redislabs/redisinsight"
+    ports:
+      - "7777:5540"
+    environment:
+      RI_REDIS_HOST: ${REDIS_HOST}
+      RI_REDIS_PORT: ${REDIS_PORT}
+      RI_REDIS_USERNAME: ${REDIS_USERNAME}
+      RI_REDIS_PASSWORD: ${REDIS_PASSWORD}
+
+  mysql:
+    image: "mysql:8.4.6"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      
+  phpmyadmin:
+    image: "phpmyadmin:5.2.2-apache"
+    ports:
+      - 1515:80
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+
+
+  web:
+    image: "php:8.4.11-apache"
+    ports:
+      - "7000:80"
+    volumes:
+      - "./:/var/www/html"
+    env_file: .env
