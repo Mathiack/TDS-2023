@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas</title>
+    <style>
+  :root {
+    --bg: #0f172a;          /* slate-900 */
+    --panel: #111827;       /* gray-900 */
+    --text: #e5e7eb;        /* gray-200 */
+    --muted: #9ca3af;       /* gray-400 */
+    --line: #1f2937;        /* gray-800 */
+    --accent: #22d3ee;      /* cyan-400 */
+    --stripe: #0b1222;
+  }
+
+  body {
+    margin: 0;
+    background: radial-gradient(80vmax 80vmax at 120% -20%, #0b2447 0%, transparent 50%) var(--bg);
+    color: var(--text);
+    font: 500 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    padding: 32px;
+  }
+
+  .wrap {
+    background: color-mix(in oklab, var(--panel) 92%, black);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+    overflow: hidden;
+  }
+
+  .header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    background:
+      linear-gradient(90deg, rgba(34,211,238,.12), transparent 35%) ,
+      linear-gradient(to bottom, rgba(255,255,255,.03), transparent);
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: .3px;
+  }
+  .header small {
+    color: var(--muted);
+  }
+
+  .table-scroller {
+    overflow-x: auto;
+    scrollbar-gutter: stable;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: max(840px, 100%);
+    min-width: 720px;
+    background: transparent;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to bottom, #0f172a, #0f172a 70%, rgba(15,23,42,.92));
+    backdrop-filter: blur(6px);
+    z-index: 2;
+    text-align: center;
+    padding: 12px 14px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  /* Coluna "Aluno" à direita e fixa */
+  th.aluno, td.aluno {
+    position: sticky;
+    right: 0;
+    background: linear-gradient(to left, #0f172a, rgba(15,23,42,.96));
+    z-index: 3; /* acima do thead padrão */
+    text-align: left;
+  }
+  thead th.aluno { z-index: 4; }
+
+  tbody td, tbody th.scope-row {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+
+  /* “Sublinhas” dos trimestres: rótulo na primeira coluna */
+  th.scope-row {
+    text-align: right;
+    color: var(--muted);
+    font-weight: 600;
+    width: 110px;
+    background: linear-gradient(to right, rgba(255,255,255,.02), transparent);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+
+  /* Listras por grupo de aluno (3 linhas) */
+  tbody tr.group:nth-child(6n+1),
+  tbody tr.group:nth-child(6n+2),
+  tbody tr.group:nth-child(6n+3) { background: transparent; }
+
+  tbody tr.group:nth-child(6n+4),
+  tbody tr.group:nth-child(6n+5),
+  tbody tr.group:nth-child(6n+6) { background: var(--stripe); }
+
+  /* Célula do nome do aluno (rowspan=3) */
+  td.aluno {
+    font-weight: 700;
+    text-align: left;
+    border-left: 1px solid var(--line);
+    padding-left: 14px;
+    white-space: nowrap;
+  }
+
+  /* Foco/hover para facilitar digitação */
+  tbody td:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  input.grade {
+    width: 4.2rem;
+    text-align: center;
+    background: #0b1222;
+    color: var(--text);
+    border: 1px solid #23324a;
+    border-radius: 10px;
+    padding: 6px 8px;
+    font: inherit;
+  }
+  input.grade:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(34,211,238,.15);
+    outline: none;
+  }
+
+  caption {
+    caption-side: bottom;
+    color: var(--muted);
+    padding: 12px 4px 16px;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+    <section>
+        <table>
+        <table aria-describedby="legenda">
+        <thead>
+          <tr>
+            <th class="aluno">Aluno</th>
+            <th>Presença</th>
+            <th class="scope-row" aria-hidden="true">Trimestre</th>
+            <th>Matematica</th>
+            <th>Biologia</th>
+            <th>Física</th>
+            <th>Quimica</th>
+            <th>Arte</th>
+            <th>Ed. Fisica</th>
+            <th>Inglês</th>
+            <th>Português</th>
+            <th>Literatura</th>
+            <th>Geografia</th>
+            <th>História</th>
+            <th>Marketing</th>
+            <th>Direitos humanos</th>
+            <th>Empreendendorismo</th>
+            <th>Redação</th>
+            <th>Resolução de problemas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aluno 1 -->
+          <tr class="group">
+            <td class="aluno" rowspan="3">Guilherme Mathiack</td>
+            <td rowspan="3">100%</td>
+            <th class="scope-row" scope="row">1º Tri</th>
+            <td>10.0</td> <!-- Matematica -------------->              
+            <td>09.0</td> <!-- Biologia ---------------->           
+            <td>08.5</td> <!-- Física ------------------>           
+            <td>10.0</td> <!-- Quimica ----------------->           
+            <td>10.0</td> <!-- Arte -------------------->           
+            <td>08.2</td> <!-- Ed. Fisica -------------->           
+            <td>09.8</td> <!-- Inglês ------------------>           
+            <td>07.0</td> <!-- Português --------------->           
+            <td>10.0</td> <!-- Literatura -------------->           
+            <td>08.0</td> <!-- Geografia --------------->           
+            <td>08.0</td> <!-- História ---------------->           
+            <td>10.0</td> <!-- Marketing --------------->           
+            <td>07.5</td> <!-- Direitos humanos -------->           
+            <td>08.0</td> <!-- Empreendendorismo ------->           
+            <td>07.6</td> <!-- Redação ----------------->           
+            <td>09.8</td> <!-- Resolução de problemas -->               
+          </tr>
+          <tr class="group">
+            <th class="scope-row" scope="row">2º Tri</th>
+            <td>08.4</td> <!-- Matematica -------------->              
+            <td>07.8</td> <!-- Biologia ---------------->           
+            <td>09.0</td> <!-- Física ------------------>           
+            <td>09.1</td> <!-- Quimica ----------------->           
+            <td>08.8</td> <!-- Arte -------------------->           
+            <td>07.3</td> <!-- Ed. Fisica -------------->           
+            <td>07.8</td> <!-- Inglês ------------------>           
+            <td>08.2</td> <!-- Português --------------->           
+            <td>08.6</td> <!-- Literatura -------------->           
+            <td>08.0</td> <!-- Geografia --------------->           
+            <td>08.0</td> <!-- História ---------------->           
+            <td>08.7</td> <!-- Marketing --------------->           
+            <td>06.6</td> <!-- Direitos humanos -------->           
+            <td>07.6</td> <!-- Empreendendorismo ------->           
+            <td>08.8</td> <!-- Redação ----------------->           
+            <td>09.1</td> <!-- Resolução de problemas --> 
+          </tr>
+          <tr class="group">
+            <th class="scope-row" scope="row">3º Tri</th>
+            <td>10.0</td> <!-- Matematica -------------->              
+            <td>10.0</td> <!-- Biologia ---------------->           
+            <td>10.0</td> <!-- Física ------------------>           
+            <td>10.0</td> <!-- Quimica ----------------->           
+            <td>10.0</td> <!-- Arte -------------------->           
+            <td>10.0</td> <!-- Ed. Fisica -------------->           
+            <td>10.0</td> <!-- Inglês ------------------>           
+            <td>10.0</td> <!-- Português --------------->           
+            <td>10.0</td> <!-- Literatura -------------->           
+            <td>10.0</td> <!-- Geografia --------------->           
+            <td>10.0</td> <!-- História ---------------->           
+            <td>10.0</td> <!-- Marketing --------------->           
+            <td>10.0</td> <!-- Direitos humanos -------->           
+            <td>10.0</td> <!-- Empreendendorismo ------->           
+            <td>10.0</td> <!-- Redação ----------------->           
+            <td>10.0</td> <!-- Resolução de problemas --> 
+          </tr>
+            <!-- Aluno 2 -->
+            <tr class="group">
+              <td class="aluno" rowspan="3">Ana Souza</td>
+              <td rowspan="3">98%</td>
+              <th class="scope-row" scope="row">1º Tri</th>
+              <td>08.5</td><td>09.2</td><td>07.8</td><td>08.0</td><td>09.0</td><td>08.5</td><td>09.1</td><td>08.0</td><td>09.5</td><td>08.7</td><td>08.9</td><td>09.0</td><td>08.2</td><td>08.5</td><td>09.0</td><td>08.8</td>
+            </tr>
+            <tr class="group">
+              <th class="scope-row" scope="row">2º Tri</th>
+              <td>09.0</td><td>08.8</td><td>08.2</td><td>08.5</td><td>09.3</td><td>08.7</td><td>09.0</td><td>08.5</td><td>09.2</td><td>08.8</td><td>09.1</td><td>09.2</td><td>08.5</td><td>08.7</td><td>09.1</td><td>08.9</td>
+            </tr>
+            <tr class="group">
+              <th class="scope-row" scope="row">3º Tri</th>
+              <td>09.5</td><td>09.0</td><td>08.9</td><td>09.2</td><td>09.5</td><td>09.0</td><td>09.3</td><td>09.0</td><td>09.7</td><td>09.1</td><td>09.4</td><td>09.5</td><td>09.0</td><td>09.2</td><td>09.5</td><td>09.3</td>
+            </tr>
+            <!-- Aluno 3 -->
+            <tr class="group">
+              <td class="aluno" rowspan="3">Carlos Lima</td>
+              <td rowspan="3">95%</td>
+              <th class="scope-row" scope="row">1º Tri</th>
+              <td>07.0</td><td>07.5</td><td>08.0</td><td>07.8</td><td>08.2</td><td>07.9</td><td>08.0</td><td>07.5</td><td>08.0</td><td>07.8</td><td>08.1</td><td>08.0</td><td>07.7</td><td>08.0</td><td>08.2</td><td>08.0</td>
+            </tr>
+            <tr class="group">
+              <th class="scope-row" scope="row">2º Tri</th>
+              <td>08.0</td><td>08.2</td><td>08.5</td><td>08.0</td><td>08.5</td><td>08.2</td><td>08.3</td><td>08.0</td><td>08.5</td><td>08.2</td><td>08.4</td><td>08.3</td><td>08.0</td><td>08.2</td><td>08.5</td><td>08.3</td>
+            </tr>
+            <tr class="group">
+              <th class="scope-row" scope="row">3º Tri</th>
+              <td>09.0</td><td>09.2</td><td>09.5</td><td>09.0</td><td>09.3</td><td>09.0</td><td>09.1</td><td>09.0</td><td>09.5</td><td>09.2</td><td>09.4</td><td>09.3</td><td>09.0</td><td>09.2</td><td>09.5</td><td>09.3</td>
+            </tr>
+        </tbody>
+      </table>
+    </section>
+</body>
+</html>
