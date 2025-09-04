@@ -4,8 +4,8 @@ include 'vendor/autoload.php';
 
 $client = new Predis\Client([
     'scheme' => 'tcp',
-    'host' => 'redis',
-    'port' => 6379
+    'host' => getenv('REDIS_HOST'),
+    'port' => getenv('REDIS_PORT'),
 ]);
 
 echo "Mathiack nº{$client->incr('hits')}!";

@@ -28,9 +28,8 @@ services:
 
 
   web:
-    image: "php:8.4.11-apache"
+    build:
+      dockerfile: ./Dockerfile
     ports:
       - "7000:80"
-    volumes:
-      - "./:/var/www/html"
     env_file: .env
